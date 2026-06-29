@@ -46,7 +46,8 @@ npm run handoff:judge
 5. Open `Host snacks pool`, add Ada's 5 USDt demo contribution, and confirm the
    newest feed card records the contribution.
 6. Export or inspect the P2P invite and confirm it is
-   `matchday-mesh-core-invite-v1`, read-only, and backed by Corestore/Hyperbee.
+   `matchday-mesh-core-invite-v1`, read-only, backed by Corestore/Hyperbee,
+   and paired with a `matchday-mesh-pairing-v1` Hyperswarm topic.
 7. Show the proof files in `docs/proof/`.
 
 ## Honest Track Scope
@@ -56,6 +57,6 @@ Primary track: Pears Stack.
 The USDt pool is a deterministic WDK-shaped demo adapter. QVAC is gated until a
 local QVAC SDK inference path is proven without cloud AI APIs. Hyperswarm UI and
 full Autobase multiwriter sync are not claimed in this launch build; direct
-Corestore replication from the invite is covered by tests, and the invite also
-derives a stable `matchday-mesh-pairing-v1` Hyperswarm topic for the next public
-swarm pairing step.
+Corestore replication from the invite is covered by tests, and the app displays
+a stable `matchday-mesh-pairing-v1` Hyperswarm topic for the next public swarm
+pairing step.

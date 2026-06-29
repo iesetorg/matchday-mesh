@@ -366,6 +366,11 @@ label {
   background: #121913;
 }
 
+.invite-summary.pairing-summary {
+  border-color: rgba(101, 182, 255, 0.35);
+  background: #11171a;
+}
+
 .invite-summary div {
   display: flex;
   align-items: center;

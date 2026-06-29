@@ -28,10 +28,11 @@ clubs, and fan groups that need coordination without a central event server.
 
 The Pear Runtime build uses a `window.matchdayAPI` bridge backed by
 Corestore/Hyperbee. The UI can export a match invite containing the host core
-key and discovery key, and tests prove direct Corestore replication from a host
-operation log to a read-only peer opened from that invite. A deterministic USDt
-pool demo module shows the intended WDK receive/contribution UX while avoiding
-any production-money claim before the real WDK adapter is proven.
+key, discovery key, and a deterministic Hyperswarm pairing topic. Tests prove
+direct Corestore replication from a host operation log to a read-only peer
+opened from that invite. A deterministic USDt pool demo module shows the
+intended WDK receive/contribution UX while avoiding any production-money claim
+before the real WDK adapter is proven.
 
 ## Links
 
@@ -62,14 +63,14 @@ npm run preview -- --port 4173
 
 ## Proof
 
-- `npm test`: 20/20 tests pass.
+- `npm test`: 21/21 tests pass.
 - `npm run validate:publish -- --strict-release`: 0 warnings.
 - Released Pear link renderer proof passed with Corestore/Hyperbee backend.
 - Fresh-peer catalog verification found the signed `matchday-mesh` row.
 - Running desktop PearBrowser loaded `Tether Developers Cup Apps` through its
   own Apps/catalog RPC path with 11 peers and 11 HiveRelays.
-- Browser proof shows the P2P invite inspector accepting a released-link invite
-  and summarizing it as a read-only handoff.
+- Browser proof shows the P2P invite panel exporting a released-link invite and
+  summarizing it as a read-only handoff with a Hyperswarm pairing topic.
 - Deterministic demo proof replays the full fan-pass, invite, prediction, and
   USDt pool contribution flow.
 - `docs/JUDGE_QUICKSTART.md` gives reviewers the shortest run/test path.
@@ -90,6 +91,6 @@ catalog/publish tooling.
 4. Claim Ada's fan pass and show the QR-style pass block.
 5. Scan the pass and show the accepted/check-in state.
 6. Post a prediction and a match note.
-7. Export the P2P invite and show the Corestore key.
+7. Export the P2P invite and show the Corestore key plus pairing topic.
 8. Open a USDt pool demo, add a contribution, and show the feed card.
 9. Show the deterministic demo proof, proof pack, and public repo.

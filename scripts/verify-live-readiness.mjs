@@ -144,10 +144,13 @@ async function main () {
   }
 
   if (releaseProof.ok === true &&
-    releaseProof.release === 1958 &&
-    releaseProof.length === 1958 &&
+    releaseProof.release === 1965 &&
+    releaseProof.length === 1965 &&
     releaseProof.backendLabel === 'Corestore/Hyperbee' &&
-    releaseProof.inviteType === 'matchday-mesh-core-invite-v1') {
+    releaseProof.inviteType === 'matchday-mesh-core-invite-v1' &&
+    releaseProof.pairingType === 'matchday-mesh-pairing-v1' &&
+    releaseProof.pairingTransport === 'hyperswarm-topic' &&
+    /^[0-9a-f]{64}$/.test(releaseProof.pairingTopic || '')) {
     pass('releasedPearProof')
   } else {
     fail('releasedPearProof', 'released Pear proof is missing or stale')

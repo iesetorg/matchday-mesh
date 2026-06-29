@@ -15,9 +15,10 @@ when opened through the local HTTP preview server.
 
 The current Pears Stack proof includes direct Corestore replication from a host
 operation log to a read-only peer opened from the exported Matchday Mesh invite.
-Hyperswarm pairing is the next publish gate. In Pear Runtime, the app exposes a
-P2P invite panel with the host core key, operation count, and exportable invite
-JSON.
+In Pear Runtime, the app exposes a P2P invite panel with the host core key,
+operation count, exportable invite JSON, and a deterministic
+`matchday-mesh-pairing-v1` Hyperswarm topic. Public swarm join UI is the next
+publish gate.
 
 ## Run Locally
 

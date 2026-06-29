@@ -54,7 +54,7 @@
     "shortDiscoveryKey": "857399f1...9f4e3f",
     "operations": 3,
     "writable": false,
-    "createdAt": "2026-06-29T21:56:14.261Z"
+    "createdAt": "2026-06-29T22:05:46.835Z"
   },
   "pairing": {
     "type": "matchday-mesh-pairing-v1",
@@ -68,11 +68,11 @@
     "shortTopic": "2b6f3a25...36d0df",
     "operations": 3,
     "writable": false,
-    "createdAt": "2026-06-29T21:56:14.261Z"
+    "createdAt": "2026-06-29T22:05:46.835Z"
   },
   "release": {
-    "pearRelease": 1958,
-    "pearLength": 1958,
+    "pearRelease": 1965,
+    "pearLength": 1965,
     "backendLabel": "Corestore/Hyperbee",
     "coreName": "matchday-mesh-ops",
     "operationCount": 3

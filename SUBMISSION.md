@@ -13,7 +13,8 @@ Matchday Mesh turns a football match into a serverless fan zone. A host creates
 a match hub, fans claim passes, check in at the door, post predictions, and join
 a watch-party feed. Optional pool cards let the group coordinate USDt
 contributions for hosts or creators. In Pear Runtime, the hub exposes a
-Corestore invite so a read-only peer can follow the match operation log by key.
+Corestore invite and pairing topic so a read-only peer can follow the match
+operation log by key.
 
 ## What Is New During The Event
 
@@ -44,8 +45,9 @@ PearBrowser catalog:
 
 - The first build has a Pear Runtime API backed by Corestore/Hyperbee, with
   browser `localStorage` fallback for preview. Direct Corestore replication is
-  proven in tests; Hyperswarm pairing and full Autobase multiwriter sync are
-  still gated.
+  proven in tests, and the invite panel displays the deterministic
+  `matchday-mesh-pairing-v1` Hyperswarm topic. Public swarm join UI and full
+  Autobase multiwriter sync are still gated.
 - The USDt pool starts in deterministic demo-ledger mode.
 - QVAC local coach is disabled until QVAC SDK inference is proven locally.
 - No live sports data API is required for the demo.

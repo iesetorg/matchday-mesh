@@ -43,7 +43,7 @@ Run from:
 | In-app browser payment adapter flow | Pass | Pool displayed `demo-usdt://matchday-mesh/...` receive address, rendered 49 QR cells, status showed `WDK-shaped demo receive path`, and top feed card was `pool-contribution`. |
 | In-app browser P2P invite panel smoke | Pass | Preview mode shows the P2P invite panel with `Mode: Preview`, `Core: Launch in Pear`, disabled export button, and operation count updating from 3 to 6 after the demo flow. |
 | In-app browser invite inspector flow | Pass | Pasted a released-link `matchday-mesh-core-invite-v1` invite, inspected it, and verified the summary showed `read-only`, `ops 3`, the short core key, and the short discovery key; invalid JSON showed `Invite must be valid JSON`. Proof saved at `docs/proof/matchday-mesh-invite-inspector-2026-06-30.jpg`. |
-| In-app browser invite export harness | Pass | Pear-like runtime harness clicked `Export Invite` and verified the on-page textarea contained `matchday-mesh-core-invite-v1`, the summary showed `Invite ready to share.`, `read-only`, and `ops 3`, and no alert dialog opened. Proof saved at `docs/proof/matchday-mesh-invite-export-panel-2026-06-30.jpg`. |
+| In-app browser invite export harness | Pass | Pear-like runtime harness clicked `Export Invite` and verified the on-page textarea contained `matchday-mesh-core-invite-v1`, the summary showed `Invite ready to share.`, `read-only`, and `ops 3`, the pairing panel showed `hyperswarm-topic` plus short topic `2b6f3a25...36d0df`, and no alert dialog opened. Proof saved at `docs/proof/matchday-mesh-invite-export-panel-2026-06-30.jpg`. |
 | In-app browser visual proof capture | Pass | Saved viewport proofs at `docs/proof/matchday-mesh-preview-2026-06-30.jpg` and `docs/proof/matchday-mesh-preview-flow-2026-06-30.jpg`; DOM assertions confirmed `Accepted`, `5.00 USDt / 50`, `Ops 6`, `Launch in Pear`, and `backendOps 6` with zero console errors. |
 | `which pear` | Pass | Pear CLI shim exists at `/opt/homebrew/bin/pear`. |
 | `pear --version` | Not supported | CLI exists but bailed with `UNKNOWN_FLAG: version`; also printed PATH warning. |
@@ -52,13 +52,13 @@ Run from:
 | `MATCHDAY_MESH_BOOT_PROOF_PATH=... pear run --dev .` | Pass | Renderer wrote `matchday-pear-proof.json` with `ok: true`, `hasPear: true`, `hasMatchdayAPI: true`, backend `pears-store`, Corestore/Hyperbee key/discovery key, a `matchday-mesh-core-invite-v1` invite, and 3 seeded operations from Pear storage. |
 | `MATCHDAY_MESH_BOOT_PROOF_PATH=... pear run --dev .` after clean `npm ci` | Pass | Pear renderer proof still passes with the clean dependency tree. |
 | `pear touch` | Pass | Created `pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy`. |
-| `PEAR_LINK=... npm run stage` | Pass | Staged Matchday Mesh and warmed the app. Latest length reported as `1957` after the pairing descriptor update. |
+| `PEAR_LINK=... npm run stage` | Pass | Staged Matchday Mesh and warmed the app. Latest length reported as `1964` after the visible pairing panel update. |
 | `pear stage --purge ...` | Pass | Removed accidentally staged ignored `pearbrowser-catalog-data/` publisher storage before release. |
-| `PEAR_LINK=... npm run release` | Pass | Released `pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy`; final latest length reported as `1958` after the pairing descriptor update. |
-| `pear info pear://9a5q...` | Pass | Pear reports `name matchday-mesh`, `release 1958`, `length 1958`, project key `fe36eb...3bca`, discovery key `e92e9f...91f9`, and content key `41328f...6b87`. |
+| `PEAR_LINK=... npm run release` | Pass | Released `pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy`; final latest length reported as `1965` after the visible pairing panel update. |
+| `pear info pear://9a5q...` | Pass | Pear reports `name matchday-mesh`, `release 1965`, `length 1965`, project key `fe36eb...3bca`, discovery key `e92e9f...91f9`, and content key `41328f...6b87`. |
 | `PEAR_LINK=... npm run seed` | Running | Seed announced drive key `fe36eb9038630aeb0a8bc2a21f548d44964c35d9eaff37c654b95d9173233bca`, discovery key `e92e9f4a8df2ced0e5eb1b15354877097a4c1030b843154f8301fe694bdc91f9`, and content key `41328f560d68a5e50e1b45a22ecd3511fa5213c49a42a625170d7175834c6b87`. |
-| `MATCHDAY_MESH_BOOT_PROOF_PATH=... pear run pear://9a5q...` | Pass | Final released-link renderer proof wrote `matchday-release-proof-1958-2026-06-30.json` with `ok: true`, `hasMatchdayAPI: true`, backend `pears-store`, a `matchday-mesh-core-invite-v1` invite, and 3 seeded operations after release length `1958`. |
-| `PATH=".../pear/bin:$PATH" MATCHDAY_MESH_BOOT_PROOF_PATH=... pear run pear://9a5q...` | Pass with warning | Released-link renderer proof still passed with `hasPear: true`, `hasMatchdayAPI: true`, Corestore/Hyperbee backend, and `matchday-mesh-core-invite-v1`. The Pear shim warning persisted because the suggested `/Users/localllm/Library/Application Support/pear/bin` directory does not exist on this host. Proof saved at `docs/proof/pear-release-renderer-proof-2026-06-30.json`. |
+| `MATCHDAY_MESH_BOOT_PROOF_PATH=... pear run pear://9a5q...` | Pass | Final released-link renderer proof wrote `matchday-release-proof-1965-2026-06-30.json` with `ok: true`, `hasMatchdayAPI: true`, backend `pears-store`, a `matchday-mesh-core-invite-v1` invite, a `matchday-mesh-pairing-v1` Hyperswarm topic, and 3 seeded operations after release length `1965`. |
+| `PATH=".../pear/bin:$PATH" MATCHDAY_MESH_BOOT_PROOF_PATH=... pear run pear://9a5q...` | Pass with warning | Released-link renderer proof still passed with `hasPear: true`, `hasMatchdayAPI: true`, Corestore/Hyperbee backend, `matchday-mesh-core-invite-v1`, and `matchday-mesh-pairing-v1`. The Pear shim warning persisted because the suggested `/Users/localllm/Library/Application Support/pear/bin` directory does not exist on this host. Proof saved at `docs/proof/pear-release-renderer-proof-2026-06-30.json`. |
 | `node --test test/pears-sync.test.js` | Pass | Host Corestore replicated the Hyperbee operation log to a read-only peer by core key; a live appended feed card reached the peer. |
 | `gh repo create matchday-mesh --public --source . --remote origin --push` | Pass | Created and pushed the public source repo at `https://github.com/iesetorg/matchday-mesh`. |
 | `node scripts/publish-catalog-bee.js ... --no-pin` | Pass | Built a signed PearBrowser Hyperbee catalog from `catalog/matchday-mesh.catalog.json`: `hyperbee://0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f`. |
@@ -107,8 +107,9 @@ The automated tests currently prove:
 - the same Matchday invite derives a stable `matchday-mesh-pairing-v1`
   descriptor with a 32-byte Hyperswarm topic for the next public pairing path.
 - Pear runtime invite export returns the host core key and discovery key as a
-  `matchday-mesh-core-invite-v1` object, and malformed invites are rejected
-  before opening a replica.
+  `matchday-mesh-core-invite-v1` object, derives the visible
+  `matchday-mesh-pairing-v1` Hyperswarm topic, and malformed invites are
+  rejected before opening a replica.
 - Pear renderer runtime API resets, appends, reports store info, and replays
   state through the Corestore/Hyperbee path.
 - released Pear link renderer proof passes even though the local Pear shim
@@ -120,7 +121,7 @@ The automated tests currently prove:
 - visual browser proof captures preserve the top hub flow and lower feed/USDt
   pool state used for the submission demo pack.
 - browser harness proof confirms the Pear-runtime invite export fills the
-  on-page handoff panel instead of relying on an alert dialog.
+  on-page handoff and pairing panels instead of relying on an alert dialog.
 - deterministic demo proof replays the submission flow and asserts Pears Stack
   ops, read-only invite handoff, door check-in, and demo USDt contribution.
 - live-readiness proof confirms the local preview, catalog server, and Pear seed

@@ -42,9 +42,16 @@ test('runtime API resets, appends, and reports Pears store info', async () => {
 
     const normalizedInvite = await api.normalizeInvite(JSON.stringify({ ...invite, writable: true }))
     const inviteSummary = await api.summarizeInvite(invite)
+    const pairing = await api.pairingDescriptor(invite)
     assert.equal(normalizedInvite.writable, false)
     assert.equal(normalizedInvite.key, invite.key)
     assert.equal(inviteSummary.shortKey, `${invite.key.slice(0, 8)}...${invite.key.slice(-6)}`)
+    assert.equal(pairing.type, 'matchday-mesh-pairing-v1')
+    assert.equal(pairing.transport, 'hyperswarm-topic')
+    assert.equal(pairing.mode, 'read-only-replica')
+    assert.equal(pairing.topic.length, 64)
+    assert.match(pairing.topic, /^[0-9a-f]{64}$/)
+    assert.equal(pairing.shortTopic, `${pairing.topic.slice(0, 8)}...${pairing.topic.slice(-6)}`)
 
     const op = createOperation(OP_TYPES.POST_REACTION, {
       hubId: 'hub_final_night',

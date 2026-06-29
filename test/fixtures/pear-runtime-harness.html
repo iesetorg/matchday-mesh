@@ -11,6 +11,7 @@
     <script>
       const coreKey = '372daa7d5fb7daaf5fd379e95cf0d20afac0015b69be4ff5737717cc71c1d3a3'
       const discoveryKey = '857399f16d735e91906edc0c06d9423848454397ef1e41c127452046129f4e3f'
+      const pairingTopic = '2b6f3a25f91e3c607343dbf165f8ef334a28b3ec85548f350727d1eda636d0df'
       let ops = []
 
       function shortHex (value) {
@@ -62,6 +63,23 @@
             shortKey: shortHex(value.key),
             discoveryKey: value.discoveryKey,
             shortDiscoveryKey: shortHex(value.discoveryKey),
+            operations: value.operations,
+            writable: false,
+            createdAt: value.createdAt
+          }
+        },
+        async pairingDescriptor (invite) {
+          const value = typeof invite === 'string' ? JSON.parse(invite) : invite
+          return {
+            type: 'matchday-mesh-pairing-v1',
+            app: value.app,
+            mode: 'read-only-replica',
+            transport: 'hyperswarm-topic',
+            coreName: value.coreName,
+            key: value.key,
+            discoveryKey: value.discoveryKey,
+            topic: pairingTopic,
+            shortTopic: shortHex(pairingTopic),
             operations: value.operations,
             writable: false,
             createdAt: value.createdAt

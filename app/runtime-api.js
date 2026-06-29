@@ -1,5 +1,6 @@
 import { openMatchdayPearsStore } from './pears-store.js'
 import { createMatchdayInvite, normalizeMatchdayInvite, summarizeMatchdayInvite } from './invite.js'
+import { createMatchdayPairingDescriptor } from './pears-sync.js'
 
 export async function createMatchdayApi (storagePath, opts = {}) {
   const store = await openMatchdayPearsStore(storagePath, opts)
@@ -50,6 +51,10 @@ export async function createMatchdayApi (storagePath, opts = {}) {
 
     async summarizeInvite (invite) {
       return summarizeMatchdayInvite(invite)
+    },
+
+    async pairingDescriptor (invite) {
+      return createMatchdayPairingDescriptor(invite)
     },
 
     async close () {

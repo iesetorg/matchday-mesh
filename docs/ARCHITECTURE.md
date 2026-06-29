@@ -21,7 +21,7 @@ The first launch build keeps the implementation small enough to publish quickly:
   handoff contract.
 - `app/runtime-api.js` exposes the Pear renderer API over the Hyperbee store:
   list operations, append one operation, reset/reseed, replay, info, invite,
-  invite normalization/summary, and close.
+  invite normalization/summary, pairing descriptor derivation, and close.
 - `app/boot-renderer.js` detects Pear Runtime, opens the runtime API with
   `Pear.config.storage`, and installs it as `window.matchdayAPI`.
 - `index.cjs` is the current Pear Runtime main process. It boots
@@ -75,16 +75,17 @@ public DHT in tests:
 - the guest replays the replicated Hyperbee log into the same domain state;
 - new host operations replicate after the connection is already open.
 
-This is the deterministic base for a later Hyperswarm pairing UI.
+This is the deterministic base for the public Hyperswarm join UI.
 
 The Pear runtime UI also exposes a `matchday-mesh-core-invite-v1` object with
 the host core key and discovery key. The invite is now a reusable handoff
 contract: tests create the invite from the host store, normalize it, open a
 read-only replica from it, and prove that new host operations reach the guest.
 The same module derives a `matchday-mesh-pairing-v1` descriptor with a stable
-Hyperswarm topic from that invite. This keeps the future Hyperswarm pairing UI
-small because pairing can focus on joining that topic rather than changing the
-store contract.
+Hyperswarm topic from that invite, and the Pear invite panel displays that topic
+when exporting or inspecting a runtime invite. This keeps the public swarm join
+UI small because pairing can focus on joining that topic rather than changing
+the store contract.
 
 ## Payment Boundary
 

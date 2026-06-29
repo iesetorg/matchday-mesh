@@ -181,6 +181,9 @@ if (releaseProof) {
   if (releaseProof.hasMatchdayAPI !== true) fail('released link renderer proof should have matchdayAPI')
   if (releaseProof.backendLabel !== 'Corestore/Hyperbee') fail('released link renderer proof should use Corestore/Hyperbee')
   if (releaseProof.inviteType !== 'matchday-mesh-core-invite-v1') fail('released link renderer proof should export the invite type')
+  if (releaseProof.pairingType !== 'matchday-mesh-pairing-v1') fail('released link renderer proof should export the pairing type')
+  if (releaseProof.pairingTransport !== 'hyperswarm-topic') fail('released link renderer proof should export the pairing transport')
+  if (!/^[0-9a-f]{64}$/.test(releaseProof.pairingTopic || '')) fail('released link renderer proof should export a 32-byte pairing topic')
   if ((releaseProof.operationCount || 0) < 3) fail('released link renderer proof should have seeded operations')
 }
 

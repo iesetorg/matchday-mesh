@@ -311,6 +311,7 @@ function renderInviteInspection () {
     return `<div class="invite-result error">${escapeHtml(inviteInspection.error)}</div>`
   }
   const summary = inviteInspection.summary
+  const pairing = inviteInspection.pairing
   return `
     ${inviteInspection.message ? `<div class="invite-result">${escapeHtml(inviteInspection.message)}</div>` : ''}
     <dl class="invite-summary">
@@ -320,6 +321,13 @@ function renderInviteInspection () {
       <div><dt>ops</dt><dd>${escapeHtml(String(summary.operations))}</dd></div>
       <div><dt>mode</dt><dd>${summary.writable ? 'writable' : 'read-only'}</dd></div>
     </dl>
+    ${pairing ? `
+      <dl class="invite-summary pairing-summary">
+        <div><dt>pairing</dt><dd title="${escapeAttr(pairing.topic)}">${escapeHtml(pairing.shortTopic || shortValue(pairing.topic))}</dd></div>
+        <div><dt>transport</dt><dd>${escapeHtml(pairing.transport)}</dd></div>
+        <div><dt>replica</dt><dd>${escapeHtml(pairing.mode)}</dd></div>
+      </dl>
+    ` : ''}
   `
 }
 
@@ -369,10 +377,7 @@ function bindActions () {
     runAction(async () => {
       const invite = await backend.invite()
       inviteDraft = JSON.stringify(invite, null, 2)
-      inviteInspection = {
-        message: 'Invite ready to share.',
-        summary: await backend.summarizeInvite(invite)
-      }
+      inviteInspection = await inspectInvite(invite, 'Invite ready to share.')
     })
   })
 
@@ -380,9 +385,7 @@ function bindActions () {
     const data = formData(form)
     inviteDraft = data.invite || ''
     try {
-      inviteInspection = {
-        summary: await backend.summarizeInvite(inviteDraft)
-      }
+      inviteInspection = await inspectInvite(inviteDraft)
     } catch (err) {
       inviteInspection = { error: err.message }
     }
@@ -513,6 +516,10 @@ async function createOperationBackend () {
         if (typeof runtimeApi.summarizeInvite === 'function') return runtimeApi.summarizeInvite(invite)
         return summarizeMatchdayInvite(invite)
       },
+      async pairingDescriptor (invite) {
+        if (typeof runtimeApi.pairingDescriptor !== 'function') return null
+        return runtimeApi.pairingDescriptor(invite)
+      },
       async status () {
         const info = await runtimeApi.info()
         return {
@@ -567,6 +574,9 @@ function createLocalOperationBackend () {
     async summarizeInvite (invite) {
       return summarizeMatchdayInvite(invite)
     },
+    async pairingDescriptor () {
+      return null
+    },
     async status () {
       return {
         source: 'local-storage',
@@ -580,6 +590,18 @@ function createLocalOperationBackend () {
   }
 }
 
+async function inspectInvite (invite, message = '') {
+  const summary = await backend.summarizeInvite(invite)
+  const pairing = typeof backend.pairingDescriptor === 'function'
+    ? await backend.pairingDescriptor(invite)
+    : null
+  return {
+    ...(message ? { message } : {}),
+    summary,
+    pairing
+  }
+}
+
 async function refreshBackendStatus () {
   backendStatus = await backend.status()
 }
@@ -590,10 +612,14 @@ async function writeRuntimeProof (stage, details = {}) {
     const invite = backendStatus.source === 'pears-store' && typeof backend.invite === 'function'
       ? await backend.invite()
       : null
+    const pairing = invite && typeof backend.pairingDescriptor === 'function'
+      ? await backend.pairingDescriptor(invite)
+      : null
     await window.matchdayMeshWriteProof(stage, {
       selectedHubId,
       selectedPassId,
       invite,
+      pairing,
       operationCount: operations.length,
       backendStatus,
       stateCounts: {

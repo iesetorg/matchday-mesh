@@ -153,7 +153,7 @@ function buildProof () {
     discoveryKey: releaseProof.discoveryKey,
     operations: releaseProof.operationCount
   }, {
-    createdAt: '2026-06-29T21:56:14.261Z'
+    createdAt: '2026-06-29T22:05:46.835Z'
   })
   const inviteSummary = summarizeMatchdayInvite(invite)
   const pairing = createMatchdayPairingDescriptor(invite)
