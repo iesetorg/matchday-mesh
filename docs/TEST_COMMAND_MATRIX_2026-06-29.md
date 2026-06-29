@@ -53,6 +53,7 @@ Run from:
 | `gh repo create matchday-mesh --public --source . --remote origin --push` | Pass | Created and pushed the public source repo at `https://github.com/iesetorg/matchday-mesh`. |
 | `node scripts/publish-catalog-bee.js ... --no-pin` | Pass | Built a signed PearBrowser Hyperbee catalog from `catalog/matchday-mesh.catalog.json`: `hyperbee://0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f`. |
 | `node scripts/publish-catalog-bee.js ... --serve` | Running | Published the same catalog, announced it on swarm, and received 5 HiveRelay seed acceptances before staying online to serve the catalog. |
+| `node scripts/verify-live-catalog.js --key 0ba0... --expect-app matchday-mesh --expect-count 1 --expect-name "Tether Developers Cup Apps"` | Pass | Fresh-peer PearBrowser catalog verification found 3 peers, updated the catalog core to length 9, read signed `\x00meta`, and confirmed the `matchday-mesh` row. |
 
 ## Current Preview
 
@@ -97,6 +98,8 @@ The automated tests currently prove:
   state through the Corestore/Hyperbee path.
 - clean install from `package-lock.json` recreates the dependency tree used by
   tests and Pear dev proof.
+- PearBrowser's live Hyperbee catalog verification can discover the catalog by
+  key, read signed metadata, and find the released `matchday-mesh` store row.
 
 ## Remaining Gates
 
