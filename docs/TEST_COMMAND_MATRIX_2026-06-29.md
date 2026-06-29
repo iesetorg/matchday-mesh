@@ -17,9 +17,10 @@ Run from:
 | `npm test` | Pass | 20/20 Node tests pass across domain, operation-log replay, payment adapter behavior, Corestore/Hyperbee persistence, invite validation, direct Corestore replication, and the Pear renderer runtime API. |
 | `npm run validate:publish` | Pass with release metadata present | `links.pearRuntime`, `links.pearBrowser`, and `links.sourceRepo` are all filled in for the public release. |
 | `npm run validate:publish -- --strict-release` | Pass | Strict release validation reports `Matchday Mesh publish surface OK (0 warnings)`. |
+| `npm run verify:demo-proof` | Pass | Deterministic demo proof is current and covers fan pass check-in, invite summary, prediction, reaction, USDt pool open, and 5 USDt contribution. |
 | `npm run verify:submission` | Pass | Submission pack preflight verifies the released Pear link, live PearBrowser catalog key, source repo, proof JSON, proof screenshots, honest track language, and prior-work disclosure. |
 | `npm run check` | Pass | Runs `npm test` and `npm run validate:publish`. |
-| `npm run check:release` | Pass | Runs the full release/submission gate: `npm test`, strict publish validation, and submission-pack preflight. |
+| `npm run check:release` | Pass | Runs the full release/submission gate: `npm test`, strict publish validation, deterministic demo-proof verification, and submission-pack preflight. |
 | `npm ci --ignore-scripts` | Pass | Clean install from `package-lock.json` added 157 packages and found 0 vulnerabilities. Local `node_modules` now matches the lockfile instead of the earlier Pear Home copy. |
 | `npm ci --ignore-scripts` in `/private/tmp/matchday-mesh-ci-proof` | Pass | Fresh fixture with only `package.json` and `package-lock.json` installed successfully from the registry. |
 | `npm ls --depth=0` | Pass | Top-level tree is clean: `b4a@1.8.0`, `corestore@6.18.4`, `hyperbee@2.27.3`, `pear-bridge@1.2.5`, `pear-electron@1.7.28`. |
@@ -112,6 +113,8 @@ The automated tests currently prove:
   key, read signed metadata, and find the released `matchday-mesh` store row.
 - visual browser proof captures preserve the top hub flow and lower feed/USDt
   pool state used for the submission demo pack.
+- deterministic demo proof replays the submission flow and asserts Pears Stack
+  ops, read-only invite handoff, door check-in, and demo USDt contribution.
 - running desktop PearBrowser can load the live Matchday Mesh Hyperbee catalog
   through its own Apps/catalog RPC path.
 

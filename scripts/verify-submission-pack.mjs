@@ -84,6 +84,7 @@ for (const relativePath of [
   'docs/proof/README.md',
   'docs/proof/pearbrowser-desktop-catalog-rpc-2026-06-30.json',
   'docs/proof/pear-release-renderer-proof-2026-06-30.json',
+  'docs/proof/matchday-demo-flow-proof-2026-06-30.json',
   'docs/proof/matchday-mesh-preview-2026-06-30.jpg',
   'docs/proof/matchday-mesh-preview-flow-2026-06-30.jpg',
   'docs/proof/matchday-mesh-invite-inspector-2026-06-30.jpg',
@@ -122,6 +123,7 @@ requireIncludes('PRIOR_WORK.md', priorWork, 'Pear POS')
 requireIncludes('PRIOR_WORK.md', priorWork, 'PearBrowser')
 requireIncludes('docs/proof/README.md', proofReadme, 'pearbrowser-desktop-catalog-rpc-2026-06-30.json')
 requireIncludes('docs/proof/README.md', proofReadme, 'pear-release-renderer-proof-2026-06-30.json')
+requireIncludes('docs/proof/README.md', proofReadme, 'matchday-demo-flow-proof-2026-06-30.json')
 
 requireImage('docs/proof/matchday-mesh-preview-2026-06-30.jpg', 10_000)
 requireImage('docs/proof/matchday-mesh-preview-flow-2026-06-30.jpg', 10_000)
@@ -170,6 +172,21 @@ if (releaseProof) {
   if (releaseProof.backendLabel !== 'Corestore/Hyperbee') fail('released link renderer proof should use Corestore/Hyperbee')
   if (releaseProof.inviteType !== 'matchday-mesh-core-invite-v1') fail('released link renderer proof should export the invite type')
   if ((releaseProof.operationCount || 0) < 3) fail('released link renderer proof should have seeded operations')
+}
+
+const demoProof = readJson('docs/proof/matchday-demo-flow-proof-2026-06-30.json')
+if (demoProof) {
+  if (demoProof.app?.pearLink !== EXPECTED.pearLink) fail('demo flow proof pear link is stale')
+  if (demoProof.app?.catalog !== EXPECTED.catalogRef) fail('demo flow proof catalog ref is stale')
+  if (demoProof.app?.sourceRepo !== EXPECTED.sourceRepo) fail('demo flow proof source repo is stale')
+  if ((demoProof.scenario?.operationCount || 0) < 8) fail('demo flow proof should replay the full scenario')
+  if (demoProof.status?.pearsStack !== 'op-log-ready') fail('demo flow proof should prove Pears Stack ops')
+  if (demoProof.payments?.status !== 'demo-ledger-active') fail('demo flow proof should prove the USDt demo pool path')
+  if (demoProof.invite?.type !== 'matchday-mesh-core-invite-v1') fail('demo flow proof should include the Matchday invite type')
+  if (demoProof.invite?.writable !== false) fail('demo flow proof invite should be read-only')
+  for (const [key, value] of Object.entries(demoProof.checks || {})) {
+    if (value !== true) fail(`demo flow proof check should pass: ${key}`)
+  }
 }
 
 if (failures.length > 0) {

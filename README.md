@@ -25,6 +25,8 @@ JSON.
 npm ci
 npm test
 npm run validate:publish
+npm run generate:demo-proof
+npm run verify:demo-proof
 npm run verify:submission
 npm run preview
 ```
@@ -94,6 +96,7 @@ publish validator.
 - Open a USDt pool demo card.
 - Record demo contributions into the feed.
 - Export the proof pack from the app header.
+- Verify the deterministic demo proof in `docs/proof/`.
 
 ## Track Claims
 

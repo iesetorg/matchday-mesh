@@ -1,0 +1,101 @@
+{
+  "generatedAt": "2026-06-30T00:00:00.000Z",
+  "app": {
+    "id": "matchday-mesh",
+    "name": "Matchday Mesh",
+    "version": "0.1.0",
+    "pearLink": "pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy",
+    "catalog": "hyperbee://0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f",
+    "sourceRepo": "https://github.com/iesetorg/matchday-mesh"
+  },
+  "scenario": {
+    "name": "Final Night Fan Zone",
+    "baseNow": "2026-06-29T20:00:00.000Z",
+    "operationCount": 8,
+    "feedCards": 8,
+    "hubIds": [
+      "hub_final_night"
+    ],
+    "latestFeedCard": {
+      "type": "feed:pool-contribution",
+      "body": "Ada contributed 5 USDt.",
+      "refs": {
+        "poolId": "pool_demo_host_snacks",
+        "paymentId": "demo_pay_ada_5"
+      }
+    },
+    "checkedInPasses": 1,
+    "poolCount": 1,
+    "paymentCount": 1
+  },
+  "status": {
+    "pearsStack": "op-log-ready",
+    "wdk": "demo-ledger-active",
+    "qvac": "disabled-until-local-sdk-proof",
+    "opLog": 8,
+    "hubs": 1,
+    "passes": 1,
+    "feedCards": 8
+  },
+  "payments": {
+    "mode": "demo-ledger",
+    "status": "demo-ledger-active",
+    "demoPools": 1,
+    "wdkPools": 0,
+    "claim": "WDK-shaped demo receive path"
+  },
+  "invite": {
+    "type": "matchday-mesh-core-invite-v1",
+    "app": "matchday-mesh",
+    "coreName": "matchday-mesh-ops",
+    "key": "372daa7d5fb7daaf5fd379e95cf0d20afac0015b69be4ff5737717cc71c1d3a3",
+    "shortKey": "372daa7d...c1d3a3",
+    "discoveryKey": "857399f16d735e91906edc0c06d9423848454397ef1e41c127452046129f4e3f",
+    "shortDiscoveryKey": "857399f1...9f4e3f",
+    "operations": 3,
+    "writable": false,
+    "createdAt": "2026-06-29T21:16:59.006Z"
+  },
+  "release": {
+    "pearRelease": 1944,
+    "pearLength": 1944,
+    "backendLabel": "Corestore/Hyperbee",
+    "coreName": "matchday-mesh-ops",
+    "operationCount": 3
+  },
+  "catalog": {
+    "name": "Tether Developers Cup Apps",
+    "appCount": 1,
+    "includesMatchdayMesh": true,
+    "sourceUrl": "https://github.com/iesetorg/matchday-mesh"
+  },
+  "proofPack": {
+    "generatedAt": "2026-06-30T00:00:00.000Z",
+    "app": "matchday-mesh",
+    "version": "0.1.0",
+    "status": {
+      "pearsStack": "op-log-ready",
+      "wdk": "demo-ledger-active",
+      "qvac": "disabled-until-local-sdk-proof",
+      "opLog": 8,
+      "hubs": 1,
+      "passes": 1,
+      "feedCards": 8
+    },
+    "opCount": 8,
+    "hubIds": [
+      "hub_final_night"
+    ],
+    "feedCards": 8,
+    "passCount": 1,
+    "poolCount": 1,
+    "paymentCount": 1
+  },
+  "checks": {
+    "hasPearsStackOps": true,
+    "hasInviteHandoff": true,
+    "hasUsdTPool": true,
+    "hasDoorCheckin": true,
+    "hasFeedContribution": true
+  }
+}

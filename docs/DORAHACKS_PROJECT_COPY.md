@@ -48,6 +48,7 @@ any production-money claim before the real WDK adapter is proven.
 npm ci
 npm test
 npm run validate:publish -- --strict-release
+npm run verify:demo-proof
 npm run verify:submission
 pear run --dev .
 ```
@@ -68,6 +69,8 @@ npm run preview -- --port 4173
   own Apps/catalog RPC path with 11 peers and 11 HiveRelays.
 - Browser proof shows the P2P invite inspector accepting a released-link invite
   and summarizing it as a read-only handoff.
+- Deterministic demo proof replays the full fan-pass, invite, prediction, and
+  USDt pool contribution flow.
 - Visual proof captures are in `docs/proof/`.
 
 ## Prior Work
@@ -87,4 +90,4 @@ catalog/publish tooling.
 6. Post a prediction and a match note.
 7. Export the P2P invite and show the Corestore key.
 8. Open a USDt pool demo, add a contribution, and show the feed card.
-9. Show the proof pack and public repo.
+9. Show the deterministic demo proof, proof pack, and public repo.
