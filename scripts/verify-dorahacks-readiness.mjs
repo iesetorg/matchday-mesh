@@ -49,6 +49,7 @@ async function main () {
   const releaseProof = readJson('docs/proof/pear-release-renderer-proof-2026-06-30.json', failures)
   const visualProof = imageInfo('docs/proof/pear-release-window-2026-06-30.png', failures)
   const catalogProof = readJson('docs/proof/pearbrowser-desktop-catalog-rpc-2026-06-30.json', failures)
+  const previewSmoke = readJson('docs/proof/matchday-preview-smoke-2026-06-30.json', failures)
   const demoProof = readJson('docs/proof/matchday-demo-flow-proof-2026-06-30.json', failures)
   const livePairing = readJson('docs/proof/matchday-live-pairing-2026-06-30.json', failures)
   const launchRehearsal = readJson('docs/proof/matchday-launch-rehearsal-2026-06-30.json', failures)
@@ -120,6 +121,17 @@ async function main () {
     'catalogProof',
     'PearBrowser catalog proof is missing or stale')
 
+  checks.previewSmoke = passFail(failures,
+    previewSmoke?.ok === true &&
+    previewSmoke?.app?.pearLink === EXPECTED.pearLink &&
+    previewSmoke?.scenario?.operationCount === 6 &&
+    previewSmoke?.scenario?.accepted === true &&
+    previewSmoke?.scenario?.poolTotal === 5 &&
+    previewSmoke?.scenario?.latestFeedCard?.type === 'feed:pool-contribution' &&
+    Object.values(previewSmoke?.checks || {}).every((value) => value === true),
+    'previewSmoke',
+    'preview UI smoke proof is missing or stale')
+
   checks.liveP2P = passFail(failures,
     livePairing?.ok === true &&
     livePairing?.replica?.writable === false &&
@@ -133,7 +145,8 @@ async function main () {
     launchRehearsal?.checks?.releaseWindowCommand === true &&
     launchRehearsal?.checks?.judgeGate === true &&
     launchRehearsal?.checks?.livePairingCommand === true &&
-    launchRehearsal?.checks?.liveReadinessCommand === true,
+    launchRehearsal?.checks?.liveReadinessCommand === true &&
+    launchRehearsal?.checks?.previewSmokeProof === true,
     'launchRehearsal',
     'launch rehearsal proof is missing or incomplete')
 
@@ -177,6 +190,7 @@ async function main () {
     hasAll(proofIndex, [
       'pear-release-renderer-proof-2026-06-30.json',
       'pear-release-window-2026-06-30.png',
+      'matchday-preview-smoke-2026-06-30.json',
       'matchday-live-pairing-2026-06-30.json',
       'matchday-launch-rehearsal-2026-06-30.json'
     ]),
@@ -217,6 +231,12 @@ async function main () {
         ok: catalogProof?.ok === true,
         peerCount: catalogProof?.pearBrowserRpc?.peerCount || 0,
         hiveRelays: catalogProof?.pearBrowserRpc?.hiveRelays || 0
+      },
+      previewSmoke: {
+        ok: previewSmoke?.ok === true,
+        operationCount: previewSmoke?.scenario?.operationCount || 0,
+        latestFeedCard: previewSmoke?.scenario?.latestFeedCard?.type || null,
+        poolTotal: previewSmoke?.scenario?.poolTotal || 0
       },
       livePairing: {
         ok: livePairing?.ok === true,

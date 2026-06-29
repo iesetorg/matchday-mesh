@@ -35,6 +35,7 @@ seed already running:
 ```sh
 npm run verify:launch
 npm run verify:dorahacks
+npm run verify:preview-smoke
 npm run verify:release-window
 npm run verify:live-pairing
 npm run verify:live-readiness
@@ -57,6 +58,9 @@ npm run handoff:judge
    automated `npm run verify:live-pairing` proof exercises the same host/join
    path over real Hyperswarm.
 8. Show the proof files in `docs/proof/`.
+
+The same local-preview reset, scan, pool-open, and contribution path is covered
+by `npm run verify:preview-smoke`.
 
 ## Honest Track Scope
 

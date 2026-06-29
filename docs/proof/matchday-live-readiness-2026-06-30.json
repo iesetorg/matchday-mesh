@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "capturedAt": "2026-06-29T23:06:52.326Z",
+  "capturedAt": "2026-06-29T23:30:41.529Z",
   "app": {
     "pearLink": "pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy",
     "catalog": "hyperbee://0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f",
@@ -15,6 +15,7 @@
     "releasedPearProof": true,
     "pearBrowserCatalogProof": true,
     "deterministicDemoProof": true,
+    "previewSmokeProof": true,
     "previewProcess": true,
     "catalogServeProcess": true,
     "pearSeedProcess": true,

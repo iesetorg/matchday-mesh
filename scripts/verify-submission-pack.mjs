@@ -84,6 +84,7 @@ for (const relativePath of [
   'docs/TEST_COMMAND_MATRIX_2026-06-29.md',
   'docs/proof/README.md',
   'docs/proof/dorahacks-readiness-2026-06-30.json',
+  'docs/proof/matchday-preview-smoke-2026-06-30.json',
   'docs/proof/pearbrowser-desktop-catalog-rpc-2026-06-30.json',
   'docs/proof/pear-release-renderer-proof-2026-06-30.json',
   'docs/proof/pear-release-window-2026-06-30.png',
@@ -136,6 +137,7 @@ requireIncludes('docs/proof/README.md', proofReadme, 'pearbrowser-desktop-catalo
 requireIncludes('docs/proof/README.md', proofReadme, 'dorahacks-readiness-2026-06-30.json')
 requireIncludes('docs/proof/README.md', proofReadme, 'pear-release-renderer-proof-2026-06-30.json')
 requireIncludes('docs/proof/README.md', proofReadme, 'pear-release-window-2026-06-30.png')
+requireIncludes('docs/proof/README.md', proofReadme, 'matchday-preview-smoke-2026-06-30.json')
 requireIncludes('docs/proof/README.md', proofReadme, 'matchday-demo-flow-proof-2026-06-30.json')
 requireIncludes('docs/proof/README.md', proofReadme, 'matchday-live-pairing-2026-06-30.json')
 requireIncludes('docs/proof/README.md', proofReadme, 'matchday-live-readiness-2026-06-30.json')
@@ -196,6 +198,23 @@ if (dorahacksReadiness) {
   }
   for (const [key, value] of Object.entries(dorahacksReadiness.checks || {})) {
     if (value !== true) fail(`DoraHacks readiness check should pass: ${key}`)
+  }
+}
+
+const previewSmoke = readJson('docs/proof/matchday-preview-smoke-2026-06-30.json')
+if (previewSmoke) {
+  if (previewSmoke.ok !== true) fail('preview smoke proof should be ok')
+  if (previewSmoke.app?.pearLink !== EXPECTED.pearLink) fail('preview smoke proof pear link is stale')
+  if (previewSmoke.app?.catalog !== EXPECTED.catalogRef) fail('preview smoke proof catalog is stale')
+  if (previewSmoke.app?.sourceRepo !== EXPECTED.sourceRepo) fail('preview smoke proof source repo is stale')
+  if (previewSmoke.scenario?.operationCount !== 6) fail('preview smoke proof should replay the 6-op UI smoke path')
+  if (previewSmoke.scenario?.accepted !== true) fail('preview smoke proof should check Ada in')
+  if (previewSmoke.scenario?.poolTotal !== 5) fail('preview smoke proof should record 5 USDt')
+  if (previewSmoke.scenario?.latestFeedCard?.type !== 'feed:pool-contribution') {
+    fail('preview smoke proof should end on a pool contribution feed card')
+  }
+  for (const [key, value] of Object.entries(previewSmoke.checks || {})) {
+    if (value !== true) fail(`preview smoke check should pass: ${key}`)
   }
 }
 

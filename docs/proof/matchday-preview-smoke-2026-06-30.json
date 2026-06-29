@@ -1,0 +1,113 @@
+{
+  "ok": true,
+  "capturedAt": "2026-06-29T23:27:42.165Z",
+  "app": {
+    "pearLink": "pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy",
+    "catalog": "hyperbee://0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f",
+    "sourceRepo": "https://github.com/iesetorg/matchday-mesh"
+  },
+  "preview": {
+    "url": "http://127.0.0.1:4193/",
+    "spawnedServer": true
+  },
+  "checks": {
+    "previewIndex": true,
+    "previewUiAsset": true,
+    "previewStyleAsset": true,
+    "previewBootAsset": true,
+    "launchCopy": true,
+    "demoActions": true,
+    "honestTrackState": true,
+    "qrRender": true,
+    "indexModules": true,
+    "manifestLinks": true,
+    "previewScenarioOps": true,
+    "previewScenarioAccepted": true,
+    "previewScenarioPoolTotal": true,
+    "previewScenarioReceiveAddress": true,
+    "previewScenarioLatestFeed": true,
+    "previewScenarioStatus": true
+  },
+  "http": {
+    "index": {
+      "path": "/",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 425,
+      "ok": true,
+      "missing": [],
+      "message": "/ served expected launch UI content"
+    },
+    "ui": {
+      "path": "/ui/app.js",
+      "status": 200,
+      "contentType": "text/javascript; charset=utf-8",
+      "bytes": 25245,
+      "ok": true,
+      "missing": [],
+      "message": "/ui/app.js served expected launch UI content"
+    },
+    "styles": {
+      "path": "/ui/styles.css",
+      "status": 200,
+      "contentType": "text/css; charset=utf-8",
+      "bytes": 7850,
+      "ok": true,
+      "missing": [],
+      "message": "/ui/styles.css served expected launch UI content"
+    },
+    "boot": {
+      "path": "/app/boot-renderer.js",
+      "status": 200,
+      "contentType": "text/javascript; charset=utf-8",
+      "bytes": 12675,
+      "ok": true,
+      "missing": [],
+      "message": "/app/boot-renderer.js served expected launch UI content"
+    }
+  },
+  "source": {
+    "launchCopy": true,
+    "demoActions": true,
+    "honestTrackState": true,
+    "qrRender": true,
+    "indexModules": true,
+    "manifestLinks": true
+  },
+  "scenario": {
+    "operationCount": 6,
+    "feedCards": 6,
+    "latestFeedCard": {
+      "type": "feed:pool-contribution",
+      "actorName": "Ada",
+      "body": "Ada contributed 5 USDt."
+    },
+    "accepted": true,
+    "poolTotal": 5,
+    "poolTarget": 50,
+    "receiveAddress": "demo-usdt://matchday-mesh/hub_final_night/recv_preview_smoke_host_snacks",
+    "status": {
+      "pearsStack": "op-log-ready",
+      "wdk": "demo-ledger-active",
+      "qvac": "disabled-until-local-sdk-proof",
+      "opLog": 6,
+      "hubs": 1,
+      "passes": 1,
+      "feedCards": 6
+    },
+    "paymentStatus": {
+      "mode": "demo-ledger",
+      "status": "demo-ledger-active",
+      "demoPools": 1,
+      "wdkPools": 0,
+      "claim": "WDK-shaped demo receive path"
+    },
+    "visibleExpectations": {
+      "scanResult": "Accepted",
+      "poolMeter": "5.00 USDt / 50",
+      "paymentClaim": "WDK-shaped demo receive path",
+      "qrCells": 49
+    }
+  },
+  "failures": []
+}

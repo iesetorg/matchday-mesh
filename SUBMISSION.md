@@ -79,10 +79,12 @@ Highlights:
 - fresh-peer catalog verification found the `matchday-mesh` row;
 - running desktop PearBrowser loaded the same catalog through its own
   Apps/catalog RPC path.
+- preview smoke proof verifies the local test path: served UI assets, Ada scan,
+  USDt pool open, 5 USDt contribution, and newest feed card.
 - real Hyperswarm pairing proof joined a read-only replica and caught a live
   host feed append.
-- launch rehearsal proof ran the judge gate, live pairing, and live-readiness
-  checks together.
+- launch rehearsal proof ran DoraHacks readiness, the judge gate, released
+  window proof, live pairing, and live-readiness checks together.
 - DoraHacks readiness proof verifies track scope, public links, license, setup,
   release/catalog/P2P proofs, prior-work disclosure, and manual video actions.
 

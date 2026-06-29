@@ -110,6 +110,11 @@ async function main () {
     liveReadinessProof: proofFiles.liveReadiness?.ok === true,
     pearBrowserCatalogProof: proofFiles.catalogProof?.ok === true &&
       proofFiles.catalogProof?.matchdayMesh?.pearLink === EXPECTED.pearLink,
+    previewSmokeProof: proofFiles.previewSmoke?.ok === true &&
+      proofFiles.previewSmoke?.scenario?.operationCount === 6 &&
+      proofFiles.previewSmoke?.scenario?.accepted === true &&
+      proofFiles.previewSmoke?.scenario?.poolTotal === 5 &&
+      proofFiles.previewSmoke?.scenario?.latestFeedCard?.type === 'feed:pool-contribution',
     deterministicDemoProof: proofFiles.demoProof?.app?.pearLink === EXPECTED.pearLink &&
       proofFiles.demoProof?.checks &&
       Object.values(proofFiles.demoProof.checks).every((value) => value === true)
@@ -142,6 +147,7 @@ async function main () {
       livePairing: summarizeLivePairingProof(proofFiles.livePairing),
       liveReadiness: summarizeLiveReadinessProof(proofFiles.liveReadiness),
       catalog: summarizeCatalogProof(proofFiles.catalogProof),
+      previewSmoke: summarizePreviewSmokeProof(proofFiles.previewSmoke),
       demo: summarizeDemoProof(proofFiles.demoProof)
     },
     checks,
@@ -174,6 +180,7 @@ function readProofFiles () {
     livePairing: readJson('docs/proof/matchday-live-pairing-2026-06-30.json'),
     liveReadiness: readJson('docs/proof/matchday-live-readiness-2026-06-30.json'),
     catalogProof: readJson('docs/proof/pearbrowser-desktop-catalog-rpc-2026-06-30.json'),
+    previewSmoke: readJson('docs/proof/matchday-preview-smoke-2026-06-30.json'),
     demoProof: readJson('docs/proof/matchday-demo-flow-proof-2026-06-30.json')
   }
 }
@@ -281,6 +288,19 @@ function summarizeCatalogProof (proof) {
     hiveRelays: proof.pearBrowserRpc?.hiveRelays,
     appLink: proof.matchdayMesh?.pearLink,
     aggregatedApps: proof.aggregatedApps
+  }
+}
+
+function summarizePreviewSmokeProof (proof) {
+  if (!proof) return null
+  return {
+    ok: proof.ok,
+    operationCount: proof.scenario?.operationCount,
+    feedCards: proof.scenario?.feedCards,
+    latestFeedCard: proof.scenario?.latestFeedCard?.type,
+    accepted: proof.scenario?.accepted,
+    poolTotal: proof.scenario?.poolTotal,
+    receiveAddress: proof.scenario?.receiveAddress
   }
 }
 

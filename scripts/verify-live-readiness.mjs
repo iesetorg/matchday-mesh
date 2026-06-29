@@ -120,6 +120,7 @@ async function main () {
   const catalog = readJson('catalog/matchday-mesh.catalog.json')
   const releaseProof = readJson('docs/proof/pear-release-renderer-proof-2026-06-30.json')
   const catalogProof = readJson('docs/proof/pearbrowser-desktop-catalog-rpc-2026-06-30.json')
+  const previewSmoke = readJson('docs/proof/matchday-preview-smoke-2026-06-30.json')
   const demoProof = readJson('docs/proof/matchday-demo-flow-proof-2026-06-30.json')
 
   if (packageJson.name === 'matchday-mesh' && packageJson.pear?.name === 'matchday-mesh') pass('packageIdentity')
@@ -175,6 +176,18 @@ async function main () {
     pass('deterministicDemoProof')
   } else {
     fail('deterministicDemoProof', 'deterministic demo proof is missing or stale')
+  }
+
+  if (previewSmoke.ok === true &&
+    previewSmoke.app?.pearLink === EXPECTED.pearLink &&
+    previewSmoke.scenario?.operationCount === 6 &&
+    previewSmoke.scenario?.accepted === true &&
+    previewSmoke.scenario?.poolTotal === 5 &&
+    previewSmoke.scenario?.latestFeedCard?.type === 'feed:pool-contribution' &&
+    hasTrueChecks(previewSmoke.checks)) {
+    pass('previewSmokeProof')
+  } else {
+    fail('previewSmokeProof', 'preview smoke proof is missing or stale')
   }
 
   const processRows = args.noProcesses ? [] : getProcessRows()

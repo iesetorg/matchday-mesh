@@ -28,6 +28,7 @@ npm test
 npm run validate:publish
 npm run generate:demo-proof
 npm run verify:demo-proof
+npm run verify:preview-smoke
 npm run verify:submission
 npm run preview
 ```
@@ -56,6 +57,7 @@ Pear seed are running:
 ```sh
 npm run verify:launch
 npm run verify:dorahacks
+npm run verify:preview-smoke
 npm run verify:release-window
 npm run verify:live-pairing
 npm run verify:live-readiness
@@ -115,6 +117,7 @@ publish validator.
 - Record demo contributions into the feed.
 - Export the proof pack from the app header.
 - Verify the deterministic demo proof in `docs/proof/`.
+- Verify the repeatable local preview smoke proof.
 - Run the consolidated launch rehearsal.
 - Verify the DoraHacks technical readiness checklist.
 - Verify the released Pear renderer visual proof.

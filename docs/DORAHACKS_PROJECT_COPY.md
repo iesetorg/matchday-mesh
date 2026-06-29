@@ -54,6 +54,7 @@ npm run validate:publish -- --strict-release
 npm run verify:demo-proof
 npm run verify:launch
 npm run verify:dorahacks
+npm run verify:preview-smoke
 npm run verify:release-window
 npm run verify:live-pairing
 npm run handoff:judge
@@ -80,10 +81,13 @@ npm run preview -- --port 4173
   own Apps/catalog RPC path with 11 peers and 11 HiveRelays.
 - Browser proof shows the P2P invite panel exporting a released-link invite,
   hosting the pairing topic, and joining a read-only replica handoff.
+- Preview smoke proof starts the local HTTP preview, verifies the served UI
+  assets, and replays the reset, scan, USDt pool, and contribution path.
 - Live Hyperswarm proof shows a hosted topic, read-only replica join, and live
   replicated feed append.
-- Launch rehearsal proof runs the judge gate, live pairing, and live-readiness
-  checks as one tester-facing command.
+- Launch rehearsal proof runs DoraHacks readiness, the judge gate, released
+  window proof, live pairing, and live-readiness checks as one tester-facing
+  command.
 - DoraHacks readiness proof verifies the technical submission checklist and
   lists manual page/video actions still outside the repo.
 - Deterministic demo proof replays the full fan-pass, invite, prediction, and
