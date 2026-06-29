@@ -56,4 +56,6 @@ Primary track: Pears Stack.
 The USDt pool is a deterministic WDK-shaped demo adapter. QVAC is gated until a
 local QVAC SDK inference path is proven without cloud AI APIs. Hyperswarm UI and
 full Autobase multiwriter sync are not claimed in this launch build; direct
-Corestore replication from the invite is covered by tests.
+Corestore replication from the invite is covered by tests, and the invite also
+derives a stable `matchday-mesh-pairing-v1` Hyperswarm topic for the next public
+swarm pairing step.

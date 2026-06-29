@@ -57,6 +57,7 @@
     "b4a": "^1.8.0",
     "corestore": "^6.18.4",
     "hyperbee": "^2.27.3",
+    "hypercore-crypto": "^3.6.1",
     "pear-bridge": "^1.2.5",
     "pear-electron": "^1.7.28"
   },

@@ -144,8 +144,8 @@ async function main () {
   }
 
   if (releaseProof.ok === true &&
-    releaseProof.release === 1952 &&
-    releaseProof.length === 1952 &&
+    releaseProof.release === 1958 &&
+    releaseProof.length === 1958 &&
     releaseProof.backendLabel === 'Corestore/Hyperbee' &&
     releaseProof.inviteType === 'matchday-mesh-core-invite-v1') {
     pass('releasedPearProof')

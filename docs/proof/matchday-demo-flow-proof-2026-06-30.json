@@ -54,11 +54,25 @@
     "shortDiscoveryKey": "857399f1...9f4e3f",
     "operations": 3,
     "writable": false,
-    "createdAt": "2026-06-29T21:41:34.035Z"
+    "createdAt": "2026-06-29T21:56:14.261Z"
+  },
+  "pairing": {
+    "type": "matchday-mesh-pairing-v1",
+    "app": "matchday-mesh",
+    "mode": "read-only-replica",
+    "transport": "hyperswarm-topic",
+    "coreName": "matchday-mesh-ops",
+    "key": "372daa7d5fb7daaf5fd379e95cf0d20afac0015b69be4ff5737717cc71c1d3a3",
+    "discoveryKey": "857399f16d735e91906edc0c06d9423848454397ef1e41c127452046129f4e3f",
+    "topic": "2b6f3a25f91e3c607343dbf165f8ef334a28b3ec85548f350727d1eda636d0df",
+    "shortTopic": "2b6f3a25...36d0df",
+    "operations": 3,
+    "writable": false,
+    "createdAt": "2026-06-29T21:56:14.261Z"
   },
   "release": {
-    "pearRelease": 1952,
-    "pearLength": 1952,
+    "pearRelease": 1958,
+    "pearLength": 1958,
     "backendLabel": "Corestore/Hyperbee",
     "coreName": "matchday-mesh-ops",
     "operationCount": 3
@@ -94,6 +108,7 @@
   "checks": {
     "hasPearsStackOps": true,
     "hasInviteHandoff": true,
+    "hasPairingTopic": true,
     "hasUsdTPool": true,
     "hasDoorCheckin": true,
     "hasFeedContribution": true

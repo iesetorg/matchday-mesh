@@ -194,6 +194,8 @@ if (demoProof) {
   if (demoProof.payments?.status !== 'demo-ledger-active') fail('demo flow proof should prove the USDt demo pool path')
   if (demoProof.invite?.type !== 'matchday-mesh-core-invite-v1') fail('demo flow proof should include the Matchday invite type')
   if (demoProof.invite?.writable !== false) fail('demo flow proof invite should be read-only')
+  if (demoProof.pairing?.type !== 'matchday-mesh-pairing-v1') fail('demo flow proof should include the Matchday pairing descriptor')
+  if (!/^[0-9a-f]{64}$/.test(demoProof.pairing?.topic || '')) fail('demo flow proof should include a 32-byte pairing topic')
   for (const [key, value] of Object.entries(demoProof.checks || {})) {
     if (value !== true) fail(`demo flow proof check should pass: ${key}`)
   }

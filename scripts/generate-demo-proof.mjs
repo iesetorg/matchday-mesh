@@ -23,6 +23,9 @@ import {
   createMatchdayInvite,
   summarizeMatchdayInvite
 } from '../app/invite.js'
+import {
+  createMatchdayPairingDescriptor
+} from '../app/pears-sync.js'
 
 const here = dirname(fileURLToPath(import.meta.url))
 const root = join(here, '..')
@@ -150,9 +153,10 @@ function buildProof () {
     discoveryKey: releaseProof.discoveryKey,
     operations: releaseProof.operationCount
   }, {
-    createdAt: '2026-06-29T21:41:34.035Z'
+    createdAt: '2026-06-29T21:56:14.261Z'
   })
   const inviteSummary = summarizeMatchdayInvite(invite)
+  const pairing = createMatchdayPairingDescriptor(invite)
   const latestFeedCard = replayed.feed[replayed.feed.length - 1]
   const passAda = replayed.passes.pass_ada
   const poolValues = Object.values(replayed.pools)
@@ -166,6 +170,9 @@ function buildProof () {
     hasInviteHandoff: inviteSummary.type === 'matchday-mesh-core-invite-v1' &&
       inviteSummary.writable === false &&
       inviteSummary.operations === releaseProof.operationCount,
+    hasPairingTopic: pairing.type === 'matchday-mesh-pairing-v1' &&
+      pairing.transport === 'hyperswarm-topic' &&
+      /^[0-9a-f]{64}$/.test(pairing.topic),
     hasUsdTPool: poolValues.some((entry) => entry.asset === 'USDt' &&
       entry.targetAmount === 50 &&
       entry.paymentMode === 'demo-ledger') &&
@@ -203,6 +210,7 @@ function buildProof () {
     status,
     payments,
     invite: inviteSummary,
+    pairing,
     release: {
       pearRelease: releaseProof.release,
       pearLength: releaseProof.length,

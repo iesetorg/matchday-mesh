@@ -15,7 +15,10 @@ The first launch build keeps the implementation small enough to publish quickly:
   Stack replication.
 - `app/pears-sync.js` connects two Matchday Mesh Corestores with replication
   streams, opens a read-only replica from an invite, and waits for that peer to
-  receive the operation log.
+  receive the operation log. It also derives a stable
+  `matchday-mesh-pairing-v1` descriptor and 32-byte Hyperswarm topic from the
+  same invite, so the future public DHT pairing path does not need a different
+  handoff contract.
 - `app/runtime-api.js` exposes the Pear renderer API over the Hyperbee store:
   list operations, append one operation, reset/reseed, replay, info, invite,
   invite normalization/summary, and close.
@@ -78,8 +81,10 @@ The Pear runtime UI also exposes a `matchday-mesh-core-invite-v1` object with
 the host core key and discovery key. The invite is now a reusable handoff
 contract: tests create the invite from the host store, normalize it, open a
 read-only replica from it, and prove that new host operations reach the guest.
-This keeps the future Hyperswarm pairing UI small because pairing can focus on
-transporting the same invite rather than changing the store contract.
+The same module derives a `matchday-mesh-pairing-v1` descriptor with a stable
+Hyperswarm topic from that invite. This keeps the future Hyperswarm pairing UI
+small because pairing can focus on joining that topic rather than changing the
+store contract.
 
 ## Payment Boundary
 

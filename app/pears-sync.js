@@ -1,5 +1,9 @@
 import { normalizeMatchdayInvite } from './invite.js'
 import { openMatchdayPearsReplica } from './pears-store.js'
+import b4a from 'b4a'
+import crypto from 'hypercore-crypto'
+
+export const MATCHDAY_PAIRING_TYPE = 'matchday-mesh-pairing-v1'
 
 export function connectMatchdayStores (leftStore, rightStore) {
   const left = leftStore.replicate(true)
@@ -23,6 +27,36 @@ export async function openReplicaFromMatchdayInvite (storagePath, invite, opts =
     invite: normalized,
     store
   }
+}
+
+export function createMatchdayPairingDescriptor (invite) {
+  const normalized = normalizeMatchdayInvite(invite)
+  const topic = createMatchdayPairingTopic(normalized)
+  return {
+    type: MATCHDAY_PAIRING_TYPE,
+    app: normalized.app,
+    mode: 'read-only-replica',
+    transport: 'hyperswarm-topic',
+    coreName: normalized.coreName,
+    key: normalized.key,
+    discoveryKey: normalized.discoveryKey,
+    topic: b4a.toString(topic, 'hex'),
+    shortTopic: shortHex(topic),
+    operations: normalized.operations,
+    writable: false,
+    createdAt: normalized.createdAt
+  }
+}
+
+export function createMatchdayPairingTopic (invite) {
+  const normalized = normalizeMatchdayInvite(invite)
+  return crypto.hash(b4a.from([
+    MATCHDAY_PAIRING_TYPE,
+    normalized.app,
+    normalized.coreName,
+    normalized.key,
+    normalized.discoveryKey
+  ].join(':')))
 }
 
 export async function waitForOperationCount (store, expectedCount, opts = {}) {
@@ -50,4 +84,9 @@ function noop () {}
 
 function delay (ms) {
   return new Promise((resolve) => setTimeout(resolve, ms))
+}
+
+function shortHex (buffer) {
+  const value = b4a.toString(buffer, 'hex')
+  return `${value.slice(0, 8)}...${value.slice(-6)}`
 }

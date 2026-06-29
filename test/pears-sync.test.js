@@ -6,7 +6,14 @@ import { tmpdir } from 'node:os'
 import { createMatchdayInvite } from '../app/invite.js'
 import { createDemoOperations, createOperation, OP_TYPES } from '../app/ops.js'
 import { openMatchdayPearsStore } from '../app/pears-store.js'
-import { connectMatchdayStores, openReplicaFromMatchdayInvite, waitForOperationCount } from '../app/pears-sync.js'
+import {
+  connectMatchdayStores,
+  createMatchdayPairingDescriptor,
+  createMatchdayPairingTopic,
+  MATCHDAY_PAIRING_TYPE,
+  openReplicaFromMatchdayInvite,
+  waitForOperationCount
+} from '../app/pears-sync.js'
 
 async function tempDir (prefix) {
   return mkdtemp(join(tmpdir(), prefix))
@@ -73,4 +80,27 @@ test('replicates the operation log to a read-only Corestore peer', async () => {
     await rm(hostDir, { recursive: true, force: true })
     await rm(guestDir, { recursive: true, force: true })
   }
+})
+
+test('creates a stable pairing descriptor from a Matchday invite', () => {
+  const invite = createMatchdayInvite({
+    coreName: 'matchday-mesh-ops',
+    key: 'a'.repeat(64),
+    discoveryKey: 'b'.repeat(64),
+    operations: 7
+  }, { createdAt: '2026-06-30T00:00:00.000Z' })
+
+  const descriptor = createMatchdayPairingDescriptor({ ...invite, writable: true })
+  const topic = createMatchdayPairingTopic(invite)
+  const sameTopic = createMatchdayPairingTopic(JSON.stringify(invite))
+
+  assert.equal(descriptor.type, MATCHDAY_PAIRING_TYPE)
+  assert.equal(descriptor.transport, 'hyperswarm-topic')
+  assert.equal(descriptor.mode, 'read-only-replica')
+  assert.equal(descriptor.writable, false)
+  assert.equal(descriptor.operations, 7)
+  assert.equal(descriptor.topic.length, 64)
+  assert.equal(topic.byteLength, 32)
+  assert.deepEqual(topic, sameTopic)
+  assert.equal(descriptor.shortTopic, `${descriptor.topic.slice(0, 8)}...${descriptor.topic.slice(-6)}`)
 })

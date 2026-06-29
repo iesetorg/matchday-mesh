@@ -45,7 +45,7 @@ requireEqual(manifest.links?.pearRuntime, EXPECTED.pearLink, 'manifest pearRunti
 requireEqual(manifest.links?.pearBrowserCatalog, EXPECTED.catalog, 'manifest catalog')
 requireEqual(manifest.links?.sourceRepo, EXPECTED.repo, 'manifest source repo')
 requireEqual(releaseProof.ok, true, 'released Pear proof ok')
-requireEqual(releaseProof.release, 1952, 'released Pear proof release')
+requireEqual(releaseProof.release, 1958, 'released Pear proof release')
 requireEqual(releaseProof.backendLabel, 'Corestore/Hyperbee', 'released Pear proof backend')
 requireEqual(catalogProof.ok, true, 'PearBrowser catalog RPC proof ok')
 requireEqual(demoProof.checks?.hasPearsStackOps, true, 'demo proof Pears Stack ops')
