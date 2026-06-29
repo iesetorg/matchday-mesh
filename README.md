@@ -24,6 +24,7 @@ host core key, operation count, and exportable invite JSON.
 npm ci
 npm test
 npm run validate:publish
+npm run verify:submission
 npm run preview
 ```
 
@@ -31,6 +32,12 @@ With Pear CLI installed:
 
 ```sh
 pear run --dev .
+```
+
+For a release/submission preflight:
+
+```sh
+npm run check:release
 ```
 
 Released Pear link:

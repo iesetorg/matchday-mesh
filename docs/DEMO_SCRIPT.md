@@ -24,8 +24,8 @@ Target length: 3 minutes.
 2. Show the PearBrowser catalog:
    `hyperbee://0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f`.
 3. Run or show `npm run validate:publish -- --strict-release`.
-4. Show `docs/proof/matchday-mesh-preview-2026-06-30.png`.
-5. Show `docs/proof/matchday-mesh-preview-flow-2026-06-30.png`.
+4. Show `docs/proof/matchday-mesh-preview-2026-06-30.jpg`.
+5. Show `docs/proof/matchday-mesh-preview-flow-2026-06-30.jpg`.
 6. Show `docs/proof/pearbrowser-desktop-catalog-rpc-2026-06-30.json`.
 7. End on the public repo URL:
    `https://github.com/iesetorg/matchday-mesh`.

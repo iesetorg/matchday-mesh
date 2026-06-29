@@ -48,6 +48,7 @@ production-money claim before the real WDK adapter is proven.
 npm ci
 npm test
 npm run validate:publish -- --strict-release
+npm run verify:submission
 pear run --dev .
 ```
 

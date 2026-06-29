@@ -17,7 +17,9 @@ Run from:
 | `npm test` | Pass | 18/18 Node tests pass across domain, operation-log replay, payment adapter behavior, Corestore/Hyperbee persistence, direct Corestore replication, and the Pear renderer runtime API. |
 | `npm run validate:publish` | Pass with release metadata present | `links.pearRuntime`, `links.pearBrowser`, and `links.sourceRepo` are all filled in for the public release. |
 | `npm run validate:publish -- --strict-release` | Pass | Strict release validation reports `Matchday Mesh publish surface OK (0 warnings)`. |
+| `npm run verify:submission` | Pass | Submission pack preflight verifies the released Pear link, live PearBrowser catalog key, source repo, proof JSON, proof screenshots, honest track language, and prior-work disclosure. |
 | `npm run check` | Pass | Runs `npm test` and `npm run validate:publish`. |
+| `npm run check:release` | Pass | Runs the full release/submission gate: `npm test`, strict publish validation, and submission-pack preflight. |
 | `npm ci --ignore-scripts` | Pass | Clean install from `package-lock.json` added 157 packages and found 0 vulnerabilities. Local `node_modules` now matches the lockfile instead of the earlier Pear Home copy. |
 | `npm ci --ignore-scripts` in `/private/tmp/matchday-mesh-ci-proof` | Pass | Fresh fixture with only `package.json` and `package-lock.json` installed successfully from the registry. |
 | `npm ls --depth=0` | Pass | Top-level tree is clean: `b4a@1.8.0`, `corestore@6.18.4`, `hyperbee@2.27.3`, `pear-bridge@1.2.5`, `pear-electron@1.7.28`. |
@@ -37,7 +39,7 @@ Run from:
 | In-app browser click flow | Pass | Reset demo, scanned Ada pass, opened USDt pool, contributed 5 USDt. Result showed `Accepted`, `5.00 USDt / 50`, newest feed cards ordered as pool contribution, pool opened, check-in, reaction. |
 | In-app browser payment adapter flow | Pass | Pool displayed `demo-usdt://matchday-mesh/...` receive address, rendered 49 QR cells, status showed `WDK-shaped demo receive path`, and top feed card was `pool-contribution`. |
 | In-app browser P2P invite panel smoke | Pass | Preview mode shows the P2P invite panel with `Mode: Preview`, `Core: Launch in Pear`, disabled export button, and operation count updating from 3 to 6 after the demo flow. |
-| In-app browser visual proof capture | Pass | Saved viewport proofs at `docs/proof/matchday-mesh-preview-2026-06-30.png` and `docs/proof/matchday-mesh-preview-flow-2026-06-30.png`; DOM assertions confirmed `Accepted`, `5.00 USDt / 50`, `Ops 6`, `Launch in Pear`, and `backendOps 6` with zero console errors. |
+| In-app browser visual proof capture | Pass | Saved viewport proofs at `docs/proof/matchday-mesh-preview-2026-06-30.jpg` and `docs/proof/matchday-mesh-preview-flow-2026-06-30.jpg`; DOM assertions confirmed `Accepted`, `5.00 USDt / 50`, `Ops 6`, `Launch in Pear`, and `backendOps 6` with zero console errors. |
 | `which pear` | Pass | Pear CLI shim exists at `/opt/homebrew/bin/pear`. |
 | `pear --version` | Not supported | CLI exists but bailed with `UNKNOWN_FLAG: version`; also printed PATH warning. |
 | `pear help` | Inconclusive | Hung after the PATH warning and was stopped. Use HTTP preview for current testing; retry Pear dev launch from a terminal with Pear's PATH fix. |

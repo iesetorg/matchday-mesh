@@ -25,7 +25,8 @@
         "/matchday-release-proof.json",
         "/pearbrowser-catalog-data",
         "/test",
-        "/scripts/validate-publish-surface.mjs"
+        "/scripts/validate-publish-surface.mjs",
+        "/scripts/verify-submission-pack.mjs"
       ]
     }
   },
@@ -35,7 +36,9 @@
     "preview": "node scripts/serve.mjs",
     "test": "node --test",
     "validate:publish": "node scripts/validate-publish-surface.mjs",
+    "verify:submission": "node scripts/verify-submission-pack.mjs",
     "check": "npm test && npm run validate:publish",
+    "check:release": "npm test && npm run validate:publish -- --strict-release && npm run verify:submission",
     "link:new": "pear touch",
     "stage": "pear stage \"$PEAR_LINK\" .",
     "release": "pear release \"$PEAR_LINK\"",
