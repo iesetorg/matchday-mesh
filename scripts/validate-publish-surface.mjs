@@ -43,6 +43,7 @@ const pkg = readJson('package.json')
 const lock = readJson('package-lock.json')
 const manifest = readJson('manifest.json')
 const catalog = readJson('scripts/app-manifest.json')
+const pearBrowserCatalog = readJson('catalog/matchday-mesh.catalog.json')
 const readme = readText('README.md')
 const submission = readText('SUBMISSION.md')
 const priorWork = readText('PRIOR_WORK.md')
@@ -61,6 +62,7 @@ for (const filePath of [
   'app/pears-sync.js',
   'app/runtime-api.js',
   'assets/icon.svg',
+  'catalog/matchday-mesh.catalog.json',
   'docs/ARCHITECTURE.md',
   'docs/DEMO_SCRIPT.md',
   'docs/RISK_LEDGER.md',
@@ -124,6 +126,19 @@ if (catalog) {
   }
   if (!catalog.links?.sourceRepo) {
     warn('links.sourceRepo is not set yet; fill this before DoraHacks submission')
+  }
+  if (strictRelease && !/^hyperbee:\/\/[0-9a-f]{64}$/i.test(catalog.links?.pearBrowserCatalog || '')) {
+    fail('strict release requires links.pearBrowserCatalog to be a hyperbee:// catalog key')
+  }
+}
+
+if (pearBrowserCatalog) {
+  const apps = Array.isArray(pearBrowserCatalog.apps) ? pearBrowserCatalog.apps : []
+  const app = apps.find(entry => entry && entry.id === 'matchday-mesh')
+  if (!app) fail('catalog/matchday-mesh.catalog.json must include matchday-mesh')
+  if (app && !isPearLink(app.link)) fail('PearBrowser catalog entry must link to the released pear:// app')
+  if (app && app.sourceUrl !== 'https://github.com/iesetorg/matchday-mesh') {
+    fail('PearBrowser catalog entry must include the public source repo URL')
   }
 }
 

@@ -36,6 +36,9 @@ Public source: https://github.com/iesetorg/matchday-mesh
 Released Pear link:
 `pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy`
 
+PearBrowser catalog:
+`hyperbee://0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f`
+
 ## Known Limits
 
 - The first build has a Pear Runtime API backed by Corestore/Hyperbee, with

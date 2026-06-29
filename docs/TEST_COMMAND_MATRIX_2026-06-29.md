@@ -44,12 +44,15 @@ Run from:
 | `MATCHDAY_MESH_BOOT_PROOF_PATH=... pear run --dev .` | Pass | Renderer wrote `matchday-pear-proof.json` with `ok: true`, `hasPear: true`, `hasMatchdayAPI: true`, backend `pears-store`, Corestore/Hyperbee key/discovery key, a `matchday-mesh-core-invite-v1` invite, and 3 seeded operations from Pear storage. |
 | `MATCHDAY_MESH_BOOT_PROOF_PATH=... pear run --dev .` after clean `npm ci` | Pass | Pear renderer proof still passes with the clean dependency tree. |
 | `pear touch` | Pass | Created `pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy`. |
-| `PEAR_LINK=... npm run stage` | Pass | Staged Matchday Mesh and warmed the app. Final public-repo metadata update reported latest length `1892`. |
-| `PEAR_LINK=... npm run release` | Pass | Released `pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy`; final latest length reported as `1893`. |
+| `PEAR_LINK=... npm run stage` | Pass | Staged Matchday Mesh and warmed the app. Final catalog metadata update plus purge reported latest length `1928`. |
+| `pear stage --purge ...` | Pass | Removed accidentally staged ignored `pearbrowser-catalog-data/` publisher storage before release. |
+| `PEAR_LINK=... npm run release` | Pass | Released `pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy`; final latest length reported as `1929`. |
 | `PEAR_LINK=... npm run seed` | Running | Seed announced drive key `fe36eb9038630aeb0a8bc2a21f548d44964c35d9eaff37c654b95d9173233bca`, discovery key `e92e9f4a8df2ced0e5eb1b15354877097a4c1030b843154f8301fe694bdc91f9`, and content key `41328f560d68a5e50e1b45a22ecd3511fa5213c49a42a625170d7175834c6b87`. |
-| `MATCHDAY_MESH_BOOT_PROOF_PATH=... pear run pear://9a5q...` | Pass | Final released-link renderer proof wrote `matchday-release-proof.json` with `ok: true`, `hasMatchdayAPI: true`, backend `pears-store`, a `matchday-mesh-core-invite-v1` invite, and 3 seeded operations after release length `1893`. |
+| `MATCHDAY_MESH_BOOT_PROOF_PATH=... pear run pear://9a5q...` | Pass | Final released-link renderer proof wrote `matchday-release-proof.json` with `ok: true`, `hasMatchdayAPI: true`, backend `pears-store`, a `matchday-mesh-core-invite-v1` invite, and 3 seeded operations after release length `1929`. |
 | `node --test test/pears-sync.test.js` | Pass | Host Corestore replicated the Hyperbee operation log to a read-only peer by core key; a live appended feed card reached the peer. |
 | `gh repo create matchday-mesh --public --source . --remote origin --push` | Pass | Created and pushed the public source repo at `https://github.com/iesetorg/matchday-mesh`. |
+| `node scripts/publish-catalog-bee.js ... --no-pin` | Pass | Built a signed PearBrowser Hyperbee catalog from `catalog/matchday-mesh.catalog.json`: `hyperbee://0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f`. |
+| `node scripts/publish-catalog-bee.js ... --serve` | Running | Published the same catalog, announced it on swarm, and received 5 HiveRelay seed acceptances before staying online to serve the catalog. |
 
 ## Current Preview
 

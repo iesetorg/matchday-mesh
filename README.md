@@ -45,6 +45,12 @@ Public source repository:
 https://github.com/iesetorg/matchday-mesh
 ```
 
+PearBrowser catalog:
+
+```text
+hyperbee://0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f
+```
+
 For an automated renderer proof:
 
 ```sh
@@ -67,7 +73,8 @@ npm run validate:publish -- --strict-release
 ```
 
 After release, update `scripts/app-manifest.json` with the final `pearRuntime`
-link and public source repo URL, then run the strict publish validator.
+link, public source repo URL, and PearBrowser catalog key, then run the strict
+publish validator.
 
 ## MVP Flow
 

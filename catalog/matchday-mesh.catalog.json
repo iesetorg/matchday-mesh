@@ -1,0 +1,21 @@
+{
+  "name": "Tether Developers Cup Apps",
+  "version": 1,
+  "apps": [
+    {
+      "id": "matchday-mesh",
+      "name": "Matchday Mesh",
+      "description": "Serverless football watch parties with P2P fan passes, live predictions, QR check-ins, and USDt pool cards.",
+      "link": "pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy",
+      "version": "0.1.0",
+      "author": "Pear Ecosystem",
+      "homepage": "https://pear.app/matchday-mesh",
+      "sourceUrl": "https://github.com/iesetorg/matchday-mesh",
+      "license": "MIT",
+      "type": "standalone",
+      "verification": "author-signed",
+      "categories": ["football", "events", "p2p", "payments", "watch-party"],
+      "iconData": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0idGl0bGUgZGVzYyI+CiAgPHRpdGxlIGlkPSJ0aXRsZSI+TWF0Y2hkYXkgTWVzaCBpY29uPC90aXRsZT4KICA8ZGVzYyBpZD0iZGVzYyI+QSBmb290YmFsbCBwaXRjaCByaW5nIHdpdGggY29ubmVjdGVkIG1hdGNoIG5vZGVzLjwvZGVzYz4KICA8cmVjdCB3aWR0aD0iMjU2IiBoZWlnaHQ9IjI1NiIgcng9IjQ2IiBmaWxsPSIjMTAxMjExIi8+CiAgPGNpcmNsZSBjeD0iMTI4IiBjeT0iMTI4IiByPSI4OCIgZmlsbD0iIzE4MzUxZiIgc3Ryb2tlPSIjMzljNTZiIiBzdHJva2Utd2lkdGg9IjEwIi8+CiAgPHBhdGggZD0iTTY0IDEyOGgxMjhNMTI4IDQwdjE3NiIgc3Ryb2tlPSIjYjhmM2M0IiBzdHJva2Utd2lkdGg9IjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgb3BhY2l0eT0iLjg1Ii8+CiAgPGNpcmNsZSBjeD0iMTI4IiBjeT0iMTI4IiByPSIzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYjhmM2M0IiBzdHJva2Utd2lkdGg9IjciLz4KICA8cGF0aCBkPSJNODggODhsODAgODBNMTY4IDg4bC04MCA4MCIgc3Ryb2tlPSIjZmY3YTU5IiBzdHJva2Utd2lkdGg9IjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxjaXJjbGUgY3g9Ijg4IiBjeT0iODgiIHI9IjE1IiBmaWxsPSIjZTdjMzVhIi8+CiAgPGNpcmNsZSBjeD0iMTY4IiBjeT0iODgiIHI9IjE1IiBmaWxsPSIjZTdjMzVhIi8+CiAgPGNpcmNsZSBjeD0iODgiIGN5PSIxNjgiIHI9IjE1IiBmaWxsPSIjZTdjMzVhIi8+CiAgPGNpcmNsZSBjeD0iMTY4IiBjeT0iMTY4IiByPSIxNSIgZmlsbD0iI2U3YzM1YSIvPgo8L3N2Zz4K"
+    }
+  ]
+}

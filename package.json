@@ -23,6 +23,7 @@
         "/docs",
         "/matchday-pear-proof.json",
         "/matchday-release-proof.json",
+        "/pearbrowser-catalog-data",
         "/test",
         "/scripts/validate-publish-surface.mjs"
       ]
