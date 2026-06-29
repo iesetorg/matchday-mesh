@@ -33,6 +33,6 @@
       "note": "The launch build starts with a deterministic demo ledger. Promote to WDK track claim only when the actual WDK adapter path is passing."
     }
   },
-  "publishedAt": "2026-06-29T21:05:40Z",
+  "publishedAt": "2026-06-29T21:16:59Z",
   "publishedBy": "Pear CLI"
 }
