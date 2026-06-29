@@ -1,0 +1,43 @@
+{
+  "ok": true,
+  "capturedAt": "2026-06-29T22:40:12.879Z",
+  "app": {
+    "pearLink": "pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy",
+    "catalog": "hyperbee://0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f",
+    "sourceRepo": "https://github.com/iesetorg/matchday-mesh"
+  },
+  "transport": {
+    "type": "hyperswarm",
+    "topic": "e57d796c46f22044882ee7bc5abe75602e966f729d069c2b91bbb71229edf495",
+    "shortTopic": "e57d796c...edf495",
+    "mode": "read-only-replica"
+  },
+  "host": {
+    "status": "hosting",
+    "operationsBeforeAppend": 3,
+    "operationsAfterAppend": 4
+  },
+  "replica": {
+    "status": "joined",
+    "writable": false,
+    "operations": 4,
+    "stateCounts": {
+      "hubs": 1,
+      "passes": 1,
+      "feedCards": 4,
+      "payments": 0
+    },
+    "latestFeedCard": {
+      "type": "feed:reaction",
+      "body": "Live Hyperswarm pairing carried this update.",
+      "actorName": "Live Peer"
+    }
+  },
+  "checks": {
+    "hostedTopic": true,
+    "joinedReadOnlyReplica": true,
+    "liveAppendReplicated": true,
+    "pairingDescriptor": true
+  },
+  "failures": []
+}

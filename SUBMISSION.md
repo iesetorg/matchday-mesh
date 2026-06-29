@@ -47,8 +47,9 @@ PearBrowser catalog:
   browser `localStorage` fallback for preview. Direct Corestore replication is
   proven in tests, and the invite panel displays the deterministic
   `matchday-mesh-pairing-v1` Hyperswarm topic. The runtime can host that topic
-  and join a read-only replica from a pasted invite; full Autobase multiwriter
-  sync is still gated.
+  and join a read-only replica from a pasted invite. Real Hyperswarm host/join
+  proof now verifies a live host append replicating to the read-only peer; full
+  Autobase multiwriter sync is still gated.
 - The USDt pool starts in deterministic demo-ledger mode.
 - QVAC local coach is disabled until QVAC SDK inference is proven locally.
 - No live sports data API is required for the demo.
@@ -76,6 +77,8 @@ Highlights:
 - fresh-peer catalog verification found the `matchday-mesh` row;
 - running desktop PearBrowser loaded the same catalog through its own
   Apps/catalog RPC path.
+- real Hyperswarm pairing proof joined a read-only replica and caught a live
+  host feed append.
 
 ## DoraHacks Copy
 

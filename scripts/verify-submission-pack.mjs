@@ -86,6 +86,7 @@ for (const relativePath of [
   'docs/proof/pearbrowser-desktop-catalog-rpc-2026-06-30.json',
   'docs/proof/pear-release-renderer-proof-2026-06-30.json',
   'docs/proof/matchday-demo-flow-proof-2026-06-30.json',
+  'docs/proof/matchday-live-pairing-2026-06-30.json',
   'docs/proof/matchday-live-readiness-2026-06-30.json',
   'docs/proof/matchday-mesh-preview-2026-06-30.jpg',
   'docs/proof/matchday-mesh-preview-flow-2026-06-30.jpg',
@@ -132,6 +133,7 @@ requireIncludes('PRIOR_WORK.md', priorWork, 'PearBrowser')
 requireIncludes('docs/proof/README.md', proofReadme, 'pearbrowser-desktop-catalog-rpc-2026-06-30.json')
 requireIncludes('docs/proof/README.md', proofReadme, 'pear-release-renderer-proof-2026-06-30.json')
 requireIncludes('docs/proof/README.md', proofReadme, 'matchday-demo-flow-proof-2026-06-30.json')
+requireIncludes('docs/proof/README.md', proofReadme, 'matchday-live-pairing-2026-06-30.json')
 requireIncludes('docs/proof/README.md', proofReadme, 'matchday-live-readiness-2026-06-30.json')
 
 requireImage('docs/proof/matchday-mesh-preview-2026-06-30.jpg', 10_000)
@@ -222,6 +224,32 @@ if (liveReadiness) {
     'previewResponds'
   ]) {
     if (liveReadiness.checks?.[key] !== true) fail(`live readiness proof check should pass: ${key}`)
+  }
+}
+
+const livePairing = readJson('docs/proof/matchday-live-pairing-2026-06-30.json')
+if (livePairing) {
+  if (livePairing.ok !== true) fail('live pairing proof should be ok')
+  if (livePairing.app?.pearLink !== EXPECTED.pearLink) fail('live pairing proof pear link is stale')
+  if (livePairing.app?.catalog !== EXPECTED.catalogRef) fail('live pairing proof catalog ref is stale')
+  if (livePairing.app?.sourceRepo !== EXPECTED.sourceRepo) fail('live pairing proof source repo is stale')
+  if (livePairing.transport?.type !== 'hyperswarm') fail('live pairing proof should use Hyperswarm')
+  if (livePairing.transport?.mode !== 'read-only-replica') fail('live pairing proof should use read-only replica mode')
+  if (!/^[0-9a-f]{64}$/.test(livePairing.transport?.topic || '')) fail('live pairing proof should include a 32-byte topic')
+  if (livePairing.host?.status !== 'hosting') fail('live pairing proof host should be hosting')
+  if ((livePairing.host?.operationsAfterAppend || 0) <= (livePairing.host?.operationsBeforeAppend || 0)) {
+    fail('live pairing proof should append a new host operation')
+  }
+  if (livePairing.replica?.status !== 'joined') fail('live pairing proof replica should join')
+  if (livePairing.replica?.writable !== false) fail('live pairing proof replica should be read-only')
+  if ((livePairing.replica?.operations || 0) !== livePairing.host?.operationsAfterAppend) {
+    fail('live pairing proof replica should catch the live append')
+  }
+  if (livePairing.replica?.latestFeedCard?.body !== 'Live Hyperswarm pairing carried this update.') {
+    fail('live pairing proof should expose the live replicated feed card')
+  }
+  for (const [key, value] of Object.entries(livePairing.checks || {})) {
+    if (value !== true) fail(`live pairing proof check should pass: ${key}`)
   }
 }
 

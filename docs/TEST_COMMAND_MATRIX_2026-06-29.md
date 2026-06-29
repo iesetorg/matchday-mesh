@@ -18,8 +18,9 @@ Run from:
 | `npm run validate:publish` | Pass with release metadata present | `links.pearRuntime`, `links.pearBrowser`, and `links.sourceRepo` are all filled in for the public release. |
 | `npm run validate:publish -- --strict-release` | Pass | Strict release validation reports `Matchday Mesh publish surface OK (0 warnings)`. |
 | `npm run verify:demo-proof` | Pass | Deterministic demo proof is current and covers fan pass check-in, invite summary, prediction, reaction, USDt pool open, and 5 USDt contribution. |
+| `npm run verify:live-pairing` | Pass | Real Hyperswarm proof hosts the deterministic pairing topic, joins a read-only replica, appends a live feed card on the host, and verifies the replica catches up to 4 operations. |
 | `npm run verify:live-readiness` | Pass | Local launch workstation check verifies release/catalog/demo proof freshness, preview server response, catalog serve process, and active Pear seed for the released app link. |
-| `npm run handoff:judge` | Pass | Prints and verifies the released app link, PearBrowser catalog, public repo, release proof, deterministic demo proof, live-readiness proof, and judge quickstart references. |
+| `npm run handoff:judge` | Pass | Prints and verifies the released app link, PearBrowser catalog, public repo, release proof, deterministic demo proof, live Hyperswarm pairing proof, live-readiness proof, and judge quickstart references. |
 | `npm run verify:submission` | Pass | Submission pack preflight verifies the released Pear link, live PearBrowser catalog key, source repo, proof JSON, proof screenshots, honest track language, and prior-work disclosure. |
 | `npm run check` | Pass | Runs `npm test` and `npm run validate:publish`. |
 | `npm run check:release` | Pass | Runs the full release/submission gate: `npm test`, strict publish validation, deterministic demo-proof verification, and submission-pack preflight. |
@@ -31,6 +32,7 @@ Run from:
 | `node --check app/pears-store.js` | Pass | Corestore/Hyperbee operation-log store parses. |
 | `node --check app/pears-sync.js` | Pass | Direct Corestore replication and Hyperswarm pairing helpers parse. |
 | `node --check app/runtime-api.js` | Pass | Pear renderer runtime API wrapper parses. |
+| `node --check scripts/verify-live-pairing.mjs` | Pass | Live Hyperswarm pairing verifier parses. |
 | `node --check app/boot-renderer.js` | Pass | Pear renderer bootstrap script parses. |
 | `node --check index.cjs` | Pass | Modern Pear main process parses. |
 | `node -e "console.log(require.resolve('pear-electron')); console.log(require.resolve('pear-bridge'))"` | Pass | Runtime deps resolve from `02-apps/matchday-mesh/node_modules`. |
@@ -59,6 +61,7 @@ Run from:
 | `PEAR_LINK=... npm run seed` | Running | Seed announced drive key `fe36eb9038630aeb0a8bc2a21f548d44964c35d9eaff37c654b95d9173233bca`, discovery key `e92e9f4a8df2ced0e5eb1b15354877097a4c1030b843154f8301fe694bdc91f9`, and content key `41328f560d68a5e50e1b45a22ecd3511fa5213c49a42a625170d7175834c6b87`. |
 | `MATCHDAY_MESH_BOOT_PROOF_PATH=... pear run pear://9a5q...` | Pass | Final released-link renderer proof wrote `matchday-release-proof-2386-2026-06-30.json` with `ok: true`, `hasMatchdayAPI: true`, backend `pears-store`, a `matchday-mesh-core-invite-v1` invite, a `matchday-mesh-pairing-v1` Hyperswarm topic, and 3 seeded operations after release length `2386`. |
 | `PATH=".../pear/bin:$PATH" MATCHDAY_MESH_BOOT_PROOF_PATH=... pear run pear://9a5q...` | Pass with warning | Released-link renderer proof still passed with `hasPear: true`, `hasMatchdayAPI: true`, Corestore/Hyperbee backend, `matchday-mesh-core-invite-v1`, and `matchday-mesh-pairing-v1`. The Pear shim warning persisted because the suggested `/Users/localllm/Library/Application Support/pear/bin` directory does not exist on this host. Proof saved at `docs/proof/pear-release-renderer-proof-2026-06-30.json`. |
+| `node scripts/verify-live-pairing.mjs --write --timeout 60000` | Pass | Real Hyperswarm proof hosted topic `e57d796c...edf495`, joined a read-only replica, appended `Live Hyperswarm pairing carried this update.`, and verified the replica reached 4 operations. Proof saved at `docs/proof/matchday-live-pairing-2026-06-30.json`. |
 | `node --test test/pears-sync.test.js` | Pass | Host Corestore replicated the Hyperbee operation log to a read-only peer by core key; hosted `matchday-mesh-pairing-v1` topic join synced a read-only replica, and a live appended feed card reached the peer. |
 | `gh repo create matchday-mesh --public --source . --remote origin --push` | Pass | Created and pushed the public source repo at `https://github.com/iesetorg/matchday-mesh`. |
 | `node scripts/publish-catalog-bee.js ... --no-pin` | Pass | Built a signed PearBrowser Hyperbee catalog from `catalog/matchday-mesh.catalog.json`: `hyperbee://0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f`. |
@@ -126,6 +129,8 @@ The automated tests currently prove:
 - browser harness proof confirms the Pear-runtime invite export and Join
   Replica controls fill the on-page host/join panels instead of relying on an
   alert dialog.
+- live Hyperswarm proof confirms the production host/join path can discover a
+  hosted pairing topic, sync a read-only replica, and catch a live host append.
 - deterministic demo proof replays the submission flow and asserts Pears Stack
   ops, read-only invite handoff, door check-in, and demo USDt contribution.
 - live-readiness proof confirms the local preview, catalog server, and Pear seed
@@ -139,7 +144,8 @@ The automated tests currently prove:
 
 - Pear runtime launch without the local shim warning; functional released-link
   proof passes, but Pear's suggested bin directory is absent on this host.
-- Live two-device Pear Runtime screenshot proving DHT pairing across machines.
+- Two-device Pear Runtime screenshot proving the already automated DHT pairing
+  path across separate machines.
 - Visual Pear window screenshot showing Corestore/Hyperbee in the status panel.
 - Optional visual PearBrowser store listing screenshot; the nonvisual desktop
   PearBrowser catalog RPC proof now verifies the live listing path.

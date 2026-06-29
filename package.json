@@ -27,6 +27,7 @@
         "/test",
         "/scripts/generate-demo-proof.mjs",
         "/scripts/print-judge-handoff.mjs",
+        "/scripts/verify-live-pairing.mjs",
         "/scripts/verify-live-readiness.mjs",
         "/scripts/validate-publish-surface.mjs",
         "/scripts/verify-submission-pack.mjs"
@@ -40,6 +41,8 @@
     "test": "node --test",
     "generate:demo-proof": "node scripts/generate-demo-proof.mjs",
     "verify:demo-proof": "node scripts/generate-demo-proof.mjs --check",
+    "generate:live-pairing-proof": "node scripts/verify-live-pairing.mjs --write",
+    "verify:live-pairing": "node scripts/verify-live-pairing.mjs",
     "generate:live-readiness-proof": "node scripts/verify-live-readiness.mjs --write",
     "handoff:judge": "node scripts/print-judge-handoff.mjs",
     "validate:publish": "node scripts/validate-publish-surface.mjs",

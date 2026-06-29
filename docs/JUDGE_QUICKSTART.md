@@ -33,6 +33,7 @@ For the launch workstation, with the preview server, catalog server, and Pear
 seed already running:
 
 ```sh
+npm run verify:live-pairing
 npm run verify:live-readiness
 npm run handoff:judge
 ```
@@ -49,7 +50,9 @@ npm run handoff:judge
    `matchday-mesh-core-invite-v1`, read-only, backed by Corestore/Hyperbee,
    and paired with a `matchday-mesh-pairing-v1` Hyperswarm topic.
 7. Click `Host Pairing`, paste the invite into another Pear Runtime instance,
-   then click `Join Replica` and confirm the joined replica is read-only.
+   then click `Join Replica` and confirm the joined replica is read-only. The
+   automated `npm run verify:live-pairing` proof exercises the same host/join
+   path over real Hyperswarm.
 8. Show the proof files in `docs/proof/`.
 
 ## Honest Track Scope

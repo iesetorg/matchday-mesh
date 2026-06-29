@@ -15,7 +15,7 @@ Target length: 3 minutes.
 | 1:45 | P2P invite | "In Pear Runtime, the app exports the Corestore/Hyperbee invite, hosts the Hyperswarm topic, and can join a read-only replica from that invite." |
 | 2:05 | USDt pool demo | "The group opens a host-snacks pool, receives a demo USDt URI, and records a contribution into the feed." |
 | 2:30 | Proof pack | "The proof pack shows operation counts, runtime backend, Pears Stack status, and payment module status." |
-| 2:45 | Close | "The repo is public, MIT licensed, with setup commands, prior-work disclosure, live Pear release proof, fresh-peer catalog proof, and desktop PearBrowser catalog RPC proof." |
+| 2:45 | Close | "The repo is public, MIT licensed, with setup commands, prior-work disclosure, live Pear release proof, real Hyperswarm pairing proof, fresh-peer catalog proof, and desktop PearBrowser catalog RPC proof." |
 
 ## Capture Checklist
 
@@ -27,6 +27,7 @@ Target length: 3 minutes.
 4. Show `docs/proof/matchday-mesh-preview-2026-06-30.jpg`.
 5. Show `docs/proof/matchday-mesh-preview-flow-2026-06-30.jpg`.
 6. Show `docs/proof/matchday-mesh-invite-export-panel-2026-06-30.jpg`.
-7. Show `docs/proof/pearbrowser-desktop-catalog-rpc-2026-06-30.json`.
-8. End on the public repo URL:
+7. Show `docs/proof/matchday-live-pairing-2026-06-30.json`.
+8. Show `docs/proof/pearbrowser-desktop-catalog-rpc-2026-06-30.json`.
+9. End on the public repo URL:
    `https://github.com/iesetorg/matchday-mesh`.

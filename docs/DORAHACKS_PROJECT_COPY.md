@@ -30,9 +30,11 @@ The Pear Runtime build uses a `window.matchdayAPI` bridge backed by
 Corestore/Hyperbee. The UI can export a match invite containing the host core
 key, discovery key, and a deterministic Hyperswarm pairing topic. Tests prove
 direct Corestore replication and a hosted-topic Join Replica path from a host
-operation log to a read-only peer opened from that invite. A deterministic USDt
-pool demo module shows the intended WDK receive/contribution UX while avoiding
-any production-money claim before the real WDK adapter is proven.
+operation log to a read-only peer opened from that invite. The launch proof also
+hosts the pairing topic over real Hyperswarm, joins a read-only replica, appends
+a live feed card, and verifies the replica catches up. A deterministic USDt pool
+demo module shows the intended WDK receive/contribution UX while avoiding any
+production-money claim before the real WDK adapter is proven.
 
 ## Links
 
@@ -50,6 +52,7 @@ npm ci
 npm test
 npm run validate:publish -- --strict-release
 npm run verify:demo-proof
+npm run verify:live-pairing
 npm run handoff:judge
 npm run verify:submission
 pear run --dev .
@@ -71,6 +74,8 @@ npm run preview -- --port 4173
   own Apps/catalog RPC path with 11 peers and 11 HiveRelays.
 - Browser proof shows the P2P invite panel exporting a released-link invite,
   hosting the pairing topic, and joining a read-only replica handoff.
+- Live Hyperswarm proof shows a hosted topic, read-only replica join, and live
+  replicated feed append.
 - Deterministic demo proof replays the full fan-pass, invite, prediction, and
   USDt pool contribution flow.
 - `docs/JUDGE_QUICKSTART.md` gives reviewers the shortest run/test path.
