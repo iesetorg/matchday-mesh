@@ -56,3 +56,20 @@ See `docs/DEMO_SCRIPT.md`.
 ## Current Proof
 
 See `docs/TEST_COMMAND_MATRIX_2026-06-29.md`.
+
+Highlights:
+
+- released Pear app:
+  `pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy`;
+- public source:
+  `https://github.com/iesetorg/matchday-mesh`;
+- live PearBrowser catalog:
+  `hyperbee://0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f`;
+- fresh-peer catalog verification found the `matchday-mesh` row;
+- running desktop PearBrowser loaded the same catalog through its own
+  Apps/catalog RPC path.
+
+## DoraHacks Copy
+
+See `docs/DORAHACKS_PROJECT_COPY.md` for paste-ready title, short description,
+long description, setup steps, proof links, and demo-video outline.

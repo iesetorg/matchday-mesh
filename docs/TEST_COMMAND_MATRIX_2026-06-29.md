@@ -55,6 +55,7 @@ Run from:
 | `node scripts/publish-catalog-bee.js ... --no-pin` | Pass | Built a signed PearBrowser Hyperbee catalog from `catalog/matchday-mesh.catalog.json`: `hyperbee://0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f`. |
 | `node scripts/publish-catalog-bee.js ... --serve` | Running | Published the same catalog, announced it on swarm, and received 5 HiveRelay seed acceptances before staying online to serve the catalog. |
 | `node scripts/verify-live-catalog.js --key 0ba0... --expect-app matchday-mesh --expect-count 1 --expect-name "Tether Developers Cup Apps"` | Pass | Fresh-peer PearBrowser catalog verification found 3 peers, updated the catalog core to length 9, read signed `\x00meta`, and confirmed the `matchday-mesh` row. |
+| `node scripts/release-rpc-story-smoke.mjs --catalog 0ba0... --timeout 60000 --request-timeout 80000 --json` in PearBrowser repo | Pass | Running desktop PearBrowser loaded the Matchday Mesh Hyperbee catalog through its own RPC/catalog path: DHT connected, 11 peers, 11 HiveRelays, `Tether Developers Cup Apps` loaded with 1 app, and 15 apps aggregated across 3 catalogues. Proof saved at `docs/proof/pearbrowser-desktop-catalog-rpc-2026-06-30.json`. |
 
 ## Current Preview
 
@@ -103,9 +104,12 @@ The automated tests currently prove:
   key, read signed metadata, and find the released `matchday-mesh` store row.
 - visual browser proof captures preserve the top hub flow and lower feed/USDt
   pool state used for the submission demo pack.
+- running desktop PearBrowser can load the live Matchday Mesh Hyperbee catalog
+  through its own Apps/catalog RPC path.
 
 ## Remaining Gates
 
 - Pear runtime launch from a fixed Pear PATH terminal without the shim warning.
 - Visual Pear window screenshot showing Corestore/Hyperbee in the status panel.
-- PearBrowser store listing screenshot.
+- Optional visual PearBrowser store listing screenshot; the nonvisual desktop
+  PearBrowser catalog RPC proof now verifies the live listing path.

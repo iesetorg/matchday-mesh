@@ -1,0 +1,43 @@
+{
+  "ok": true,
+  "capturedAt": "2026-06-30T00:45:00+04:00",
+  "command": "node scripts/release-rpc-story-smoke.mjs --catalog 0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f --timeout 60000 --request-timeout 80000 --json",
+  "runFrom": "/Users/localllm/Projects/pear-ecosystem/01-browser/pearbrowser-desktop",
+  "pearBrowserRpc": {
+    "port": 9876,
+    "proxyPort": 55348,
+    "dhtConnected": true,
+    "peerCount": 11,
+    "hiveRelays": 11,
+    "storagePercent": 9
+  },
+  "loadedCatalogues": [
+    {
+      "keyHex": "f5fb7500bccd60a976d2b1d24246108f4444a210b9ca591533114dffc089934d",
+      "name": "PearBrowser Network",
+      "apps": 14
+    },
+    {
+      "keyHex": "5d961fdc2f56215463e5d4656dd4a3f22bb5e15b93f9bfc8439a63a18f974d75",
+      "name": "P2P Catalog",
+      "apps": 0
+    },
+    {
+      "keyHex": "0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f",
+      "name": "Tether Developers Cup Apps",
+      "apps": 1
+    }
+  ],
+  "aggregatedApps": 15,
+  "matchdayMesh": {
+    "catalogName": "Tether Developers Cup Apps",
+    "catalogKey": "0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f",
+    "pearLink": "pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy",
+    "sourceRepo": "https://github.com/iesetorg/matchday-mesh"
+  },
+  "notes": [
+    "The command exercised the running desktop PearBrowser backend over its diagnostic RPC socket.",
+    "The Matchday Mesh Hyperbee catalog loaded beside the default PearBrowser catalogues.",
+    "macOS screencapture was attempted separately and failed with: could not create image from display."
+  ]
+}
