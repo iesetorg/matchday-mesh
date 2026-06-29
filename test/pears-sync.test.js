@@ -3,9 +3,10 @@ import assert from 'node:assert/strict'
 import { mkdtemp, rm } from 'node:fs/promises'
 import { join } from 'node:path'
 import { tmpdir } from 'node:os'
+import { createMatchdayInvite } from '../app/invite.js'
 import { createDemoOperations, createOperation, OP_TYPES } from '../app/ops.js'
-import { openMatchdayPearsReplica, openMatchdayPearsStore } from '../app/pears-store.js'
-import { connectMatchdayStores, waitForOperationCount } from '../app/pears-sync.js'
+import { openMatchdayPearsStore } from '../app/pears-store.js'
+import { connectMatchdayStores, openReplicaFromMatchdayInvite, waitForOperationCount } from '../app/pears-sync.js'
 
 async function tempDir (prefix) {
   return mkdtemp(join(tmpdir(), prefix))
@@ -23,12 +24,17 @@ test('replicates the operation log to a read-only Corestore peer', async () => {
     await host.appendOperations(createDemoOperations({ baseNow: '2026-06-29T20:00:00.000Z' }))
     const hostInfo = await host.info()
 
-    guest = await openMatchdayPearsReplica(guestDir, hostInfo.key)
+    const invite = createMatchdayInvite(hostInfo, { createdAt: '2026-06-29T20:00:01.000Z' })
+    const joined = await openReplicaFromMatchdayInvite(guestDir, invite)
+    guest = joined.store
     closeReplication = connectMatchdayStores(host, guest)
 
     const seededOps = await waitForOperationCount(guest, 3)
     const seededState = await guest.replayState()
 
+    assert.equal(joined.invite.key, hostInfo.key)
+    assert.equal(joined.invite.discoveryKey, hostInfo.discoveryKey)
+    assert.equal(joined.invite.writable, false)
     assert.equal(seededOps.length, 3)
     assert.equal(seededState.hubs.hub_final_night.title, 'Final Night Fan Zone')
     assert.equal((await guest.info()).writable, false)

@@ -8,14 +8,17 @@ The first launch build keeps the implementation small enough to publish quickly:
 - `app/payments.js` owns the WDK-shaped payment adapter boundary. The first
   launch build uses demo-ledger mode and refuses to claim real WDK mode until
   the SDK path is enabled.
+- `app/invite.js` owns the `matchday-mesh-core-invite-v1` handoff contract:
+  create, normalize, summarize, and reject malformed invites.
 - `app/pears-store.js` persists the same operation envelopes in a
   Corestore-backed Hyperbee so the local model is already shaped for Pears
   Stack replication.
 - `app/pears-sync.js` connects two Matchday Mesh Corestores with replication
-  streams and waits for a read-only peer to receive the operation log.
+  streams, opens a read-only replica from an invite, and waits for that peer to
+  receive the operation log.
 - `app/runtime-api.js` exposes the Pear renderer API over the Hyperbee store:
   list operations, append one operation, reset/reseed, replay, info, invite,
-  and close.
+  invite normalization/summary, and close.
 - `app/boot-renderer.js` detects Pear Runtime, opens the runtime API with
   `Pear.config.storage`, and installs it as `window.matchdayAPI`.
 - `index.cjs` is the current Pear Runtime main process. It boots
@@ -72,9 +75,11 @@ public DHT in tests:
 This is the deterministic base for a later Hyperswarm pairing UI.
 
 The Pear runtime UI also exposes a `matchday-mesh-core-invite-v1` object with
-the host core key and discovery key. The current invite is enough for the
-read-only replication proof and gives the demo a visible P2P artifact before
-Hyperswarm pairing is added.
+the host core key and discovery key. The invite is now a reusable handoff
+contract: tests create the invite from the host store, normalize it, open a
+read-only replica from it, and prove that new host operations reach the guest.
+This keeps the future Hyperswarm pairing UI small because pairing can focus on
+transporting the same invite rather than changing the store contract.
 
 ## Payment Boundary
 

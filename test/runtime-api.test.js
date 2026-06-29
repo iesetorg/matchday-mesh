@@ -40,6 +40,12 @@ test('runtime API resets, appends, and reports Pears store info', async () => {
     assert.equal(invite.writable, false)
     assert.equal(invite.operations, 3)
 
+    const normalizedInvite = await api.normalizeInvite(JSON.stringify({ ...invite, writable: true }))
+    const inviteSummary = await api.summarizeInvite(invite)
+    assert.equal(normalizedInvite.writable, false)
+    assert.equal(normalizedInvite.key, invite.key)
+    assert.equal(inviteSummary.shortKey, `${invite.key.slice(0, 8)}...${invite.key.slice(-6)}`)
+
     const op = createOperation(OP_TYPES.POST_REACTION, {
       hubId: 'hub_final_night',
       actorName: 'Sam',

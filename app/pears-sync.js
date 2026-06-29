@@ -1,3 +1,6 @@
+import { normalizeMatchdayInvite } from './invite.js'
+import { openMatchdayPearsReplica } from './pears-store.js'
+
 export function connectMatchdayStores (leftStore, rightStore) {
   const left = leftStore.replicate(true)
   const right = rightStore.replicate(false)
@@ -10,6 +13,15 @@ export function connectMatchdayStores (leftStore, rightStore) {
     if (typeof left.destroy === 'function') left.destroy()
     if (typeof right.destroy === 'function') right.destroy()
     await delay(20)
+  }
+}
+
+export async function openReplicaFromMatchdayInvite (storagePath, invite, opts = {}) {
+  const normalized = normalizeMatchdayInvite(invite)
+  const store = await openMatchdayPearsReplica(storagePath, normalized.key, opts)
+  return {
+    invite: normalized,
+    store
   }
 }
 

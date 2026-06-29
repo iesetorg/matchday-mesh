@@ -1,4 +1,5 @@
 import { openMatchdayPearsStore } from './pears-store.js'
+import { createMatchdayInvite, normalizeMatchdayInvite, summarizeMatchdayInvite } from './invite.js'
 
 export async function createMatchdayApi (storagePath, opts = {}) {
   const store = await openMatchdayPearsStore(storagePath, opts)
@@ -40,16 +41,15 @@ export async function createMatchdayApi (storagePath, opts = {}) {
 
     async invite () {
       const info = await store.info()
-      return {
-        type: 'matchday-mesh-core-invite-v1',
-        app: 'matchday-mesh',
-        coreName: info.coreName,
-        key: info.key,
-        discoveryKey: info.discoveryKey,
-        writable: false,
-        operations: info.operations,
-        createdAt: new Date().toISOString()
-      }
+      return createMatchdayInvite(info)
+    },
+
+    async normalizeInvite (invite) {
+      return normalizeMatchdayInvite(invite)
+    },
+
+    async summarizeInvite (invite) {
+      return summarizeMatchdayInvite(invite)
     },
 
     async close () {

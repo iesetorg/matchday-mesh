@@ -29,9 +29,9 @@ clubs, and fan groups that need coordination without a central event server.
 The Pear Runtime build uses a `window.matchdayAPI` bridge backed by
 Corestore/Hyperbee. The UI can export a match invite containing the host core
 key and discovery key, and tests prove direct Corestore replication from a host
-operation log to a read-only peer opened by key. A deterministic USDt pool demo
-module shows the intended WDK receive/contribution UX while avoiding any
-production-money claim before the real WDK adapter is proven.
+operation log to a read-only peer opened from that invite. A deterministic USDt
+pool demo module shows the intended WDK receive/contribution UX while avoiding
+any production-money claim before the real WDK adapter is proven.
 
 ## Links
 
@@ -60,7 +60,7 @@ npm run preview -- --port 4173
 
 ## Proof
 
-- `npm test`: 18/18 tests pass.
+- `npm test`: 20/20 tests pass.
 - `npm run validate:publish -- --strict-release`: 0 warnings.
 - Released Pear link renderer proof passed with Corestore/Hyperbee backend.
 - Fresh-peer catalog verification found the signed `matchday-mesh` row.

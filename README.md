@@ -14,9 +14,10 @@ bridge backed by Corestore/Hyperbee. The same UI falls back to `localStorage`
 when opened through the local HTTP preview server.
 
 The current Pears Stack proof includes direct Corestore replication from a host
-operation log to a read-only peer opened by core key. Hyperswarm pairing is the
-next publish gate. In Pear Runtime, the app exposes a P2P invite panel with the
-host core key, operation count, and exportable invite JSON.
+operation log to a read-only peer opened from the exported Matchday Mesh invite.
+Hyperswarm pairing is the next publish gate. In Pear Runtime, the app exposes a
+P2P invite panel with the host core key, operation count, and exportable invite
+JSON.
 
 ## Run Locally
 

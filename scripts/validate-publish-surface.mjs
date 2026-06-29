@@ -56,6 +56,7 @@ for (const filePath of [
   'ui/styles.css',
   'app/boot-renderer.js',
   'app/domain.js',
+  'app/invite.js',
   'app/ops.js',
   'app/payments.js',
   'app/pears-store.js',

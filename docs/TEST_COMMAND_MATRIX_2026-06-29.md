@@ -14,7 +14,7 @@ Run from:
 
 | Command | Result | Notes |
 |---|---|---|
-| `npm test` | Pass | 18/18 Node tests pass across domain, operation-log replay, payment adapter behavior, Corestore/Hyperbee persistence, direct Corestore replication, and the Pear renderer runtime API. |
+| `npm test` | Pass | 20/20 Node tests pass across domain, operation-log replay, payment adapter behavior, Corestore/Hyperbee persistence, invite validation, direct Corestore replication, and the Pear renderer runtime API. |
 | `npm run validate:publish` | Pass with release metadata present | `links.pearRuntime`, `links.pearBrowser`, and `links.sourceRepo` are all filled in for the public release. |
 | `npm run validate:publish -- --strict-release` | Pass | Strict release validation reports `Matchday Mesh publish surface OK (0 warnings)`. |
 | `npm run verify:submission` | Pass | Submission pack preflight verifies the released Pear link, live PearBrowser catalog key, source repo, proof JSON, proof screenshots, honest track language, and prior-work disclosure. |
@@ -96,9 +96,11 @@ The automated tests currently prove:
 - Hyperbee `op-id!{id}` index deduplicates operation ids.
 - Hyperbee operation log clearing resets sequence state and supports demo reseed.
 - direct Corestore replication sends the host operation log to a read-only peer
-  opened by core key and catches up after new host appends.
+  opened from a normalized `matchday-mesh-core-invite-v1` and catches up after
+  new host appends.
 - Pear runtime invite export returns the host core key and discovery key as a
-  `matchday-mesh-core-invite-v1` object.
+  `matchday-mesh-core-invite-v1` object, and malformed invites are rejected
+  before opening a replica.
 - Pear renderer runtime API resets, appends, reports store info, and replays
   state through the Corestore/Hyperbee path.
 - released Pear link renderer proof passes even though the local Pear shim
