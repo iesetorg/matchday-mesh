@@ -52,6 +52,7 @@ npm ci
 npm test
 npm run validate:publish -- --strict-release
 npm run verify:demo-proof
+npm run verify:launch
 npm run verify:live-pairing
 npm run handoff:judge
 npm run verify:submission
@@ -76,6 +77,8 @@ npm run preview -- --port 4173
   hosting the pairing topic, and joining a read-only replica handoff.
 - Live Hyperswarm proof shows a hosted topic, read-only replica join, and live
   replicated feed append.
+- Launch rehearsal proof runs the judge gate, live pairing, and live-readiness
+  checks as one tester-facing command.
 - Deterministic demo proof replays the full fan-pass, invite, prediction, and
   USDt pool contribution flow.
 - `docs/JUDGE_QUICKSTART.md` gives reviewers the shortest run/test path.

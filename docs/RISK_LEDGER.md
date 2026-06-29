@@ -9,6 +9,7 @@
 | Live cross-device Hyperswarm pairing still needs visual field proof | Medium | Real Hyperswarm host/join proof now passes on the launch workstation: the hosted topic syncs a read-only replica and carries a live host append. Capture a two-device Pear Runtime screenshot when another host is available. |
 | Dependency freshness drifts before release | Low | `package-lock.json` is generated, `npm ci --ignore-scripts` succeeds from the lockfile, and local `node_modules` now matches the declared top-level dependencies. Re-run `npm ci` before staging. |
 | Catalog listing lags behind release | Low | Fresh-peer catalog verification passes, and running desktop PearBrowser loaded `Tether Developers Cup Apps` with 1 app through its own RPC/catalog path. A macOS screenshot remains optional because `screencapture` failed on this host. |
+| Tester handoff drifts across separate commands | Low | `npm run verify:launch` now runs the judge gate, real Hyperswarm pairing, and live-readiness checks in one pass, then writes a consolidated proof receipt. |
 | WDK integration slips | Medium | Ship deterministic demo-ledger mode and avoid claiming WDK unless the real adapter is passing. |
 | QVAC integration slips | Medium | Keep QVAC gated and do not claim QVAC track until local SDK inference works. |
 | UI scope grows | High | Freeze MVP to hub, pass, scan, feed, prediction, and pool. |

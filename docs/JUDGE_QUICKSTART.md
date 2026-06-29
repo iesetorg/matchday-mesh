@@ -33,6 +33,7 @@ For the launch workstation, with the preview server, catalog server, and Pear
 seed already running:
 
 ```sh
+npm run verify:launch
 npm run verify:live-pairing
 npm run verify:live-readiness
 npm run handoff:judge

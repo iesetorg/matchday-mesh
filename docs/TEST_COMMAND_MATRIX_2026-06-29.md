@@ -18,6 +18,7 @@ Run from:
 | `npm run validate:publish` | Pass with release metadata present | `links.pearRuntime`, `links.pearBrowser`, and `links.sourceRepo` are all filled in for the public release. |
 | `npm run validate:publish -- --strict-release` | Pass | Strict release validation reports `Matchday Mesh publish surface OK (0 warnings)`. |
 | `npm run verify:demo-proof` | Pass | Deterministic demo proof is current and covers fan pass check-in, invite summary, prediction, reaction, USDt pool open, and 5 USDt contribution. |
+| `npm run verify:launch` | Pass | Consolidated launch rehearsal runs the judge gate, real Hyperswarm pairing, and live-readiness check in one tester-facing command. |
 | `npm run verify:live-pairing` | Pass | Real Hyperswarm proof hosts the deterministic pairing topic, joins a read-only replica, appends a live feed card on the host, and verifies the replica catches up to 4 operations. |
 | `npm run verify:live-readiness` | Pass | Local launch workstation check verifies release/catalog/demo proof freshness, preview server response, catalog serve process, and active Pear seed for the released app link. |
 | `npm run handoff:judge` | Pass | Prints and verifies the released app link, PearBrowser catalog, public repo, release proof, deterministic demo proof, live Hyperswarm pairing proof, live-readiness proof, and judge quickstart references. |
@@ -32,6 +33,7 @@ Run from:
 | `node --check app/pears-store.js` | Pass | Corestore/Hyperbee operation-log store parses. |
 | `node --check app/pears-sync.js` | Pass | Direct Corestore replication and Hyperswarm pairing helpers parse. |
 | `node --check app/runtime-api.js` | Pass | Pear renderer runtime API wrapper parses. |
+| `node --check scripts/verify-launch-rehearsal.mjs` | Pass | Launch rehearsal verifier parses. |
 | `node --check scripts/verify-live-pairing.mjs` | Pass | Live Hyperswarm pairing verifier parses. |
 | `node --check app/boot-renderer.js` | Pass | Pear renderer bootstrap script parses. |
 | `node --check index.cjs` | Pass | Modern Pear main process parses. |
@@ -62,6 +64,7 @@ Run from:
 | `MATCHDAY_MESH_BOOT_PROOF_PATH=... pear run pear://9a5q...` | Pass | Final released-link renderer proof wrote `matchday-release-proof-2386-2026-06-30.json` with `ok: true`, `hasMatchdayAPI: true`, backend `pears-store`, a `matchday-mesh-core-invite-v1` invite, a `matchday-mesh-pairing-v1` Hyperswarm topic, and 3 seeded operations after release length `2386`. |
 | `PATH=".../pear/bin:$PATH" MATCHDAY_MESH_BOOT_PROOF_PATH=... pear run pear://9a5q...` | Pass with warning | Released-link renderer proof still passed with `hasPear: true`, `hasMatchdayAPI: true`, Corestore/Hyperbee backend, `matchday-mesh-core-invite-v1`, and `matchday-mesh-pairing-v1`. The Pear shim warning persisted because the suggested `/Users/localllm/Library/Application Support/pear/bin` directory does not exist on this host. Proof saved at `docs/proof/pear-release-renderer-proof-2026-06-30.json`. |
 | `node scripts/verify-live-pairing.mjs --write --timeout 60000` | Pass | Real Hyperswarm proof hosted topic `e57d796c...edf495`, joined a read-only replica, appended `Live Hyperswarm pairing carried this update.`, and verified the replica reached 4 operations. Proof saved at `docs/proof/matchday-live-pairing-2026-06-30.json`. |
+| `node scripts/verify-launch-rehearsal.mjs --write` | Pass | Launch rehearsal ran `npm run check:judge`, `npm run verify:live-pairing -- --timeout 60000`, and `npm run verify:live-readiness`; all 8 consolidated checks passed. Proof saved at `docs/proof/matchday-launch-rehearsal-2026-06-30.json`. |
 | `node --test test/pears-sync.test.js` | Pass | Host Corestore replicated the Hyperbee operation log to a read-only peer by core key; hosted `matchday-mesh-pairing-v1` topic join synced a read-only replica, and a live appended feed card reached the peer. |
 | `gh repo create matchday-mesh --public --source . --remote origin --push` | Pass | Created and pushed the public source repo at `https://github.com/iesetorg/matchday-mesh`. |
 | `node scripts/publish-catalog-bee.js ... --no-pin` | Pass | Built a signed PearBrowser Hyperbee catalog from `catalog/matchday-mesh.catalog.json`: `hyperbee://0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f`. |
@@ -131,6 +134,8 @@ The automated tests currently prove:
   alert dialog.
 - live Hyperswarm proof confirms the production host/join path can discover a
   hosted pairing topic, sync a read-only replica, and catch a live host append.
+- launch rehearsal proof confirms the main judge gate, real-network pairing,
+  and live workstation readiness all pass in one command.
 - deterministic demo proof replays the submission flow and asserts Pears Stack
   ops, read-only invite handoff, door check-in, and demo USDt contribution.
 - live-readiness proof confirms the local preview, catalog server, and Pear seed

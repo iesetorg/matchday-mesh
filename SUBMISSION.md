@@ -79,6 +79,8 @@ Highlights:
   Apps/catalog RPC path.
 - real Hyperswarm pairing proof joined a read-only replica and caught a live
   host feed append.
+- launch rehearsal proof ran the judge gate, live pairing, and live-readiness
+  checks together.
 
 ## DoraHacks Copy
 
