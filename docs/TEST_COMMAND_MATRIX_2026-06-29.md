@@ -50,6 +50,7 @@ Run from:
 | `PEAR_LINK=... npm run release` | Pass | Released `pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy`; final latest length reported as `1929`. |
 | `PEAR_LINK=... npm run seed` | Running | Seed announced drive key `fe36eb9038630aeb0a8bc2a21f548d44964c35d9eaff37c654b95d9173233bca`, discovery key `e92e9f4a8df2ced0e5eb1b15354877097a4c1030b843154f8301fe694bdc91f9`, and content key `41328f560d68a5e50e1b45a22ecd3511fa5213c49a42a625170d7175834c6b87`. |
 | `MATCHDAY_MESH_BOOT_PROOF_PATH=... pear run pear://9a5q...` | Pass | Final released-link renderer proof wrote `matchday-release-proof.json` with `ok: true`, `hasMatchdayAPI: true`, backend `pears-store`, a `matchday-mesh-core-invite-v1` invite, and 3 seeded operations after release length `1929`. |
+| `PATH=".../pear/bin:$PATH" MATCHDAY_MESH_BOOT_PROOF_PATH=... pear run pear://9a5q...` | Pass with warning | Released-link renderer proof still passed with `hasPear: true`, `hasMatchdayAPI: true`, Corestore/Hyperbee backend, and `matchday-mesh-core-invite-v1`. The Pear shim warning persisted because the suggested `/Users/localllm/Library/Application Support/pear/bin` directory does not exist on this host. Proof saved at `docs/proof/pear-release-renderer-proof-2026-06-30.json`. |
 | `node --test test/pears-sync.test.js` | Pass | Host Corestore replicated the Hyperbee operation log to a read-only peer by core key; a live appended feed card reached the peer. |
 | `gh repo create matchday-mesh --public --source . --remote origin --push` | Pass | Created and pushed the public source repo at `https://github.com/iesetorg/matchday-mesh`. |
 | `node scripts/publish-catalog-bee.js ... --no-pin` | Pass | Built a signed PearBrowser Hyperbee catalog from `catalog/matchday-mesh.catalog.json`: `hyperbee://0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f`. |
@@ -98,6 +99,8 @@ The automated tests currently prove:
   `matchday-mesh-core-invite-v1` object.
 - Pear renderer runtime API resets, appends, reports store info, and replays
   state through the Corestore/Hyperbee path.
+- released Pear link renderer proof passes even though the local Pear shim
+  warning remains unresolved on this host.
 - clean install from `package-lock.json` recreates the dependency tree used by
   tests and Pear dev proof.
 - PearBrowser's live Hyperbee catalog verification can discover the catalog by
@@ -109,7 +112,8 @@ The automated tests currently prove:
 
 ## Remaining Gates
 
-- Pear runtime launch from a fixed Pear PATH terminal without the shim warning.
+- Pear runtime launch without the local shim warning; functional released-link
+  proof passes, but Pear's suggested bin directory is absent on this host.
 - Visual Pear window screenshot showing Corestore/Hyperbee in the status panel.
 - Optional visual PearBrowser store listing screenshot; the nonvisual desktop
   PearBrowser catalog RPC proof now verifies the live listing path.

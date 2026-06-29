@@ -1,0 +1,24 @@
+{
+  "ok": true,
+  "capturedAt": "2026-06-30T00:49:50+04:00",
+  "command": "PATH=\"/Users/localllm/Library/Application Support/pear/bin:$PATH\" MATCHDAY_MESH_BOOT_PROOF_PATH=/private/tmp/matchday-release-proof-fixed-path-2026-06-30.json pear run pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy",
+  "warning": "Pear still printed the PATH shim warning because /Users/localllm/Library/Application Support/pear/bin does not exist on this host.",
+  "stage": "ui-ready",
+  "hasPear": true,
+  "hasMatchdayAPI": true,
+  "runtimeError": null,
+  "backend": "pears-store",
+  "backendLabel": "Corestore/Hyperbee",
+  "storagePath": "/Users/localllm/Library/Application Support/pear/app-storage/by-dkey/e92e9f4a8df2ced0e5eb1b15354877097a4c1030b843154f8301fe694bdc91f9",
+  "coreName": "matchday-mesh-ops",
+  "key": "372daa7d5fb7daaf5fd379e95cf0d20afac0015b69be4ff5737717cc71c1d3a3",
+  "discoveryKey": "857399f16d735e91906edc0c06d9423848454397ef1e41c127452046129f4e3f",
+  "inviteType": "matchday-mesh-core-invite-v1",
+  "operationCount": 3,
+  "stateCounts": {
+    "hubs": 1,
+    "passes": 1,
+    "feedCards": 3,
+    "payments": 0
+  }
+}
