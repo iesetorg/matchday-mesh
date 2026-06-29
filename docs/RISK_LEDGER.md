@@ -2,7 +2,7 @@
 
 | Risk | Impact | Mitigation |
 |---|---:|---|
-| Pear release must be reproducible after future edits | Medium | Release succeeded for `pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy` at length `1929`. Re-run stage/release/seed after any launch-critical edit. |
+| Pear release must be reproducible after future edits | Medium | Release succeeded for `pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy` at length `1939`. Re-run stage/release/seed after any launch-critical edit. |
 | Pear CLI PATH is incomplete on this machine | Low | The shim exists at `/opt/homebrew/bin/pear`, but it warns to prepend `/Users/localllm/Library/Application Support/pear/bin`; that suggested directory is absent on this host. Functional released-link renderer proof still passes with `hasPear: true` and Corestore/Hyperbee backend. |
 | Pear rejects legacy HTML entrypoints | High | Matchday Mesh now uses `index.cjs`, `pear.pre: pear-electron/pre`, `pear-electron`, and `pear-bridge` while keeping `index.html` as the renderer. |
 | Runtime bridge proof must be refreshed after release packaging | Low | Dev-mode Pear renderer proof passes with `hasMatchdayAPI: true` and Corestore/Hyperbee operations. Re-run the proof after `pear stage` and release. |
