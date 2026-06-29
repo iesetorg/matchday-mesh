@@ -31,6 +31,8 @@ let selectedHubId = Object.keys(state.hubs)[0] || null
 let selectedPassId = Object.keys(state.passes)[0] || null
 let inviteDraft = ''
 let inviteInspection = null
+let pairingHostStatus = null
+let replicaJoinStatus = null
 
 if (!selectedHubId) await seedDemo()
 render()
@@ -295,12 +297,20 @@ function renderP2PInvite () {
         <span>Ops</span>
         <strong>${escapeHtml(String(backendStatus.operations))}</strong>
       </div>
-      <button data-action="export-invite" ${isPear ? '' : 'disabled'}>Export Invite</button>
+      <div class="invite-actions">
+        <button data-action="export-invite" ${isPear ? '' : 'disabled'}>Export Invite</button>
+        <button data-action="host-pairing" ${isPear ? '' : 'disabled'}>Host Pairing</button>
+      </div>
       <form data-form="inspect-invite" class="invite-inspector">
         <textarea name="invite" rows="5" placeholder="Invite JSON">${escapeHtml(inviteDraft)}</textarea>
-        <button type="submit">Inspect Invite</button>
+        <div class="invite-actions">
+          <button type="submit">Inspect Invite</button>
+          <button type="button" data-action="join-replica" ${isPear ? '' : 'disabled'}>Join Replica</button>
+        </div>
       </form>
       ${renderInviteInspection()}
+      ${renderPairingHostStatus()}
+      ${renderReplicaJoinStatus()}
     </div>
   `
 }
@@ -328,6 +338,40 @@ function renderInviteInspection () {
         <div><dt>replica</dt><dd>${escapeHtml(pairing.mode)}</dd></div>
       </dl>
     ` : ''}
+  `
+}
+
+function renderPairingHostStatus () {
+  if (!pairingHostStatus) return ''
+  if (pairingHostStatus.error) {
+    return `<div class="invite-result error">${escapeHtml(pairingHostStatus.error)}</div>`
+  }
+  const descriptor = pairingHostStatus.descriptor || pairingHostStatus
+  return `
+    <dl class="invite-summary pairing-summary">
+      <div><dt>host</dt><dd>${escapeHtml(pairingHostStatus.status || 'hosting')}</dd></div>
+      <div><dt>topic</dt><dd title="${escapeAttr(descriptor.topic || '')}">${escapeHtml(descriptor.shortTopic || shortValue(descriptor.topic || ''))}</dd></div>
+      <div><dt>transport</dt><dd>${escapeHtml(descriptor.transport || 'hyperswarm-topic')}</dd></div>
+    </dl>
+  `
+}
+
+function renderReplicaJoinStatus () {
+  if (!replicaJoinStatus) return ''
+  if (replicaJoinStatus.error) {
+    return `<div class="invite-result error">${escapeHtml(replicaJoinStatus.error)}</div>`
+  }
+  const descriptor = replicaJoinStatus.descriptor || {}
+  const counts = replicaJoinStatus.stateCounts || {}
+  return `
+    <dl class="invite-summary replica-summary">
+      <div><dt>replica</dt><dd>${escapeHtml(replicaJoinStatus.status || 'joined')}</dd></div>
+      <div><dt>ops</dt><dd>${escapeHtml(String(replicaJoinStatus.operations || 0))}</dd></div>
+      <div><dt>writable</dt><dd>${replicaJoinStatus.writable ? 'yes' : 'no'}</dd></div>
+      <div><dt>feed</dt><dd>${escapeHtml(String(counts.feedCards || 0))}</dd></div>
+      <div><dt>topic</dt><dd title="${escapeAttr(descriptor.topic || '')}">${escapeHtml(descriptor.shortTopic || shortValue(descriptor.topic || ''))}</dd></div>
+    </dl>
+    ${replicaJoinStatus.latestFeedCard ? `<div class="invite-result">${escapeHtml(replicaJoinStatus.latestFeedCard.body)}</div>` : ''}
   `
 }
 
@@ -378,12 +422,28 @@ function bindActions () {
       const invite = await backend.invite()
       inviteDraft = JSON.stringify(invite, null, 2)
       inviteInspection = await inspectInvite(invite, 'Invite ready to share.')
+      pairingHostStatus = await backend.startPairingHost()
+    })
+  })
+
+  root.querySelector('[data-action="host-pairing"]')?.addEventListener('click', () => {
+    runAction(async () => {
+      pairingHostStatus = await backend.startPairingHost()
+    })
+  })
+
+  root.querySelector('[data-action="join-replica"]')?.addEventListener('click', () => {
+    runAction(async () => {
+      if (!inviteDraft.trim()) throw new Error('Paste or export an invite before joining a replica')
+      replicaJoinStatus = await backend.joinReplica(inviteDraft)
+      inviteInspection = await inspectInvite(inviteDraft, 'Replica joined from invite.')
     })
   })
 
   bindForm('inspect-invite', async (form) => {
     const data = formData(form)
     inviteDraft = data.invite || ''
+    replicaJoinStatus = null
     try {
       inviteInspection = await inspectInvite(inviteDraft)
     } catch (err) {
@@ -520,6 +580,14 @@ async function createOperationBackend () {
         if (typeof runtimeApi.pairingDescriptor !== 'function') return null
         return runtimeApi.pairingDescriptor(invite)
       },
+      async startPairingHost () {
+        if (typeof runtimeApi.startPairingHost !== 'function') return null
+        return runtimeApi.startPairingHost()
+      },
+      async joinReplica (invite) {
+        if (typeof runtimeApi.joinReplica !== 'function') throw new Error('Replica join requires Pear Runtime')
+        return runtimeApi.joinReplica(invite)
+      },
       async status () {
         const info = await runtimeApi.info()
         return {
@@ -576,6 +644,12 @@ function createLocalOperationBackend () {
     },
     async pairingDescriptor () {
       return null
+    },
+    async startPairingHost () {
+      return null
+    },
+    async joinReplica () {
+      throw new Error('Replica join requires Pear Runtime')
     },
     async status () {
       return {

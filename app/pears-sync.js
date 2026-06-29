@@ -29,6 +29,84 @@ export async function openReplicaFromMatchdayInvite (storagePath, invite, opts =
   }
 }
 
+export async function startMatchdayPairingHost (store, invite, opts = {}) {
+  const descriptor = createMatchdayPairingDescriptor(invite)
+  const swarm = opts.swarm || await createDefaultSwarm(opts.swarmOpts)
+  const connections = new Set()
+  const topic = b4a.from(descriptor.topic, 'hex')
+
+  function onConnection (conn) {
+    connections.add(conn)
+    conn.on('close', () => connections.delete(conn))
+    conn.on('error', noop)
+    replicateOverConnection(store, conn)
+  }
+
+  swarm.on('connection', onConnection)
+  const discovery = swarm.join(topic, { server: true, client: false })
+  if (discovery && typeof discovery.flushed === 'function') await discovery.flushed()
+  else if (typeof swarm.flush === 'function') await swarm.flush()
+
+  return {
+    role: 'host',
+    descriptor,
+    topic: descriptor.topic,
+    shortTopic: descriptor.shortTopic,
+    async close () {
+      swarm.off?.('connection', onConnection)
+      for (const conn of connections) destroyConnection(conn)
+      connections.clear()
+      if (!opts.swarm && typeof swarm.destroy === 'function') await swarm.destroy()
+    }
+  }
+}
+
+export async function joinMatchdayPairingReplica (storagePath, invite, opts = {}) {
+  const joined = await openReplicaFromMatchdayInvite(storagePath, invite, opts)
+  const descriptor = createMatchdayPairingDescriptor(joined.invite)
+  const swarm = opts.swarm || await createDefaultSwarm(opts.swarmOpts)
+  const connections = new Set()
+  const topic = b4a.from(descriptor.topic, 'hex')
+
+  function onConnection (conn) {
+    connections.add(conn)
+    conn.on('close', () => connections.delete(conn))
+    conn.on('error', noop)
+    replicateOverConnection(joined.store, conn)
+  }
+
+  swarm.on('connection', onConnection)
+  const discovery = swarm.join(topic, { server: false, client: true })
+  if (discovery && typeof discovery.flushed === 'function') await discovery.flushed()
+  if (typeof swarm.flush === 'function') await swarm.flush()
+
+  const expectedOperations = Number.isSafeInteger(opts.expectedOperations)
+    ? opts.expectedOperations
+    : descriptor.operations
+  if (expectedOperations > 0) {
+    await waitForOperationCount(joined.store, expectedOperations, {
+      timeout: opts.timeout || 8000,
+      interval: opts.interval || 75
+    })
+  }
+
+  return {
+    role: 'replica',
+    invite: joined.invite,
+    store: joined.store,
+    descriptor,
+    topic: descriptor.topic,
+    shortTopic: descriptor.shortTopic,
+    async close () {
+      swarm.off?.('connection', onConnection)
+      for (const conn of connections) destroyConnection(conn)
+      connections.clear()
+      if (!opts.swarm && typeof swarm.destroy === 'function') await swarm.destroy()
+      await joined.store.close()
+    }
+  }
+}
+
 export function createMatchdayPairingDescriptor (invite) {
   const normalized = normalizeMatchdayInvite(invite)
   const topic = createMatchdayPairingTopic(normalized)
@@ -84,6 +162,32 @@ function noop () {}
 
 function delay (ms) {
   return new Promise((resolve) => setTimeout(resolve, ms))
+}
+
+function destroyConnection (conn) {
+  if (typeof conn.destroy === 'function') conn.destroy()
+  else if (typeof conn.end === 'function') conn.end()
+}
+
+async function createDefaultSwarm (opts = {}) {
+  const mod = await import('hyperswarm')
+  const Hyperswarm = mod.default || mod
+  return new Hyperswarm(opts || {})
+}
+
+function replicateOverConnection (store, conn) {
+  if (conn.noiseStream) {
+    const stream = store.replicateConnection
+      ? store.replicateConnection(conn)
+      : store.store.replicate(conn)
+    if (stream && typeof stream.on === 'function') stream.on('error', noop)
+    return stream
+  }
+
+  const stream = store.replicate(conn.isInitiator === true)
+  stream.on('error', noop)
+  stream.pipe(conn).pipe(stream)
+  return stream
 }
 
 function shortHex (buffer) {

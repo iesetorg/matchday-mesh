@@ -46,8 +46,9 @@ PearBrowser catalog:
 - The first build has a Pear Runtime API backed by Corestore/Hyperbee, with
   browser `localStorage` fallback for preview. Direct Corestore replication is
   proven in tests, and the invite panel displays the deterministic
-  `matchday-mesh-pairing-v1` Hyperswarm topic. Public swarm join UI and full
-  Autobase multiwriter sync are still gated.
+  `matchday-mesh-pairing-v1` Hyperswarm topic. The runtime can host that topic
+  and join a read-only replica from a pasted invite; full Autobase multiwriter
+  sync is still gated.
 - The USDt pool starts in deterministic demo-ledger mode.
 - QVAC local coach is disabled until QVAC SDK inference is proven locally.
 - No live sports data API is required for the demo.

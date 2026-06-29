@@ -1,7 +1,9 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
+import { EventEmitter } from 'node:events'
 import { mkdtemp, rm } from 'node:fs/promises'
 import { join } from 'node:path'
+import { Duplex, PassThrough } from 'node:stream'
 import { tmpdir } from 'node:os'
 import { createDemoOperations, createOperation, OP_TYPES } from '../app/ops.js'
 import { createMatchdayApi } from '../app/runtime-api.js'
@@ -69,3 +71,109 @@ test('runtime API resets, appends, and reports Pears store info', async () => {
     assert.equal((await api.listOperations()).length, 4)
   })
 })
+
+test('runtime API hosts and joins a read-only pairing replica', async () => {
+  const hostDir = await mkdtemp(join(tmpdir(), 'matchday-mesh-api-host-'))
+  const guestDir = await mkdtemp(join(tmpdir(), 'matchday-mesh-api-guest-'))
+  const network = new FakeSwarmNetwork()
+  let hostApi
+  let guestApi
+
+  try {
+    hostApi = await createMatchdayApi(hostDir, { createSwarm: () => network.createSwarm() })
+    guestApi = await createMatchdayApi(guestDir, { createSwarm: () => network.createSwarm() })
+    await hostApi.resetOperations(createDemoOperations({ baseNow: '2026-06-29T20:00:00.000Z' }))
+
+    const invite = await hostApi.invite()
+    const hostPairing = await hostApi.startPairingHost()
+    const joined = await guestApi.joinReplica(invite, { timeout: 5000 })
+
+    assert.equal(hostPairing.status, 'hosting')
+    assert.equal(hostPairing.descriptor.topic, joined.descriptor.topic)
+    assert.equal(joined.status, 'joined')
+    assert.equal(joined.writable, false)
+    assert.equal(joined.operations, 3)
+    assert.equal(joined.stateCounts.hubs, 1)
+    assert.equal(joined.latestFeedCard.body, 'Doors open. Bring the noise, keep it friendly.')
+
+    const liveOp = createOperation(OP_TYPES.POST_REACTION, {
+      hubId: 'hub_final_night',
+      actorName: 'Nora',
+      body: 'Runtime join received this live update.'
+    }, {
+      opId: 'op_runtime_pairing_update',
+      entityId: 'feed_runtime_pairing_update',
+      now: '2026-06-29T20:08:00.000Z'
+    })
+    await hostApi.appendOperation(liveOp)
+
+    const refreshed = await guestApi.joinReplica(await hostApi.invite(), { timeout: 5000 })
+    assert.equal(refreshed.operations, 4)
+    assert.equal(refreshed.latestFeedCard.body, 'Runtime join received this live update.')
+  } finally {
+    try { await guestApi?.close() } catch {}
+    try { await hostApi?.close() } catch {}
+    await rm(hostDir, { recursive: true, force: true })
+    await rm(guestDir, { recursive: true, force: true })
+  }
+})
+
+class FakeSwarmNetwork {
+  constructor () {
+    this.channels = new Map()
+  }
+
+  createSwarm () {
+    return new FakeSwarm(this)
+  }
+
+  join (swarm, topic, opts) {
+    const topicHex = topic.toString('hex')
+    const channel = this.channels.get(topicHex) || new Set()
+    this.channels.set(topicHex, channel)
+    const entry = { swarm, opts }
+    channel.add(entry)
+
+    queueMicrotask(() => {
+      for (const peer of channel) {
+        if (peer === entry) continue
+        const canConnect = (opts.client && peer.opts.server) || (opts.server && peer.opts.client)
+        if (!canConnect) continue
+        const [left, right] = duplexPair()
+        left.isInitiator = opts.client === true
+        right.isInitiator = peer.opts.client === true
+        swarm.emit('connection', left)
+        peer.swarm.emit('connection', right)
+      }
+    })
+
+    return {
+      flushed: async () => {}
+    }
+  }
+}
+
+class FakeSwarm extends EventEmitter {
+  constructor (network) {
+    super()
+    this.network = network
+  }
+
+  join (topic, opts) {
+    return this.network.join(this, topic, opts)
+  }
+
+  async flush () {}
+
+  async destroy () {
+    this.removeAllListeners()
+  }
+}
+
+function duplexPair () {
+  const leftToRight = new PassThrough()
+  const rightToLeft = new PassThrough()
+  const left = Duplex.from({ writable: leftToRight, readable: rightToLeft })
+  const right = Duplex.from({ writable: rightToLeft, readable: leftToRight })
+  return [left, right]
+}

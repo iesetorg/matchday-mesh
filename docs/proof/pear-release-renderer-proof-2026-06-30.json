@@ -1,9 +1,9 @@
 {
   "ok": true,
-  "capturedAt": "2026-06-30T02:05:46+04:00",
-  "release": 1965,
-  "length": 1965,
-  "command": "MATCHDAY_MESH_BOOT_PROOF_PATH=/private/tmp/matchday-release-proof-1965-2026-06-30.json pear run pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy",
+  "capturedAt": "2026-06-30T02:31:26+04:00",
+  "release": 2386,
+  "length": 2386,
+  "command": "MATCHDAY_MESH_BOOT_PROOF_PATH=/private/tmp/matchday-release-proof-2386-2026-06-30.json pear run pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy",
   "warning": "Pear still printed the PATH shim warning because /Users/localllm/Library/Application Support/pear/bin does not exist on this host.",
   "stage": "ui-ready",
   "hasPear": true,

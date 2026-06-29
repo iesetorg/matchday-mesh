@@ -12,7 +12,7 @@ Target length: 3 minutes.
 | 0:45 | Fan pass | "A fan claims a pass and gets a QR-style local pass block." |
 | 1:05 | Door scan | "Door staff scan the pass and append a check-in operation." |
 | 1:25 | Feed | "Fans post predictions and notes into the watch-party feed. The feed is rebuilt from an operation log." |
-| 1:45 | P2P invite | "In Pear Runtime, the app exposes the Corestore/Hyperbee invite plus the Hyperswarm topic that a read-only peer can use for pairing." |
+| 1:45 | P2P invite | "In Pear Runtime, the app exports the Corestore/Hyperbee invite, hosts the Hyperswarm topic, and can join a read-only replica from that invite." |
 | 2:05 | USDt pool demo | "The group opens a host-snacks pool, receives a demo USDt URI, and records a contribution into the feed." |
 | 2:30 | Proof pack | "The proof pack shows operation counts, runtime backend, Pears Stack status, and payment module status." |
 | 2:45 | Close | "The repo is public, MIT licensed, with setup commands, prior-work disclosure, live Pear release proof, fresh-peer catalog proof, and desktop PearBrowser catalog RPC proof." |

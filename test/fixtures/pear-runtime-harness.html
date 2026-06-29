@@ -84,6 +84,42 @@
             writable: false,
             createdAt: value.createdAt
           }
+        },
+        async startPairingHost () {
+          return {
+            status: 'hosting',
+            role: 'host',
+            descriptor: await this.pairingDescriptor(await this.invite())
+          }
+        },
+        async joinReplica (invite) {
+          const descriptor = await this.pairingDescriptor(invite)
+          return {
+            status: 'joined',
+            role: 'replica',
+            invite: typeof invite === 'string' ? JSON.parse(invite) : invite,
+            descriptor,
+            info: {
+              backend: 'pears-store',
+              storagePath: 'test-harness-replica',
+              coreName: descriptor.coreName,
+              key: descriptor.key,
+              discoveryKey: descriptor.discoveryKey,
+              writable: false,
+              operations: descriptor.operations
+            },
+            operations: descriptor.operations,
+            writable: false,
+            stateCounts: {
+              hubs: 1,
+              passes: 1,
+              feedCards: descriptor.operations,
+              payments: 0
+            },
+            latestFeedCard: {
+              body: 'Doors open. Bring the noise, keep it friendly.'
+            }
+          }
         }
       }
     </script>

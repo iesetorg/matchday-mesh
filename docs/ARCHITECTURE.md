@@ -17,11 +17,11 @@ The first launch build keeps the implementation small enough to publish quickly:
   streams, opens a read-only replica from an invite, and waits for that peer to
   receive the operation log. It also derives a stable
   `matchday-mesh-pairing-v1` descriptor and 32-byte Hyperswarm topic from the
-  same invite, so the future public DHT pairing path does not need a different
-  handoff contract.
+  same invite, and can host or join that topic through Hyperswarm.
 - `app/runtime-api.js` exposes the Pear renderer API over the Hyperbee store:
   list operations, append one operation, reset/reseed, replay, info, invite,
-  invite normalization/summary, pairing descriptor derivation, and close.
+  invite normalization/summary, pairing descriptor derivation, host pairing,
+  read-only replica join, and close.
 - `app/boot-renderer.js` detects Pear Runtime, opens the runtime API with
   `Pear.config.storage`, and installs it as `window.matchdayAPI`.
 - `index.cjs` is the current Pear Runtime main process. It boots
@@ -83,9 +83,10 @@ contract: tests create the invite from the host store, normalize it, open a
 read-only replica from it, and prove that new host operations reach the guest.
 The same module derives a `matchday-mesh-pairing-v1` descriptor with a stable
 Hyperswarm topic from that invite, and the Pear invite panel displays that topic
-when exporting or inspecting a runtime invite. This keeps the public swarm join
-UI small because pairing can focus on joining that topic rather than changing
-the store contract.
+when exporting or inspecting a runtime invite. The runtime API can then host the
+topic or open a joined read-only replica. Tests cover that join path with an
+injected swarm, including a live host append reaching the replica after the
+initial catch-up.
 
 ## Payment Boundary
 

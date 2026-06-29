@@ -108,6 +108,11 @@ export class MatchdayPearsStore {
     return this.store.replicate(isInitiator, opts)
   }
 
+  replicateConnection (conn, opts = {}) {
+    this._assertOpen()
+    return this.store.replicate(conn, opts)
+  }
+
   async clearOperations () {
     this._assertOpen()
     const keys = []

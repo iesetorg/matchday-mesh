@@ -82,6 +82,7 @@ if (pkg) {
   if (!pkg.dependencies?.['pear-bridge']) fail('package.json must depend on pear-bridge')
   if (!pkg.dependencies?.corestore) fail('package.json must depend on corestore')
   if (!pkg.dependencies?.hyperbee) fail('package.json must depend on hyperbee')
+  if (!pkg.dependencies?.hyperswarm) fail('package.json must depend on hyperswarm')
   if (!pkg.dependencies?.b4a) fail('package.json must depend on b4a')
   const scripts = pkg.scripts || {}
   for (const scriptName of ['dev', 'preview', 'test', 'validate:publish', 'stage', 'release', 'seed']) {

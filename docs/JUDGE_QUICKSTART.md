@@ -48,15 +48,17 @@ npm run handoff:judge
 6. Export or inspect the P2P invite and confirm it is
    `matchday-mesh-core-invite-v1`, read-only, backed by Corestore/Hyperbee,
    and paired with a `matchday-mesh-pairing-v1` Hyperswarm topic.
-7. Show the proof files in `docs/proof/`.
+7. Click `Host Pairing`, paste the invite into another Pear Runtime instance,
+   then click `Join Replica` and confirm the joined replica is read-only.
+8. Show the proof files in `docs/proof/`.
 
 ## Honest Track Scope
 
 Primary track: Pears Stack.
 
 The USDt pool is a deterministic WDK-shaped demo adapter. QVAC is gated until a
-local QVAC SDK inference path is proven without cloud AI APIs. Hyperswarm UI and
-full Autobase multiwriter sync are not claimed in this launch build; direct
-Corestore replication from the invite is covered by tests, and the app displays
-a stable `matchday-mesh-pairing-v1` Hyperswarm topic for the next public swarm
-pairing step.
+local QVAC SDK inference path is proven without cloud AI APIs. Full Autobase
+multiwriter sync is not claimed in this launch build; direct Corestore
+replication from the invite is covered by tests, and the app can host/join a
+read-only replica over the displayed `matchday-mesh-pairing-v1` Hyperswarm
+topic.

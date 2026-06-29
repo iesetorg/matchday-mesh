@@ -144,8 +144,8 @@ async function main () {
   }
 
   if (releaseProof.ok === true &&
-    releaseProof.release === 1965 &&
-    releaseProof.length === 1965 &&
+    releaseProof.release === 2386 &&
+    releaseProof.length === 2386 &&
     releaseProof.backendLabel === 'Corestore/Hyperbee' &&
     releaseProof.inviteType === 'matchday-mesh-core-invite-v1' &&
     releaseProof.pairingType === 'matchday-mesh-pairing-v1' &&
