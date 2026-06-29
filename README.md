@@ -43,6 +43,12 @@ For a release/submission preflight:
 npm run check:release
 ```
 
+For a judge/tester handoff summary:
+
+```sh
+npm run handoff:judge
+```
+
 For a local live-readiness check while the preview server, catalog server, and
 Pear seed are running:
 

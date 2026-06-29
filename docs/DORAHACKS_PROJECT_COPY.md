@@ -49,6 +49,7 @@ npm ci
 npm test
 npm run validate:publish -- --strict-release
 npm run verify:demo-proof
+npm run handoff:judge
 npm run verify:submission
 pear run --dev .
 ```
@@ -71,6 +72,7 @@ npm run preview -- --port 4173
   and summarizing it as a read-only handoff.
 - Deterministic demo proof replays the full fan-pass, invite, prediction, and
   USDt pool contribution flow.
+- `docs/JUDGE_QUICKSTART.md` gives reviewers the shortest run/test path.
 - Visual proof captures are in `docs/proof/`.
 
 ## Prior Work

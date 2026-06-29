@@ -28,6 +28,7 @@ Pear POS, and PearBrowser publishing tools, with all reuse disclosed in
 npm ci
 npm test
 npm run validate:publish
+npm run handoff:judge
 pear run --dev .
 ```
 
@@ -52,6 +53,10 @@ PearBrowser catalog:
 ## Demo Script
 
 See `docs/DEMO_SCRIPT.md`.
+
+## Judge Quickstart
+
+See `docs/JUDGE_QUICKSTART.md`.
 
 ## Current Proof
 

@@ -77,6 +77,7 @@ for (const relativePath of [
   'SUBMISSION.md',
   'PRIOR_WORK.md',
   'LICENSE',
+  'docs/JUDGE_QUICKSTART.md',
   'docs/DEMO_SCRIPT.md',
   'docs/DORAHACKS_PROJECT_COPY.md',
   'docs/RISK_LEDGER.md',
@@ -99,6 +100,7 @@ const readme = readText('README.md')
 const submission = readText('SUBMISSION.md')
 const doraCopy = readText('docs/DORAHACKS_PROJECT_COPY.md')
 const demoScript = readText('docs/DEMO_SCRIPT.md')
+const judgeQuickstart = readText('docs/JUDGE_QUICKSTART.md')
 const priorWork = readText('PRIOR_WORK.md')
 const proofReadme = readText('docs/proof/README.md')
 const matrix = readText('docs/TEST_COMMAND_MATRIX_2026-06-29.md')
@@ -108,6 +110,7 @@ for (const [relativePath, text] of [
   ['SUBMISSION.md', submission],
   ['docs/DORAHACKS_PROJECT_COPY.md', doraCopy],
   ['docs/DEMO_SCRIPT.md', demoScript],
+  ['docs/JUDGE_QUICKSTART.md', judgeQuickstart],
   ['docs/TEST_COMMAND_MATRIX_2026-06-29.md', matrix]
 ]) {
   requireIncludes(relativePath, text, EXPECTED.pearLink)
@@ -119,6 +122,9 @@ requireIncludes('docs/DORAHACKS_PROJECT_COPY.md', doraCopy, 'Primary: Pears Stac
 requireIncludes('docs/DORAHACKS_PROJECT_COPY.md', doraCopy, 'not claimed as primary tracks')
 requireIncludes('docs/DORAHACKS_PROJECT_COPY.md', doraCopy, EXPECTED.sourceRepo)
 requireIncludes('docs/DEMO_SCRIPT.md', demoScript, 'Target length: 3 minutes')
+requireIncludes('docs/JUDGE_QUICKSTART.md', judgeQuickstart, 'npm run check:release')
+requireIncludes('docs/JUDGE_QUICKSTART.md', judgeQuickstart, 'npm run handoff:judge')
+requireIncludes('docs/JUDGE_QUICKSTART.md', judgeQuickstart, 'matchday-mesh-core-invite-v1')
 requireIncludes('PRIOR_WORK.md', priorWork, 'Pear Tickets')
 requireIncludes('PRIOR_WORK.md', priorWork, 'Pear POS')
 requireIncludes('PRIOR_WORK.md', priorWork, 'PearBrowser')
