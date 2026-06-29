@@ -56,6 +56,12 @@ function usage (message) {
 async function main () {
   const commandPlan = [
     {
+      name: 'releaseWindow',
+      command: 'npm',
+      args: ['run', 'verify:release-window'],
+      timeout: args.commandTimeout
+    },
+    {
       name: 'judgeGate',
       command: 'npm',
       args: ['run', 'check:judge'],
@@ -84,11 +90,12 @@ async function main () {
 
   const proofFiles = readProofFiles()
   const checks = {
+    releaseWindowCommand: commandResults.find((result) => result.name === 'releaseWindow')?.ok === true,
     judgeGate: commandResults.find((result) => result.name === 'judgeGate')?.ok === true,
     livePairingCommand: commandResults.find((result) => result.name === 'livePairing')?.ok === true,
     liveReadinessCommand: commandResults.find((result) => result.name === 'liveReadiness')?.ok === true,
     releasedPearProof: proofFiles.releaseProof?.ok === true &&
-      proofFiles.releaseProof?.release === 2386 &&
+      proofFiles.releaseProof?.release === 2394 &&
       proofFiles.releaseProof?.backendLabel === 'Corestore/Hyperbee',
     livePairingProof: proofFiles.livePairing?.ok === true &&
       proofFiles.livePairing?.replica?.writable === false &&

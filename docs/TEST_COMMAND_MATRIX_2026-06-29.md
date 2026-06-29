@@ -19,6 +19,7 @@ Run from:
 | `npm run validate:publish -- --strict-release` | Pass | Strict release validation reports `Matchday Mesh publish surface OK (0 warnings)`. |
 | `npm run verify:demo-proof` | Pass | Deterministic demo proof is current and covers fan pass check-in, invite summary, prediction, reaction, USDt pool open, and 5 USDt contribution. |
 | `npm run verify:launch` | Pass | Consolidated launch rehearsal runs the judge gate, real Hyperswarm pairing, and live-readiness check in one tester-facing command. |
+| `npm run verify:release-window` | Pass | Launches the released Pear app and validates boot proof plus `pear-release-window-2026-06-30.png`; the host blocks desktop screenshots, so the image is a renderer-generated proof card from the live Pear renderer. |
 | `npm run verify:live-pairing` | Pass | Real Hyperswarm proof hosts the deterministic pairing topic, joins a read-only replica, appends a live feed card on the host, and verifies the replica catches up to 4 operations. |
 | `npm run verify:live-readiness` | Pass | Local launch workstation check verifies release/catalog/demo proof freshness, preview server response, catalog serve process, and active Pear seed for the released app link. |
 | `npm run handoff:judge` | Pass | Prints and verifies the released app link, PearBrowser catalog, public repo, release proof, deterministic demo proof, live Hyperswarm pairing proof, live-readiness proof, and judge quickstart references. |
@@ -57,12 +58,14 @@ Run from:
 | `MATCHDAY_MESH_BOOT_PROOF_PATH=... pear run --dev .` after clean `npm ci` | Pass | Pear renderer proof still passes with the clean dependency tree. |
 | `pear touch` | Pass | Created `pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy`. |
 | `PEAR_LINK=... npm run stage` | Pass | Staged Matchday Mesh and warmed the app. Latest length reported as `2385` after the Hyperswarm Join Replica update and runtime import fix. |
+| `PEAR_LINK=... npm run stage` after release-window proof hook | Pass | Staged the optional Pear renderer visual proof hook and release-window verifier script; latest length reported as `2393` before release. |
 | `pear stage --purge ...` | Pass | Removed accidentally staged ignored `pearbrowser-catalog-data/` publisher storage before release. |
-| `PEAR_LINK=... npm run release` | Pass | Released `pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy`; final latest length reported as `2386` after the Hyperswarm Join Replica update and runtime import fix. |
-| `pear info pear://9a5q...` | Pass | Pear reports `name matchday-mesh`, `release 2386`, `length 2386`, project key `fe36eb...3bca`, discovery key `e92e9f...91f9`, and content key `41328f...6b87`. |
+| `PEAR_LINK=... npm run release` after release-window proof hook | Pass | Released `pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy`; final latest length reported as `2394` after adding the optional renderer visual proof hook. |
+| `pear info pear://9a5q...` | Pass | Pear reports `name matchday-mesh`, `release 2394`, `length 2394`, project key `fe36eb...3bca`, discovery key `e92e9f...91f9`, and content key `41328f...6b87`. |
 | `PEAR_LINK=... npm run seed` | Running | Seed announced drive key `fe36eb9038630aeb0a8bc2a21f548d44964c35d9eaff37c654b95d9173233bca`, discovery key `e92e9f4a8df2ced0e5eb1b15354877097a4c1030b843154f8301fe694bdc91f9`, and content key `41328f560d68a5e50e1b45a22ecd3511fa5213c49a42a625170d7175834c6b87`. |
-| `MATCHDAY_MESH_BOOT_PROOF_PATH=... pear run pear://9a5q...` | Pass | Final released-link renderer proof wrote `matchday-release-proof-2386-2026-06-30.json` with `ok: true`, `hasMatchdayAPI: true`, backend `pears-store`, a `matchday-mesh-core-invite-v1` invite, a `matchday-mesh-pairing-v1` Hyperswarm topic, and 3 seeded operations after release length `2386`. |
+| `MATCHDAY_MESH_BOOT_PROOF_PATH=... pear run pear://9a5q...` | Pass | Final released-link renderer proof wrote `pear-release-renderer-proof-2026-06-30.json` with `ok: true`, release `2394`, `hasMatchdayAPI: true`, backend `pears-store`, a `matchday-mesh-core-invite-v1` invite, a `matchday-mesh-pairing-v1` Hyperswarm topic, and 3 seeded operations. |
 | `PATH=".../pear/bin:$PATH" MATCHDAY_MESH_BOOT_PROOF_PATH=... pear run pear://9a5q...` | Pass with warning | Released-link renderer proof still passed with `hasPear: true`, `hasMatchdayAPI: true`, Corestore/Hyperbee backend, `matchday-mesh-core-invite-v1`, and `matchday-mesh-pairing-v1`. The Pear shim warning persisted because the suggested `/Users/localllm/Library/Application Support/pear/bin` directory does not exist on this host. Proof saved at `docs/proof/pear-release-renderer-proof-2026-06-30.json`. |
+| `node scripts/verify-release-window-proof.mjs --write` | Pass | Released Pear link wrote `pear-release-renderer-proof-2026-06-30.json` and `pear-release-window-2026-06-30.png`; the PNG is a renderer-generated proof card because macOS desktop screenshot capture failed with `could not create image from display`. |
 | `node scripts/verify-live-pairing.mjs --write --timeout 60000` | Pass | Real Hyperswarm proof hosted topic `e57d796c...edf495`, joined a read-only replica, appended `Live Hyperswarm pairing carried this update.`, and verified the replica reached 4 operations. Proof saved at `docs/proof/matchday-live-pairing-2026-06-30.json`. |
 | `node scripts/verify-launch-rehearsal.mjs --write` | Pass | Launch rehearsal ran `npm run check:judge`, `npm run verify:live-pairing -- --timeout 60000`, and `npm run verify:live-readiness`; all 8 consolidated checks passed. Proof saved at `docs/proof/matchday-launch-rehearsal-2026-06-30.json`. |
 | `node --test test/pears-sync.test.js` | Pass | Host Corestore replicated the Hyperbee operation log to a read-only peer by core key; hosted `matchday-mesh-pairing-v1` topic join synced a read-only replica, and a live appended feed card reached the peer. |
@@ -123,6 +126,8 @@ The automated tests currently prove:
   hosted read-only pairing replica and catch a live host append.
 - released Pear link renderer proof passes even though the local Pear shim
   warning remains unresolved on this host.
+- released Pear renderer visual proof now produces a PNG proof card from inside
+  the live renderer when host desktop capture is unavailable.
 - clean install from `package-lock.json` recreates the dependency tree used by
   tests and Pear dev proof.
 - PearBrowser's live Hyperbee catalog verification can discover the catalog by
@@ -151,6 +156,8 @@ The automated tests currently prove:
   proof passes, but Pear's suggested bin directory is absent on this host.
 - Two-device Pear Runtime screenshot proving the already automated DHT pairing
   path across separate machines.
-- Visual Pear window screenshot showing Corestore/Hyperbee in the status panel.
+- True OS-level Pear window screenshot showing Corestore/Hyperbee in the status
+  panel; the renderer-generated visual proof card now covers the same runtime
+  facts on this host where desktop capture is blocked.
 - Optional visual PearBrowser store listing screenshot; the nonvisual desktop
   PearBrowser catalog RPC proof now verifies the live listing path.

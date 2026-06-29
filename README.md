@@ -55,6 +55,7 @@ Pear seed are running:
 
 ```sh
 npm run verify:launch
+npm run verify:release-window
 npm run verify:live-pairing
 npm run verify:live-readiness
 ```
@@ -114,6 +115,7 @@ publish validator.
 - Export the proof pack from the app header.
 - Verify the deterministic demo proof in `docs/proof/`.
 - Run the consolidated launch rehearsal.
+- Verify the released Pear renderer visual proof.
 - Verify the real Hyperswarm host/join proof before recording the demo.
 - Verify local live-readiness before recording the demo.
 

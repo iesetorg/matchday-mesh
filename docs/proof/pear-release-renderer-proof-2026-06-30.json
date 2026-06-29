@@ -1,10 +1,10 @@
 {
   "ok": true,
-  "capturedAt": "2026-06-30T02:31:26+04:00",
-  "release": 2386,
-  "length": 2386,
-  "command": "MATCHDAY_MESH_BOOT_PROOF_PATH=/private/tmp/matchday-release-proof-2386-2026-06-30.json pear run pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy",
-  "warning": "Pear still printed the PATH shim warning because /Users/localllm/Library/Application Support/pear/bin does not exist on this host.",
+  "capturedAt": "2026-06-29T23:04:31.955Z",
+  "release": 2394,
+  "length": 2394,
+  "command": "MATCHDAY_MESH_BOOT_PROOF_PATH=/var/folders/rx/zv2nrybs0sg0f0vs6kj9m71w0000gn/T/matchday-release-window-raw-49636-1782774267287.json MATCHDAY_MESH_VISUAL_PROOF_PATH=/Users/localllm/Projects/pear-ecosystem/02-apps/matchday-mesh/docs/proof/pear-release-window-2026-06-30.png pear run pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy",
+  "warning": "Pear printed the PATH shim warning because /Users/localllm/Library/Application Support/pear/bin does not exist on this host.",
   "stage": "ui-ready",
   "hasPear": true,
   "hasMatchdayAPI": true,
@@ -26,5 +26,24 @@
     "passes": 1,
     "feedCards": 3,
     "payments": 0
-  }
+  },
+  "visualProof": {
+    "ok": true,
+    "path": "docs/proof/pear-release-window-2026-06-30.png",
+    "bytes": 126111,
+    "png": true,
+    "mode": "renderer-proof-card",
+    "screenshot": false,
+    "sourceId": null,
+    "sourceName": "Matchday Mesh renderer proof card",
+    "fallbackReason": "Timed out capturing visual proof after 2500ms",
+    "stage": "ui-ready",
+    "capturedAt": "2026-06-29T23:04:30.890Z"
+  },
+  "app": {
+    "pearLink": "pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy",
+    "catalog": "hyperbee://0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f",
+    "sourceRepo": "https://github.com/iesetorg/matchday-mesh"
+  },
+  "failures": []
 }

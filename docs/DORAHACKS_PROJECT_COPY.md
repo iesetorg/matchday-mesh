@@ -53,6 +53,7 @@ npm test
 npm run validate:publish -- --strict-release
 npm run verify:demo-proof
 npm run verify:launch
+npm run verify:release-window
 npm run verify:live-pairing
 npm run handoff:judge
 npm run verify:submission
@@ -70,6 +71,9 @@ npm run preview -- --port 4173
 - `npm test`: 23/23 tests pass.
 - `npm run validate:publish -- --strict-release`: 0 warnings.
 - Released Pear link renderer proof passed with Corestore/Hyperbee backend.
+- Released Pear renderer visual proof produced a PNG from inside the live Pear
+  renderer; OS desktop screenshot capture is blocked on this host, so the image
+  is honestly marked as a renderer proof-card fallback.
 - Fresh-peer catalog verification found the signed `matchday-mesh` row.
 - Running desktop PearBrowser loaded `Tether Developers Cup Apps` through its
   own Apps/catalog RPC path with 11 peers and 11 HiveRelays.

@@ -70,6 +70,8 @@ Highlights:
 
 - released Pear app:
   `pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy`;
+- released Pear renderer visual proof:
+  `docs/proof/pear-release-window-2026-06-30.png`;
 - public source:
   `https://github.com/iesetorg/matchday-mesh`;
 - live PearBrowser catalog:

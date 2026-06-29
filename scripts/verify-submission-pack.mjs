@@ -85,6 +85,7 @@ for (const relativePath of [
   'docs/proof/README.md',
   'docs/proof/pearbrowser-desktop-catalog-rpc-2026-06-30.json',
   'docs/proof/pear-release-renderer-proof-2026-06-30.json',
+  'docs/proof/pear-release-window-2026-06-30.png',
   'docs/proof/matchday-demo-flow-proof-2026-06-30.json',
   'docs/proof/matchday-live-pairing-2026-06-30.json',
   'docs/proof/matchday-live-readiness-2026-06-30.json',
@@ -132,6 +133,7 @@ requireIncludes('PRIOR_WORK.md', priorWork, 'Pear POS')
 requireIncludes('PRIOR_WORK.md', priorWork, 'PearBrowser')
 requireIncludes('docs/proof/README.md', proofReadme, 'pearbrowser-desktop-catalog-rpc-2026-06-30.json')
 requireIncludes('docs/proof/README.md', proofReadme, 'pear-release-renderer-proof-2026-06-30.json')
+requireIncludes('docs/proof/README.md', proofReadme, 'pear-release-window-2026-06-30.png')
 requireIncludes('docs/proof/README.md', proofReadme, 'matchday-demo-flow-proof-2026-06-30.json')
 requireIncludes('docs/proof/README.md', proofReadme, 'matchday-live-pairing-2026-06-30.json')
 requireIncludes('docs/proof/README.md', proofReadme, 'matchday-live-readiness-2026-06-30.json')
@@ -140,6 +142,7 @@ requireImage('docs/proof/matchday-mesh-preview-2026-06-30.jpg', 10_000)
 requireImage('docs/proof/matchday-mesh-preview-flow-2026-06-30.jpg', 10_000)
 requireImage('docs/proof/matchday-mesh-invite-inspector-2026-06-30.jpg', 10_000)
 requireImage('docs/proof/matchday-mesh-invite-export-panel-2026-06-30.jpg', 10_000)
+requireImage('docs/proof/pear-release-window-2026-06-30.png', 10_000)
 
 const manifest = readJson('scripts/app-manifest.json')
 if (manifest) {
@@ -181,12 +184,19 @@ if (releaseProof) {
   if (releaseProof.ok !== true) fail('released link renderer proof should be ok')
   if (releaseProof.hasPear !== true) fail('released link renderer proof should have Pear')
   if (releaseProof.hasMatchdayAPI !== true) fail('released link renderer proof should have matchdayAPI')
+  if (releaseProof.release !== 2394 || releaseProof.length !== 2394) fail('released link renderer proof release metadata is stale')
   if (releaseProof.backendLabel !== 'Corestore/Hyperbee') fail('released link renderer proof should use Corestore/Hyperbee')
   if (releaseProof.inviteType !== 'matchday-mesh-core-invite-v1') fail('released link renderer proof should export the invite type')
   if (releaseProof.pairingType !== 'matchday-mesh-pairing-v1') fail('released link renderer proof should export the pairing type')
   if (releaseProof.pairingTransport !== 'hyperswarm-topic') fail('released link renderer proof should export the pairing transport')
   if (!/^[0-9a-f]{64}$/.test(releaseProof.pairingTopic || '')) fail('released link renderer proof should export a 32-byte pairing topic')
   if ((releaseProof.operationCount || 0) < 3) fail('released link renderer proof should have seeded operations')
+  if (releaseProof.visualProof?.ok !== true) fail('released link renderer proof should include visual proof metadata')
+  if (releaseProof.visualProof?.path !== 'docs/proof/pear-release-window-2026-06-30.png') fail('released link renderer proof visual path is stale')
+  if (!['desktop-capture', 'renderer-proof-card'].includes(releaseProof.visualProof?.mode)) {
+    fail('released link renderer proof visual mode is invalid')
+  }
+  if ((releaseProof.visualProof?.bytes || 0) < 10_000) fail('released link renderer proof visual PNG is unexpectedly small')
 }
 
 const demoProof = readJson('docs/proof/matchday-demo-flow-proof-2026-06-30.json')
