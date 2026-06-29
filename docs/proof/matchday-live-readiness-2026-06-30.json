@@ -1,0 +1,50 @@
+{
+  "ok": true,
+  "capturedAt": "2026-06-29T21:33:29.806Z",
+  "app": {
+    "pearLink": "pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy",
+    "catalog": "hyperbee://0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f",
+    "sourceRepo": "https://github.com/iesetorg/matchday-mesh",
+    "release": 1944,
+    "length": 1944
+  },
+  "checks": {
+    "packageIdentity": true,
+    "manifestLinks": true,
+    "catalogManifest": true,
+    "releasedPearProof": true,
+    "pearBrowserCatalogProof": true,
+    "deterministicDemoProof": true,
+    "previewProcess": true,
+    "catalogServeProcess": true,
+    "pearSeedProcess": true,
+    "previewResponds": true
+  },
+  "preview": {
+    "url": "http://127.0.0.1:4173/",
+    "status": 200,
+    "hasMatchdayMesh": true
+  },
+  "processes": {
+    "preview": {
+      "pid": 11381,
+      "command": "node scripts/serve.mjs --port 4173"
+    },
+    "catalogServe": {
+      "pid": 19854,
+      "command": "node scripts/publish-catalog-bee.js /Users/localllm/Projects/pear-ecosystem/02-apps/matchday-mesh/catalog/matchday-mesh.catalog.json --storage /Users/localllm/Projects/pear-ecosystem/02-apps/matchday-mesh/pearbrowser-catalog-data --serve"
+    },
+    "pearSeed": {
+      "pid": 91320,
+      "command": "node /opt/homebrew/bin/pear seed pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy"
+    }
+  },
+  "catalogRpc": {
+    "dhtConnected": true,
+    "peerCount": 11,
+    "hiveRelays": 11,
+    "loadedCatalogName": "Tether Developers Cup Apps",
+    "loadedCatalogApps": 1
+  },
+  "failures": []
+}

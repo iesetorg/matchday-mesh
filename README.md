@@ -43,6 +43,13 @@ For a release/submission preflight:
 npm run check:release
 ```
 
+For a local live-readiness check while the preview server, catalog server, and
+Pear seed are running:
+
+```sh
+npm run verify:live-readiness
+```
+
 Released Pear link:
 
 ```text
@@ -97,6 +104,7 @@ publish validator.
 - Record demo contributions into the feed.
 - Export the proof pack from the app header.
 - Verify the deterministic demo proof in `docs/proof/`.
+- Verify local live-readiness before recording the demo.
 
 ## Track Claims
 

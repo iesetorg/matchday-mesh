@@ -18,6 +18,7 @@ Run from:
 | `npm run validate:publish` | Pass with release metadata present | `links.pearRuntime`, `links.pearBrowser`, and `links.sourceRepo` are all filled in for the public release. |
 | `npm run validate:publish -- --strict-release` | Pass | Strict release validation reports `Matchday Mesh publish surface OK (0 warnings)`. |
 | `npm run verify:demo-proof` | Pass | Deterministic demo proof is current and covers fan pass check-in, invite summary, prediction, reaction, USDt pool open, and 5 USDt contribution. |
+| `npm run verify:live-readiness` | Pass | Local launch workstation check verifies release/catalog/demo proof freshness, preview server response, catalog serve process, and active Pear seed for the released app link. |
 | `npm run verify:submission` | Pass | Submission pack preflight verifies the released Pear link, live PearBrowser catalog key, source repo, proof JSON, proof screenshots, honest track language, and prior-work disclosure. |
 | `npm run check` | Pass | Runs `npm test` and `npm run validate:publish`. |
 | `npm run check:release` | Pass | Runs the full release/submission gate: `npm test`, strict publish validation, deterministic demo-proof verification, and submission-pack preflight. |
@@ -115,6 +116,8 @@ The automated tests currently prove:
   pool state used for the submission demo pack.
 - deterministic demo proof replays the submission flow and asserts Pears Stack
   ops, read-only invite handoff, door check-in, and demo USDt contribution.
+- live-readiness proof confirms the local preview, catalog server, and Pear seed
+  are online before recording or handing the app to a tester.
 - running desktop PearBrowser can load the live Matchday Mesh Hyperbee catalog
   through its own Apps/catalog RPC path.
 

@@ -85,6 +85,7 @@ for (const relativePath of [
   'docs/proof/pearbrowser-desktop-catalog-rpc-2026-06-30.json',
   'docs/proof/pear-release-renderer-proof-2026-06-30.json',
   'docs/proof/matchday-demo-flow-proof-2026-06-30.json',
+  'docs/proof/matchday-live-readiness-2026-06-30.json',
   'docs/proof/matchday-mesh-preview-2026-06-30.jpg',
   'docs/proof/matchday-mesh-preview-flow-2026-06-30.jpg',
   'docs/proof/matchday-mesh-invite-inspector-2026-06-30.jpg',
@@ -124,6 +125,7 @@ requireIncludes('PRIOR_WORK.md', priorWork, 'PearBrowser')
 requireIncludes('docs/proof/README.md', proofReadme, 'pearbrowser-desktop-catalog-rpc-2026-06-30.json')
 requireIncludes('docs/proof/README.md', proofReadme, 'pear-release-renderer-proof-2026-06-30.json')
 requireIncludes('docs/proof/README.md', proofReadme, 'matchday-demo-flow-proof-2026-06-30.json')
+requireIncludes('docs/proof/README.md', proofReadme, 'matchday-live-readiness-2026-06-30.json')
 
 requireImage('docs/proof/matchday-mesh-preview-2026-06-30.jpg', 10_000)
 requireImage('docs/proof/matchday-mesh-preview-flow-2026-06-30.jpg', 10_000)
@@ -186,6 +188,27 @@ if (demoProof) {
   if (demoProof.invite?.writable !== false) fail('demo flow proof invite should be read-only')
   for (const [key, value] of Object.entries(demoProof.checks || {})) {
     if (value !== true) fail(`demo flow proof check should pass: ${key}`)
+  }
+}
+
+const liveReadiness = readJson('docs/proof/matchday-live-readiness-2026-06-30.json')
+if (liveReadiness) {
+  if (liveReadiness.ok !== true) fail('live readiness proof should be ok')
+  if (liveReadiness.app?.pearLink !== EXPECTED.pearLink) fail('live readiness proof pear link is stale')
+  if (liveReadiness.app?.catalog !== EXPECTED.catalogRef) fail('live readiness proof catalog ref is stale')
+  if (liveReadiness.app?.sourceRepo !== EXPECTED.sourceRepo) fail('live readiness proof source repo is stale')
+  for (const key of [
+    'manifestLinks',
+    'catalogManifest',
+    'releasedPearProof',
+    'pearBrowserCatalogProof',
+    'deterministicDemoProof',
+    'previewProcess',
+    'catalogServeProcess',
+    'pearSeedProcess',
+    'previewResponds'
+  ]) {
+    if (liveReadiness.checks?.[key] !== true) fail(`live readiness proof check should pass: ${key}`)
   }
 }
 

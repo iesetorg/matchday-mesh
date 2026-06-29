@@ -26,6 +26,7 @@
         "/pearbrowser-catalog-data",
         "/test",
         "/scripts/generate-demo-proof.mjs",
+        "/scripts/verify-live-readiness.mjs",
         "/scripts/validate-publish-surface.mjs",
         "/scripts/verify-submission-pack.mjs"
       ]
@@ -38,7 +39,9 @@
     "test": "node --test",
     "generate:demo-proof": "node scripts/generate-demo-proof.mjs",
     "verify:demo-proof": "node scripts/generate-demo-proof.mjs --check",
+    "generate:live-readiness-proof": "node scripts/verify-live-readiness.mjs --write",
     "validate:publish": "node scripts/validate-publish-surface.mjs",
+    "verify:live-readiness": "node scripts/verify-live-readiness.mjs",
     "verify:submission": "node scripts/verify-submission-pack.mjs",
     "check": "npm test && npm run validate:publish",
     "check:release": "npm test && npm run validate:publish -- --strict-release && npm run verify:demo-proof && npm run verify:submission",
