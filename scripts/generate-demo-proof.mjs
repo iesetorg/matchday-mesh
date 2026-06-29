@@ -150,7 +150,7 @@ function buildProof () {
     discoveryKey: releaseProof.discoveryKey,
     operations: releaseProof.operationCount
   }, {
-    createdAt: '2026-06-29T21:16:59.006Z'
+    createdAt: '2026-06-29T21:41:34.035Z'
   })
   const inviteSummary = summarizeMatchdayInvite(invite)
   const latestFeedCard = replayed.feed[replayed.feed.length - 1]

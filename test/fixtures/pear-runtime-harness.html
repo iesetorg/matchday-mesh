@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Matchday Mesh Pear Runtime Harness</title>
+    <link rel="stylesheet" href="../../ui/styles.css">
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      const coreKey = '372daa7d5fb7daaf5fd379e95cf0d20afac0015b69be4ff5737717cc71c1d3a3'
+      const discoveryKey = '857399f16d735e91906edc0c06d9423848454397ef1e41c127452046129f4e3f'
+      let ops = []
+
+      function shortHex (value) {
+        return `${value.slice(0, 8)}...${value.slice(-6)}`
+      }
+
+      window.matchdayAPI = {
+        async listOperations () {
+          return ops
+        },
+        async appendOperation (op) {
+          ops = [...ops, op]
+          return { result: { skipped: false }, info: await this.info() }
+        },
+        async resetOperations (nextOps) {
+          ops = nextOps.slice()
+          return { results: [], info: await this.info() }
+        },
+        async info () {
+          return {
+            backend: 'pears-store',
+            storagePath: 'test-harness',
+            coreName: 'matchday-mesh-ops',
+            key: coreKey,
+            discoveryKey,
+            writable: true,
+            operations: ops.length
+          }
+        },
+        async invite () {
+          return {
+            type: 'matchday-mesh-core-invite-v1',
+            app: 'matchday-mesh',
+            coreName: 'matchday-mesh-ops',
+            key: coreKey,
+            discoveryKey,
+            writable: false,
+            operations: ops.length,
+            createdAt: '2026-06-29T21:41:34.035Z'
+          }
+        },
+        async summarizeInvite (invite) {
+          const value = typeof invite === 'string' ? JSON.parse(invite) : invite
+          return {
+            type: value.type,
+            app: value.app,
+            coreName: value.coreName,
+            key: value.key,
+            shortKey: shortHex(value.key),
+            discoveryKey: value.discoveryKey,
+            shortDiscoveryKey: shortHex(value.discoveryKey),
+            operations: value.operations,
+            writable: false,
+            createdAt: value.createdAt
+          }
+        }
+      }
+    </script>
+    <script type="module" src="../../ui/app.js"></script>
+  </body>
+</html>

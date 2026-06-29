@@ -90,6 +90,7 @@ for (const relativePath of [
   'docs/proof/matchday-mesh-preview-2026-06-30.jpg',
   'docs/proof/matchday-mesh-preview-flow-2026-06-30.jpg',
   'docs/proof/matchday-mesh-invite-inspector-2026-06-30.jpg',
+  'docs/proof/matchday-mesh-invite-export-panel-2026-06-30.jpg',
   'catalog/matchday-mesh.catalog.json',
   'scripts/app-manifest.json'
 ]) {
@@ -136,6 +137,7 @@ requireIncludes('docs/proof/README.md', proofReadme, 'matchday-live-readiness-20
 requireImage('docs/proof/matchday-mesh-preview-2026-06-30.jpg', 10_000)
 requireImage('docs/proof/matchday-mesh-preview-flow-2026-06-30.jpg', 10_000)
 requireImage('docs/proof/matchday-mesh-invite-inspector-2026-06-30.jpg', 10_000)
+requireImage('docs/proof/matchday-mesh-invite-export-panel-2026-06-30.jpg', 10_000)
 
 const manifest = readJson('scripts/app-manifest.json')
 if (manifest) {

@@ -54,11 +54,11 @@
     "shortDiscoveryKey": "857399f1...9f4e3f",
     "operations": 3,
     "writable": false,
-    "createdAt": "2026-06-29T21:16:59.006Z"
+    "createdAt": "2026-06-29T21:41:34.035Z"
   },
   "release": {
-    "pearRelease": 1944,
-    "pearLength": 1944,
+    "pearRelease": 1952,
+    "pearLength": 1952,
     "backendLabel": "Corestore/Hyperbee",
     "coreName": "matchday-mesh-ops",
     "operationCount": 3

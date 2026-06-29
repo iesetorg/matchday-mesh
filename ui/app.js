@@ -312,6 +312,7 @@ function renderInviteInspection () {
   }
   const summary = inviteInspection.summary
   return `
+    ${inviteInspection.message ? `<div class="invite-result">${escapeHtml(inviteInspection.message)}</div>` : ''}
     <dl class="invite-summary">
       <div><dt>type</dt><dd>${escapeHtml(summary.type)}</dd></div>
       <div><dt>core</dt><dd title="${escapeAttr(summary.key)}">${escapeHtml(summary.shortKey)}</dd></div>
@@ -367,7 +368,11 @@ function bindActions () {
   root.querySelector('[data-action="export-invite"]')?.addEventListener('click', () => {
     runAction(async () => {
       const invite = await backend.invite()
-      window.alert(JSON.stringify(invite, null, 2))
+      inviteDraft = JSON.stringify(invite, null, 2)
+      inviteInspection = {
+        message: 'Invite ready to share.',
+        summary: await backend.summarizeInvite(invite)
+      }
     })
   })
 

@@ -1,12 +1,12 @@
 {
   "ok": true,
-  "capturedAt": "2026-06-29T21:33:29.806Z",
+  "capturedAt": "2026-06-29T21:43:37.184Z",
   "app": {
     "pearLink": "pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy",
     "catalog": "hyperbee://0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f",
     "sourceRepo": "https://github.com/iesetorg/matchday-mesh",
-    "release": 1944,
-    "length": 1944
+    "release": 1952,
+    "length": 1952
   },
   "checks": {
     "packageIdentity": true,
@@ -35,7 +35,7 @@
       "command": "node scripts/publish-catalog-bee.js /Users/localllm/Projects/pear-ecosystem/02-apps/matchday-mesh/catalog/matchday-mesh.catalog.json --storage /Users/localllm/Projects/pear-ecosystem/02-apps/matchday-mesh/pearbrowser-catalog-data --serve"
     },
     "pearSeed": {
-      "pid": 91320,
+      "pid": 28405,
       "command": "node /opt/homebrew/bin/pear seed pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy"
     }
   },
