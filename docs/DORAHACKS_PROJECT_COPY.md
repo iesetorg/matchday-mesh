@@ -55,6 +55,7 @@ npm run verify:demo-proof
 npm run verify:launch
 npm run verify:dorahacks
 npm run verify:preview-smoke
+npm run verify:catalog-visual
 npm run verify:release-window
 npm run verify:live-pairing
 npm run handoff:judge
@@ -79,6 +80,8 @@ npm run preview -- --port 4173
 - Fresh-peer catalog verification found the signed `matchday-mesh` row.
 - Running desktop PearBrowser loaded `Tether Developers Cup Apps` through its
   own Apps/catalog RPC path with 11 peers and 11 HiveRelays.
+- PearBrowser catalog visual proof card validates the released app row from the
+  same desktop RPC evidence.
 - Browser proof shows the P2P invite panel exporting a released-link invite,
   hosting the pairing topic, and joining a read-only replica handoff.
 - Preview smoke proof starts the local HTTP preview, verifies the served UI

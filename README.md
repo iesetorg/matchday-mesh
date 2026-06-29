@@ -29,6 +29,7 @@ npm run validate:publish
 npm run generate:demo-proof
 npm run verify:demo-proof
 npm run verify:preview-smoke
+npm run verify:catalog-visual
 npm run verify:submission
 npm run preview
 ```
@@ -58,6 +59,7 @@ Pear seed are running:
 npm run verify:launch
 npm run verify:dorahacks
 npm run verify:preview-smoke
+npm run verify:catalog-visual
 npm run verify:release-window
 npm run verify:live-pairing
 npm run verify:live-readiness
@@ -118,6 +120,7 @@ publish validator.
 - Export the proof pack from the app header.
 - Verify the deterministic demo proof in `docs/proof/`.
 - Verify the repeatable local preview smoke proof.
+- Verify the PearBrowser catalog visual proof card.
 - Run the consolidated launch rehearsal.
 - Verify the DoraHacks technical readiness checklist.
 - Verify the released Pear renderer visual proof.

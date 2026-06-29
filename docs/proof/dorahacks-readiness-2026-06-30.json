@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "capturedAt": "2026-06-29T23:31:51.900Z",
+  "capturedAt": "2026-06-29T23:48:26.153Z",
   "app": {
     "id": "matchday-mesh",
     "name": "Matchday Mesh",
@@ -21,6 +21,7 @@
     "releaseApp": true,
     "visualProof": true,
     "catalogProof": true,
+    "catalogVisualProof": true,
     "previewSmoke": true,
     "liveP2P": true,
     "launchRehearsal": true,
@@ -43,6 +44,13 @@
       "ok": true,
       "peerCount": 11,
       "hiveRelays": 11
+    },
+    "catalogVisual": {
+      "ok": true,
+      "mode": "rpc-proof-card",
+      "path": "docs/proof/pearbrowser-catalog-visual-proof-2026-06-30.png",
+      "bytes": 354369,
+      "catalogApps": 1
     },
     "previewSmoke": {
       "ok": true,

@@ -120,6 +120,7 @@ async function main () {
   const catalog = readJson('catalog/matchday-mesh.catalog.json')
   const releaseProof = readJson('docs/proof/pear-release-renderer-proof-2026-06-30.json')
   const catalogProof = readJson('docs/proof/pearbrowser-desktop-catalog-rpc-2026-06-30.json')
+  const catalogVisualProof = readJson('docs/proof/pearbrowser-catalog-visual-proof-2026-06-30.json')
   const previewSmoke = readJson('docs/proof/matchday-preview-smoke-2026-06-30.json')
   const demoProof = readJson('docs/proof/matchday-demo-flow-proof-2026-06-30.json')
 
@@ -167,6 +168,20 @@ async function main () {
     pass('pearBrowserCatalogProof')
   } else {
     fail('pearBrowserCatalogProof', 'PearBrowser catalog RPC proof is missing or stale')
+  }
+
+  if (catalogVisualProof.ok === true &&
+    catalogVisualProof.mode === 'rpc-proof-card' &&
+    catalogVisualProof.app?.pearLink === EXPECTED.pearLink &&
+    catalogVisualProof.app?.catalog === EXPECTED.catalogRef &&
+    catalogVisualProof.catalog?.keyHex === EXPECTED.catalogKey &&
+    catalogVisualProof.pearBrowserRpc?.dhtConnected === true &&
+    catalogVisualProof.visualProof?.path === 'docs/proof/pearbrowser-catalog-visual-proof-2026-06-30.png' &&
+    catalogVisualProof.visualProof?.png === true &&
+    (catalogVisualProof.visualProof?.bytes || 0) >= 10_000) {
+    pass('pearBrowserCatalogVisualProof')
+  } else {
+    fail('pearBrowserCatalogVisualProof', 'PearBrowser catalog visual proof card is missing or stale')
   }
 
   if (demoProof.app?.pearLink === EXPECTED.pearLink &&
@@ -244,6 +259,12 @@ async function main () {
       hiveRelays: catalogProof.pearBrowserRpc?.hiveRelays || 0,
       loadedCatalogName: loadedCatalog?.name || null,
       loadedCatalogApps: loadedCatalog?.apps || 0
+    },
+    catalogVisual: {
+      ok: catalogVisualProof.ok === true,
+      mode: catalogVisualProof.mode || null,
+      path: catalogVisualProof.visualProof?.path || null,
+      bytes: catalogVisualProof.visualProof?.bytes || 0
     },
     failures
   }

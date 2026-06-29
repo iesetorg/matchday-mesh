@@ -19,15 +19,16 @@ Run from:
 | `npm run validate:publish -- --strict-release` | Pass | Strict release validation reports `Matchday Mesh publish surface OK (0 warnings)`. |
 | `npm run verify:demo-proof` | Pass | Deterministic demo proof is current and covers fan pass check-in, invite summary, prediction, reaction, USDt pool open, and 5 USDt contribution. |
 | `npm run verify:preview-smoke` | Pass | Starts the local HTTP preview, verifies served frontend assets, and replays the reset, scan, USDt pool open, and 5 USDt contribution path through the app modules. |
+| `npm run verify:catalog-visual` | Pass | Verifies the PearBrowser catalog visual proof card generated from the live desktop PearBrowser catalog RPC proof, including released app link, catalog key, source repo, peers, HiveRelays, PNG, and SVG metadata. |
 | `npm run verify:launch` | Pass | Consolidated launch rehearsal runs DoraHacks readiness, the judge gate including preview smoke, released-window proof, real Hyperswarm pairing, and live-readiness check in one tester-facing command. |
 | `npm run verify:dorahacks` | Pass | Verifies the technical DoraHacks submission checklist: track scope, football theme, public links, MIT license, setup instructions, release/catalog/P2P proofs, prior-work disclosure, demo-video plan, and manual page/video actions. |
 | `npm run verify:release-window` | Pass | Launches the released Pear app and validates boot proof plus `pear-release-window-2026-06-30.png`; the host blocks desktop screenshots, so the image is a renderer-generated proof card from the live Pear renderer. |
 | `npm run verify:live-pairing` | Pass | Real Hyperswarm proof hosts the deterministic pairing topic, joins a read-only replica, appends a live feed card on the host, and verifies the replica catches up to 4 operations. |
 | `npm run verify:live-readiness` | Pass | Local launch workstation check verifies release/catalog/demo/preview-smoke proof freshness, preview server response, catalog serve process, and active Pear seed for the released app link. |
-| `npm run handoff:judge` | Pass | Prints and verifies the released app link, PearBrowser catalog, public repo, release proof, preview smoke proof, deterministic demo proof, live Hyperswarm pairing proof, live-readiness proof, and judge quickstart references. |
-| `npm run verify:submission` | Pass | Submission pack preflight verifies the released Pear link, live PearBrowser catalog key, source repo, proof JSON, proof screenshots, honest track language, and prior-work disclosure. |
+| `npm run handoff:judge` | Pass | Prints and verifies the released app link, PearBrowser catalog, public repo, release proof, catalog visual proof, preview smoke proof, deterministic demo proof, live Hyperswarm pairing proof, live-readiness proof, and judge quickstart references. |
+| `npm run verify:submission` | Pass | Submission pack preflight verifies the released Pear link, live PearBrowser catalog key, source repo, proof JSON, proof screenshots, catalog visual proof card, honest track language, and prior-work disclosure. |
 | `npm run check` | Pass | Runs `npm test` and `npm run validate:publish`. |
-| `npm run check:release` | Pass | Runs the full release/submission gate: `npm test`, strict publish validation, deterministic demo-proof verification, preview smoke verification, and submission-pack preflight. |
+| `npm run check:release` | Pass | Runs the full release/submission gate: `npm test`, strict publish validation, deterministic demo-proof verification, preview smoke verification, catalog visual proof verification, and submission-pack preflight. |
 | `npm ci --ignore-scripts` | Pass | Clean install from `package-lock.json` recreates the app dependency tree and found 0 vulnerabilities. Local `node_modules` now matches the lockfile instead of the earlier Pear Home copy. |
 | `npm ci --ignore-scripts` in `/private/tmp/matchday-mesh-ci-proof` | Pass | Fresh fixture with only `package.json` and `package-lock.json` installed successfully from the registry. |
 | `npm ls --depth=0` | Pass | Top-level tree is clean: `b4a@1.8.0`, `corestore@6.18.4`, `hyperbee@2.27.3`, `hypercore-crypto@3.6.1`, `hyperswarm@4.17.0`, `pear-bridge@1.2.5`, `pear-electron@1.7.28`. |
@@ -39,6 +40,7 @@ Run from:
 | `node --check scripts/verify-launch-rehearsal.mjs` | Pass | Launch rehearsal verifier parses. |
 | `node --check scripts/verify-dorahacks-readiness.mjs` | Pass | DoraHacks readiness verifier parses. |
 | `node --check scripts/verify-preview-smoke.mjs` | Pass | Preview smoke verifier parses. |
+| `node --check scripts/verify-pearbrowser-catalog-visual.mjs` | Pass | PearBrowser catalog visual proof verifier parses. |
 | `node --check scripts/verify-live-pairing.mjs` | Pass | Live Hyperswarm pairing verifier parses. |
 | `node --check app/boot-renderer.js` | Pass | Pear renderer bootstrap script parses. |
 | `node --check index.cjs` | Pass | Modern Pear main process parses. |
@@ -72,6 +74,7 @@ Run from:
 | `node scripts/verify-release-window-proof.mjs --write` | Pass | Released Pear link wrote `pear-release-renderer-proof-2026-06-30.json` and `pear-release-window-2026-06-30.png`; the PNG is a renderer-generated proof card because macOS desktop screenshot capture failed with `could not create image from display`. |
 | `node scripts/verify-dorahacks-readiness.mjs --write` | Pass | Wrote `docs/proof/dorahacks-readiness-2026-06-30.json`, proving all technical submission checklist items and listing 4 manual DoraHacks page/video actions. |
 | `node scripts/verify-preview-smoke.mjs --write` | Pass | Wrote `docs/proof/matchday-preview-smoke-2026-06-30.json`; local preview served the launch UI assets, replayed 6 operations, checked in Ada, opened the USDt pool, recorded a 5 USDt contribution, and ended with `feed:pool-contribution`. |
+| `node scripts/verify-pearbrowser-catalog-visual.mjs --write` | Pass | Wrote `docs/proof/pearbrowser-catalog-visual-proof-2026-06-30.{json,png,svg}` from the desktop PearBrowser RPC proof and catalog manifest. |
 | `node scripts/verify-live-pairing.mjs --write --timeout 60000` | Pass | Real Hyperswarm proof hosted topic `e57d796c...edf495`, joined a read-only replica, appended `Live Hyperswarm pairing carried this update.`, and verified the replica reached 4 operations. Proof saved at `docs/proof/matchday-live-pairing-2026-06-30.json`. |
 | `node scripts/verify-launch-rehearsal.mjs --write` | Pass | Launch rehearsal ran `npm run verify:dorahacks`, `npm run verify:release-window`, `npm run check:judge`, `npm run verify:live-pairing -- --timeout 60000`, and `npm run verify:live-readiness`; all consolidated checks, including preview smoke proof, passed. Proof saved at `docs/proof/matchday-launch-rehearsal-2026-06-30.json`. |
 | `node --test test/pears-sync.test.js` | Pass | Host Corestore replicated the Hyperbee operation log to a read-only peer by core key; hosted `matchday-mesh-pairing-v1` topic join synced a read-only replica, and a live appended feed card reached the peer. |
@@ -162,6 +165,9 @@ The automated tests currently prove:
   run the released Pear app and local test suite.
 - running desktop PearBrowser can load the live Matchday Mesh Hyperbee catalog
   through its own Apps/catalog RPC path.
+- PearBrowser catalog visual proof card preserves that desktop RPC evidence in
+  a reviewer-friendly PNG/SVG/JSON artifact and verifies it as part of the
+  release gate.
 
 ## Remaining Gates
 
@@ -172,5 +178,6 @@ The automated tests currently prove:
 - True OS-level Pear window screenshot showing Corestore/Hyperbee in the status
   panel; the renderer-generated visual proof card now covers the same runtime
   facts on this host where desktop capture is blocked.
-- Optional visual PearBrowser store listing screenshot; the nonvisual desktop
-  PearBrowser catalog RPC proof now verifies the live listing path.
+- True OS-level PearBrowser store listing screenshot; the desktop PearBrowser
+  catalog RPC proof plus generated visual proof card now covers the live listing
+  facts on this host.

@@ -86,6 +86,9 @@ for (const relativePath of [
   'docs/proof/dorahacks-readiness-2026-06-30.json',
   'docs/proof/matchday-preview-smoke-2026-06-30.json',
   'docs/proof/pearbrowser-desktop-catalog-rpc-2026-06-30.json',
+  'docs/proof/pearbrowser-catalog-visual-proof-2026-06-30.json',
+  'docs/proof/pearbrowser-catalog-visual-proof-2026-06-30.png',
+  'docs/proof/pearbrowser-catalog-visual-proof-2026-06-30.svg',
   'docs/proof/pear-release-renderer-proof-2026-06-30.json',
   'docs/proof/pear-release-window-2026-06-30.png',
   'docs/proof/matchday-demo-flow-proof-2026-06-30.json',
@@ -141,12 +144,15 @@ requireIncludes('docs/proof/README.md', proofReadme, 'matchday-preview-smoke-202
 requireIncludes('docs/proof/README.md', proofReadme, 'matchday-demo-flow-proof-2026-06-30.json')
 requireIncludes('docs/proof/README.md', proofReadme, 'matchday-live-pairing-2026-06-30.json')
 requireIncludes('docs/proof/README.md', proofReadme, 'matchday-live-readiness-2026-06-30.json')
+requireIncludes('docs/proof/README.md', proofReadme, 'pearbrowser-catalog-visual-proof-2026-06-30.json')
+requireIncludes('docs/proof/README.md', proofReadme, 'pearbrowser-catalog-visual-proof-2026-06-30.png')
 
 requireImage('docs/proof/matchday-mesh-preview-2026-06-30.jpg', 10_000)
 requireImage('docs/proof/matchday-mesh-preview-flow-2026-06-30.jpg', 10_000)
 requireImage('docs/proof/matchday-mesh-invite-inspector-2026-06-30.jpg', 10_000)
 requireImage('docs/proof/matchday-mesh-invite-export-panel-2026-06-30.jpg', 10_000)
 requireImage('docs/proof/pear-release-window-2026-06-30.png', 10_000)
+requireImage('docs/proof/pearbrowser-catalog-visual-proof-2026-06-30.png', 10_000)
 
 const manifest = readJson('scripts/app-manifest.json')
 if (manifest) {
@@ -181,6 +187,33 @@ if (catalogProof) {
   if (cupCatalog && cupCatalog.apps < 1) fail('PearBrowser catalog RPC proof cup catalog should include at least one app')
   if (catalogProof.matchdayMesh?.pearLink !== EXPECTED.pearLink) fail('PearBrowser catalog RPC proof pear link is stale')
   if (catalogProof.matchdayMesh?.sourceRepo !== EXPECTED.sourceRepo) fail('PearBrowser catalog RPC proof source repo is stale')
+}
+
+const catalogVisualProof = readJson('docs/proof/pearbrowser-catalog-visual-proof-2026-06-30.json')
+if (catalogVisualProof) {
+  if (catalogVisualProof.ok !== true) fail('PearBrowser catalog visual proof should be ok')
+  if (catalogVisualProof.mode !== 'rpc-proof-card') fail('PearBrowser catalog visual proof mode is stale')
+  if (catalogVisualProof.sourceProof !== 'docs/proof/pearbrowser-desktop-catalog-rpc-2026-06-30.json') {
+    fail('PearBrowser catalog visual proof source proof is stale')
+  }
+  if (catalogVisualProof.app?.pearLink !== EXPECTED.pearLink) fail('PearBrowser catalog visual proof pear link is stale')
+  if (catalogVisualProof.app?.catalog !== EXPECTED.catalogRef) fail('PearBrowser catalog visual proof catalog ref is stale')
+  if (catalogVisualProof.app?.sourceRepo !== EXPECTED.sourceRepo) fail('PearBrowser catalog visual proof source repo is stale')
+  if (catalogVisualProof.catalog?.keyHex !== EXPECTED.catalogKey) fail('PearBrowser catalog visual proof catalog key is stale')
+  if (catalogVisualProof.catalog?.name !== 'Tether Developers Cup Apps') fail('PearBrowser catalog visual proof catalog name is stale')
+  if ((catalogVisualProof.catalog?.apps || 0) < 1) fail('PearBrowser catalog visual proof should include at least one app')
+  if (catalogVisualProof.pearBrowserRpc?.dhtConnected !== true) fail('PearBrowser catalog visual proof should preserve DHT connection')
+  if ((catalogVisualProof.pearBrowserRpc?.peerCount || 0) < 1) fail('PearBrowser catalog visual proof should preserve peer count')
+  if ((catalogVisualProof.pearBrowserRpc?.hiveRelays || 0) < 1) fail('PearBrowser catalog visual proof should preserve HiveRelays')
+  if (catalogVisualProof.matchdayMesh?.pearLink !== EXPECTED.pearLink) fail('PearBrowser catalog visual proof Matchday row is stale')
+  if (catalogVisualProof.visualProof?.path !== 'docs/proof/pearbrowser-catalog-visual-proof-2026-06-30.png') {
+    fail('PearBrowser catalog visual proof PNG path is stale')
+  }
+  if (catalogVisualProof.visualProof?.svgPath !== 'docs/proof/pearbrowser-catalog-visual-proof-2026-06-30.svg') {
+    fail('PearBrowser catalog visual proof SVG path is stale')
+  }
+  if (catalogVisualProof.visualProof?.png !== true) fail('PearBrowser catalog visual proof PNG metadata is stale')
+  if ((catalogVisualProof.visualProof?.bytes || 0) < 10_000) fail('PearBrowser catalog visual proof PNG is unexpectedly small')
 }
 
 const dorahacksReadiness = readJson('docs/proof/dorahacks-readiness-2026-06-30.json')
@@ -266,6 +299,7 @@ if (liveReadiness) {
     'catalogManifest',
     'releasedPearProof',
     'pearBrowserCatalogProof',
+    'pearBrowserCatalogVisualProof',
     'deterministicDemoProof',
     'previewProcess',
     'catalogServeProcess',

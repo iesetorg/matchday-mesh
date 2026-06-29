@@ -36,6 +36,7 @@ seed already running:
 npm run verify:launch
 npm run verify:dorahacks
 npm run verify:preview-smoke
+npm run verify:catalog-visual
 npm run verify:release-window
 npm run verify:live-pairing
 npm run verify:live-readiness
@@ -61,6 +62,8 @@ npm run handoff:judge
 
 The same local-preview reset, scan, pool-open, and contribution path is covered
 by `npm run verify:preview-smoke`.
+The PearBrowser catalog proof card is covered by `npm run verify:catalog-visual`
+and saved as `docs/proof/pearbrowser-catalog-visual-proof-2026-06-30.png`.
 
 ## Honest Track Scope
 

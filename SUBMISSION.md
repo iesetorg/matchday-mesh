@@ -79,6 +79,8 @@ Highlights:
 - fresh-peer catalog verification found the `matchday-mesh` row;
 - running desktop PearBrowser loaded the same catalog through its own
   Apps/catalog RPC path.
+- PearBrowser catalog visual proof card:
+  `docs/proof/pearbrowser-catalog-visual-proof-2026-06-30.png`;
 - preview smoke proof verifies the local test path: served UI assets, Ada scan,
   USDt pool open, 5 USDt contribution, and newest feed card.
 - real Hyperswarm pairing proof joined a read-only replica and caught a live

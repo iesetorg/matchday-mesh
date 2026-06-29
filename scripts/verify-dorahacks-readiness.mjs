@@ -49,6 +49,9 @@ async function main () {
   const releaseProof = readJson('docs/proof/pear-release-renderer-proof-2026-06-30.json', failures)
   const visualProof = imageInfo('docs/proof/pear-release-window-2026-06-30.png', failures)
   const catalogProof = readJson('docs/proof/pearbrowser-desktop-catalog-rpc-2026-06-30.json', failures)
+  const catalogVisualProof = readJson('docs/proof/pearbrowser-catalog-visual-proof-2026-06-30.json', failures)
+  const catalogVisualImage = imageInfo('docs/proof/pearbrowser-catalog-visual-proof-2026-06-30.png', failures)
+  const catalogVisualSvg = existsSync(join(root, 'docs/proof/pearbrowser-catalog-visual-proof-2026-06-30.svg'))
   const previewSmoke = readJson('docs/proof/matchday-preview-smoke-2026-06-30.json', failures)
   const demoProof = readJson('docs/proof/matchday-demo-flow-proof-2026-06-30.json', failures)
   const livePairing = readJson('docs/proof/matchday-live-pairing-2026-06-30.json', failures)
@@ -121,6 +124,23 @@ async function main () {
     'catalogProof',
     'PearBrowser catalog proof is missing or stale')
 
+  checks.catalogVisualProof = passFail(failures,
+    catalogVisualProof?.ok === true &&
+    catalogVisualProof?.mode === 'rpc-proof-card' &&
+    catalogVisualProof?.sourceProof === 'docs/proof/pearbrowser-desktop-catalog-rpc-2026-06-30.json' &&
+    catalogVisualProof?.app?.pearLink === EXPECTED.pearLink &&
+    catalogVisualProof?.app?.catalog === EXPECTED.catalogRef &&
+    catalogVisualProof?.app?.sourceRepo === EXPECTED.sourceRepo &&
+    catalogVisualProof?.catalog?.name === 'Tether Developers Cup Apps' &&
+    (catalogVisualProof?.catalog?.apps || 0) >= 1 &&
+    catalogVisualProof?.pearBrowserRpc?.dhtConnected === true &&
+    catalogVisualProof?.visualProof?.path === 'docs/proof/pearbrowser-catalog-visual-proof-2026-06-30.png' &&
+    catalogVisualProof?.visualProof?.svgPath === 'docs/proof/pearbrowser-catalog-visual-proof-2026-06-30.svg' &&
+    catalogVisualImage.ok &&
+    catalogVisualSvg,
+    'catalogVisualProof',
+    'PearBrowser catalog visual proof card is missing or stale')
+
   checks.previewSmoke = passFail(failures,
     previewSmoke?.ok === true &&
     previewSmoke?.app?.pearLink === EXPECTED.pearLink &&
@@ -190,6 +210,8 @@ async function main () {
     hasAll(proofIndex, [
       'pear-release-renderer-proof-2026-06-30.json',
       'pear-release-window-2026-06-30.png',
+      'pearbrowser-catalog-visual-proof-2026-06-30.json',
+      'pearbrowser-catalog-visual-proof-2026-06-30.png',
       'matchday-preview-smoke-2026-06-30.json',
       'matchday-live-pairing-2026-06-30.json',
       'matchday-launch-rehearsal-2026-06-30.json'
@@ -232,6 +254,13 @@ async function main () {
         peerCount: catalogProof?.pearBrowserRpc?.peerCount || 0,
         hiveRelays: catalogProof?.pearBrowserRpc?.hiveRelays || 0
       },
+      catalogVisual: {
+        ok: catalogVisualProof?.ok === true,
+        mode: catalogVisualProof?.mode || null,
+        path: catalogVisualProof?.visualProof?.path || null,
+        bytes: catalogVisualImage.bytes,
+        catalogApps: catalogVisualProof?.catalog?.apps || 0
+      },
       previewSmoke: {
         ok: previewSmoke?.ok === true,
         operationCount: previewSmoke?.scenario?.operationCount || 0,
@@ -273,6 +302,7 @@ async function main () {
   console.log(`  pear: ${EXPECTED.pearLink}`)
   console.log(`  catalog: ${EXPECTED.catalogRef}`)
   console.log(`  release: ${releaseProof?.release}, visual: ${releaseProof?.visualProof?.mode}`)
+  console.log(`  catalog visual: ${catalogVisualProof?.visualProof?.path || 'missing'}`)
   console.log(`  manual actions: ${manualActions.length}`)
   if (args.writePath) console.log(`  proof: ${relative(root, args.writePath)}`)
 }

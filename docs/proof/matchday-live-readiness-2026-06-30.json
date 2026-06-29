@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "capturedAt": "2026-06-29T23:30:41.529Z",
+  "capturedAt": "2026-06-29T23:47:44.671Z",
   "app": {
     "pearLink": "pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy",
     "catalog": "hyperbee://0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f",
@@ -14,6 +14,7 @@
     "catalogManifest": true,
     "releasedPearProof": true,
     "pearBrowserCatalogProof": true,
+    "pearBrowserCatalogVisualProof": true,
     "deterministicDemoProof": true,
     "previewSmokeProof": true,
     "previewProcess": true,
@@ -46,6 +47,12 @@
     "hiveRelays": 11,
     "loadedCatalogName": "Tether Developers Cup Apps",
     "loadedCatalogApps": 1
+  },
+  "catalogVisual": {
+    "ok": true,
+    "mode": "rpc-proof-card",
+    "path": "docs/proof/pearbrowser-catalog-visual-proof-2026-06-30.png",
+    "bytes": 354369
   },
   "failures": []
 }

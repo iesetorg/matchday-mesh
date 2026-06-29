@@ -1,0 +1,38 @@
+{
+  "ok": true,
+  "capturedAt": "2026-06-29T23:47:27.032Z",
+  "mode": "rpc-proof-card",
+  "sourceProof": "docs/proof/pearbrowser-desktop-catalog-rpc-2026-06-30.json",
+  "app": {
+    "name": "Matchday Mesh",
+    "pearLink": "pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy",
+    "catalog": "hyperbee://0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f",
+    "sourceRepo": "https://github.com/iesetorg/matchday-mesh"
+  },
+  "catalog": {
+    "name": "Tether Developers Cup Apps",
+    "keyHex": "0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f",
+    "apps": 1,
+    "aggregatedApps": 15
+  },
+  "pearBrowserRpc": {
+    "dhtConnected": true,
+    "peerCount": 11,
+    "hiveRelays": 11,
+    "storagePercent": 9
+  },
+  "matchdayMesh": {
+    "catalogName": "Tether Developers Cup Apps",
+    "catalogKey": "0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f",
+    "pearLink": "pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy",
+    "sourceRepo": "https://github.com/iesetorg/matchday-mesh"
+  },
+  "visualProof": {
+    "path": "docs/proof/pearbrowser-catalog-visual-proof-2026-06-30.png",
+    "svgPath": "docs/proof/pearbrowser-catalog-visual-proof-2026-06-30.svg",
+    "bytes": 354369,
+    "png": true,
+    "note": "Generated from live desktop PearBrowser diagnostic RPC proof; this is not an OS window screenshot."
+  },
+  "failures": []
+}

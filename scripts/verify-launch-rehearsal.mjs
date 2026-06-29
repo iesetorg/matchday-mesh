@@ -110,6 +110,10 @@ async function main () {
     liveReadinessProof: proofFiles.liveReadiness?.ok === true,
     pearBrowserCatalogProof: proofFiles.catalogProof?.ok === true &&
       proofFiles.catalogProof?.matchdayMesh?.pearLink === EXPECTED.pearLink,
+    pearBrowserCatalogVisualProof: proofFiles.catalogVisualProof?.ok === true &&
+      proofFiles.catalogVisualProof?.mode === 'rpc-proof-card' &&
+      proofFiles.catalogVisualProof?.app?.pearLink === EXPECTED.pearLink &&
+      proofFiles.catalogVisualProof?.visualProof?.path === 'docs/proof/pearbrowser-catalog-visual-proof-2026-06-30.png',
     previewSmokeProof: proofFiles.previewSmoke?.ok === true &&
       proofFiles.previewSmoke?.scenario?.operationCount === 6 &&
       proofFiles.previewSmoke?.scenario?.accepted === true &&
@@ -147,6 +151,7 @@ async function main () {
       livePairing: summarizeLivePairingProof(proofFiles.livePairing),
       liveReadiness: summarizeLiveReadinessProof(proofFiles.liveReadiness),
       catalog: summarizeCatalogProof(proofFiles.catalogProof),
+      catalogVisual: summarizeCatalogVisualProof(proofFiles.catalogVisualProof),
       previewSmoke: summarizePreviewSmokeProof(proofFiles.previewSmoke),
       demo: summarizeDemoProof(proofFiles.demoProof)
     },
@@ -180,6 +185,7 @@ function readProofFiles () {
     livePairing: readJson('docs/proof/matchday-live-pairing-2026-06-30.json'),
     liveReadiness: readJson('docs/proof/matchday-live-readiness-2026-06-30.json'),
     catalogProof: readJson('docs/proof/pearbrowser-desktop-catalog-rpc-2026-06-30.json'),
+    catalogVisualProof: readJson('docs/proof/pearbrowser-catalog-visual-proof-2026-06-30.json'),
     previewSmoke: readJson('docs/proof/matchday-preview-smoke-2026-06-30.json'),
     demoProof: readJson('docs/proof/matchday-demo-flow-proof-2026-06-30.json')
   }
@@ -288,6 +294,19 @@ function summarizeCatalogProof (proof) {
     hiveRelays: proof.pearBrowserRpc?.hiveRelays,
     appLink: proof.matchdayMesh?.pearLink,
     aggregatedApps: proof.aggregatedApps
+  }
+}
+
+function summarizeCatalogVisualProof (proof) {
+  if (!proof) return null
+  return {
+    ok: proof.ok,
+    mode: proof.mode,
+    path: proof.visualProof?.path,
+    bytes: proof.visualProof?.bytes,
+    catalogApps: proof.catalog?.apps,
+    peerCount: proof.pearBrowserRpc?.peerCount,
+    hiveRelays: proof.pearBrowserRpc?.hiveRelays
   }
 }
 
