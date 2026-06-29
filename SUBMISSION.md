@@ -83,6 +83,8 @@ Highlights:
   host feed append.
 - launch rehearsal proof ran the judge gate, live pairing, and live-readiness
   checks together.
+- DoraHacks readiness proof verifies track scope, public links, license, setup,
+  release/catalog/P2P proofs, prior-work disclosure, and manual video actions.
 
 ## DoraHacks Copy
 

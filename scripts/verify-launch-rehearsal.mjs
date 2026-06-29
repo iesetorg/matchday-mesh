@@ -56,6 +56,12 @@ function usage (message) {
 async function main () {
   const commandPlan = [
     {
+      name: 'dorahacksReadiness',
+      command: 'npm',
+      args: ['run', 'verify:dorahacks'],
+      timeout: args.commandTimeout
+    },
+    {
       name: 'releaseWindow',
       command: 'npm',
       args: ['run', 'verify:release-window'],
@@ -90,6 +96,7 @@ async function main () {
 
   const proofFiles = readProofFiles()
   const checks = {
+    dorahacksReadinessCommand: commandResults.find((result) => result.name === 'dorahacksReadiness')?.ok === true,
     releaseWindowCommand: commandResults.find((result) => result.name === 'releaseWindow')?.ok === true,
     judgeGate: commandResults.find((result) => result.name === 'judgeGate')?.ok === true,
     livePairingCommand: commandResults.find((result) => result.name === 'livePairing')?.ok === true,

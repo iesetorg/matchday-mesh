@@ -30,6 +30,7 @@ Target length: 3 minutes.
 7. Show `docs/proof/pear-release-window-2026-06-30.png`.
 8. Show `docs/proof/matchday-live-pairing-2026-06-30.json`.
 9. Show `docs/proof/matchday-launch-rehearsal-2026-06-30.json`.
-10. Show `docs/proof/pearbrowser-desktop-catalog-rpc-2026-06-30.json`.
-11. End on the public repo URL:
+10. Show `docs/proof/dorahacks-readiness-2026-06-30.json`.
+11. Show `docs/proof/pearbrowser-desktop-catalog-rpc-2026-06-30.json`.
+12. End on the public repo URL:
    `https://github.com/iesetorg/matchday-mesh`.

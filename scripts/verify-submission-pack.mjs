@@ -83,6 +83,7 @@ for (const relativePath of [
   'docs/RISK_LEDGER.md',
   'docs/TEST_COMMAND_MATRIX_2026-06-29.md',
   'docs/proof/README.md',
+  'docs/proof/dorahacks-readiness-2026-06-30.json',
   'docs/proof/pearbrowser-desktop-catalog-rpc-2026-06-30.json',
   'docs/proof/pear-release-renderer-proof-2026-06-30.json',
   'docs/proof/pear-release-window-2026-06-30.png',
@@ -132,6 +133,7 @@ requireIncludes('PRIOR_WORK.md', priorWork, 'Pear Tickets')
 requireIncludes('PRIOR_WORK.md', priorWork, 'Pear POS')
 requireIncludes('PRIOR_WORK.md', priorWork, 'PearBrowser')
 requireIncludes('docs/proof/README.md', proofReadme, 'pearbrowser-desktop-catalog-rpc-2026-06-30.json')
+requireIncludes('docs/proof/README.md', proofReadme, 'dorahacks-readiness-2026-06-30.json')
 requireIncludes('docs/proof/README.md', proofReadme, 'pear-release-renderer-proof-2026-06-30.json')
 requireIncludes('docs/proof/README.md', proofReadme, 'pear-release-window-2026-06-30.png')
 requireIncludes('docs/proof/README.md', proofReadme, 'matchday-demo-flow-proof-2026-06-30.json')
@@ -177,6 +179,24 @@ if (catalogProof) {
   if (cupCatalog && cupCatalog.apps < 1) fail('PearBrowser catalog RPC proof cup catalog should include at least one app')
   if (catalogProof.matchdayMesh?.pearLink !== EXPECTED.pearLink) fail('PearBrowser catalog RPC proof pear link is stale')
   if (catalogProof.matchdayMesh?.sourceRepo !== EXPECTED.sourceRepo) fail('PearBrowser catalog RPC proof source repo is stale')
+}
+
+const dorahacksReadiness = readJson('docs/proof/dorahacks-readiness-2026-06-30.json')
+if (dorahacksReadiness) {
+  if (dorahacksReadiness.ok !== true) fail('DoraHacks readiness proof should be ok')
+  if (dorahacksReadiness.app?.primaryTrack !== 'Pears Stack') fail('DoraHacks readiness proof should keep Pears Stack primary')
+  if (dorahacksReadiness.app?.pearLink !== EXPECTED.pearLink) fail('DoraHacks readiness proof pear link is stale')
+  if (dorahacksReadiness.app?.catalog !== EXPECTED.catalogRef) fail('DoraHacks readiness proof catalog is stale')
+  if (dorahacksReadiness.app?.sourceRepo !== EXPECTED.sourceRepo) fail('DoraHacks readiness proof source repo is stale')
+  if ((dorahacksReadiness.proofHighlights?.launchRehearsal?.commandCount || 0) < 5) {
+    fail('DoraHacks readiness proof should include the expanded launch rehearsal gate')
+  }
+  if (!Array.isArray(dorahacksReadiness.manualActions) || dorahacksReadiness.manualActions.length < 3) {
+    fail('DoraHacks readiness proof should list manual submission actions')
+  }
+  for (const [key, value] of Object.entries(dorahacksReadiness.checks || {})) {
+    if (value !== true) fail(`DoraHacks readiness check should pass: ${key}`)
+  }
 }
 
 const releaseProof = readJson('docs/proof/pear-release-renderer-proof-2026-06-30.json')

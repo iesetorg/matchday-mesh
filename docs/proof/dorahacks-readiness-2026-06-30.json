@@ -1,0 +1,68 @@
+{
+  "ok": true,
+  "capturedAt": "2026-06-29T23:18:13.713Z",
+  "app": {
+    "id": "matchday-mesh",
+    "name": "Matchday Mesh",
+    "primaryTrack": "Pears Stack",
+    "pearLink": "pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy",
+    "catalog": "hyperbee://0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f",
+    "sourceRepo": "https://github.com/iesetorg/matchday-mesh",
+    "license": "MIT",
+    "release": 2394,
+    "length": 2394
+  },
+  "checks": {
+    "openSource": true,
+    "primaryTrack": true,
+    "footballTheme": true,
+    "publicLinks": true,
+    "setupInstructions": true,
+    "releaseApp": true,
+    "visualProof": true,
+    "catalogProof": true,
+    "liveP2P": true,
+    "launchRehearsal": true,
+    "demoProof": true,
+    "liveReadiness": true,
+    "priorWorkDisclosure": true,
+    "demoVideoPlan": true,
+    "noPlatformOverclaim": true,
+    "proofIndex": true
+  },
+  "proofHighlights": {
+    "release": {
+      "ok": true,
+      "release": 2394,
+      "length": 2394,
+      "backend": "Corestore/Hyperbee",
+      "visualMode": "renderer-proof-card"
+    },
+    "catalog": {
+      "ok": true,
+      "peerCount": 11,
+      "hiveRelays": 11
+    },
+    "livePairing": {
+      "ok": true,
+      "topic": "e57d796c...edf495",
+      "replicaOperations": 4
+    },
+    "launchRehearsal": {
+      "ok": true,
+      "commandCount": 5
+    },
+    "visualProof": {
+      "path": "docs/proof/pear-release-window-2026-06-30.png",
+      "bytes": 126111,
+      "mode": "renderer-proof-card"
+    }
+  },
+  "manualActions": [
+    "Register or update the DoraHacks project page with the paste-ready copy from docs/DORAHACKS_PROJECT_COPY.md.",
+    "Record and upload a 3-minute-or-shorter unlisted YouTube demo video before the final DoraHacks deadline.",
+    "Add the YouTube demo link to the DoraHacks submission page once recorded.",
+    "If a second machine is available, capture a two-device Pear Runtime pairing screenshot for extra polish."
+  ],
+  "failures": []
+}

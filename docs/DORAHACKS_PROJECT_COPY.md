@@ -53,6 +53,7 @@ npm test
 npm run validate:publish -- --strict-release
 npm run verify:demo-proof
 npm run verify:launch
+npm run verify:dorahacks
 npm run verify:release-window
 npm run verify:live-pairing
 npm run handoff:judge
@@ -83,6 +84,8 @@ npm run preview -- --port 4173
   replicated feed append.
 - Launch rehearsal proof runs the judge gate, live pairing, and live-readiness
   checks as one tester-facing command.
+- DoraHacks readiness proof verifies the technical submission checklist and
+  lists manual page/video actions still outside the repo.
 - Deterministic demo proof replays the full fan-pass, invite, prediction, and
   USDt pool contribution flow.
 - `docs/JUDGE_QUICKSTART.md` gives reviewers the shortest run/test path.

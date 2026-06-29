@@ -34,6 +34,7 @@ seed already running:
 
 ```sh
 npm run verify:launch
+npm run verify:dorahacks
 npm run verify:release-window
 npm run verify:live-pairing
 npm run verify:live-readiness
