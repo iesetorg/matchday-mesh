@@ -1,0 +1,5 @@
+node_modules/
+matchday-pear-proof.json
+matchday-release-proof.json
+*.log
+.DS_Store

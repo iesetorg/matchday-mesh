@@ -1,0 +1,14 @@
+# Risk Ledger
+
+| Risk | Impact | Mitigation |
+|---|---:|---|
+| Pear release must be reproducible after future edits | Medium | Release succeeded for `pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy` at length `1888`. Re-run stage/release/seed after any launch-critical edit. |
+| Pear CLI PATH is incomplete on this machine | Medium | The shim exists at `/opt/homebrew/bin/pear`, but it warns to prepend `/Users/localllm/Library/Application Support/pear/bin`; retry Pear dev/release commands from a fixed terminal. |
+| Pear rejects legacy HTML entrypoints | High | Matchday Mesh now uses `index.cjs`, `pear.pre: pear-electron/pre`, `pear-electron`, and `pear-bridge` while keeping `index.html` as the renderer. |
+| Runtime bridge proof must be refreshed after release packaging | Low | Dev-mode Pear renderer proof passes with `hasMatchdayAPI: true` and Corestore/Hyperbee operations. Re-run the proof after `pear stage` and release. |
+| Hyperswarm pairing UI is not implemented yet | Medium | Direct Corestore replication by core key is now covered by tests. Build the pairing UI on top of that proof, then add a local HyperDHT/Hyperswarm test if time allows. |
+| Dependency freshness drifts before release | Low | `package-lock.json` is generated, `npm ci --ignore-scripts` succeeds from the lockfile, and local `node_modules` now matches the declared top-level dependencies. Re-run `npm ci` before staging. |
+| Catalog listing lags behind release | High | Direct `pear://` release proof passes. PearBrowser store listing and screenshot still need separate verification. |
+| WDK integration slips | Medium | Ship deterministic demo-ledger mode and avoid claiming WDK unless the real adapter is passing. |
+| QVAC integration slips | Medium | Keep QVAC gated and do not claim QVAC track until local SDK inference works. |
+| UI scope grows | High | Freeze MVP to hub, pass, scan, feed, prediction, and pool. |

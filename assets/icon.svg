@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Matchday Mesh icon</title>
+  <desc id="desc">A football pitch ring with connected match nodes.</desc>
+  <rect width="256" height="256" rx="46" fill="#101211"/>
+  <circle cx="128" cy="128" r="88" fill="#18351f" stroke="#39c56b" stroke-width="10"/>
+  <path d="M64 128h128M128 40v176" stroke="#b8f3c4" stroke-width="8" stroke-linecap="round" opacity=".85"/>
+  <circle cx="128" cy="128" r="30" fill="none" stroke="#b8f3c4" stroke-width="7"/>
+  <path d="M88 88l80 80M168 88l-80 80" stroke="#ff7a59" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="88" cy="88" r="15" fill="#e7c35a"/>
+  <circle cx="168" cy="88" r="15" fill="#e7c35a"/>
+  <circle cx="88" cy="168" r="15" fill="#e7c35a"/>
+  <circle cx="168" cy="168" r="15" fill="#e7c35a"/>
+</svg>

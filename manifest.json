@@ -1,0 +1,10 @@
+{
+  "name": "Matchday Mesh",
+  "version": "0.1.0",
+  "description": "Serverless football watch parties with P2P fan passes, live predictions, QR check-ins, and USDt pool cards.",
+  "author": "Pear Ecosystem",
+  "icon": "/assets/icon.svg",
+  "entry": "/index.html",
+  "categories": ["football", "events", "p2p", "payments", "watch-party"],
+  "permissions": []
+}

@@ -1,0 +1,37 @@
+{
+  "appId": "matchday-mesh",
+  "name": "Matchday Mesh",
+  "version": "0.1.0",
+  "description": "Serverless football watch parties with P2P fan passes, live predictions, QR check-ins, and USDt pool cards.",
+  "longDescription": "Matchday Mesh lets fans create a local football match hub, issue fan passes, scan check-ins, run a watch-party feed, post predictions, and collect optional USDt pool contributions without a central event server. The first PearBrowser build is focused on Pears Stack proof with a WDK-shaped payment module and a QVAC local coach module gated until local inference is proven.",
+  "author": "Pear Ecosystem",
+  "homepage": "https://pear.app/matchday-mesh",
+  "license": "MIT",
+  "categories": ["football", "events", "p2p", "payments", "watch-party"],
+  "privacyTier": "local-first",
+  "icon": "/assets/icon.svg",
+  "links": {
+    "pearRuntime": "pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy",
+    "pearBrowser": "pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy",
+    "sourceRepo": null
+  },
+  "runtimes": {
+    "pear-browser": {
+      "supported": true,
+      "minVersion": "0.4.0",
+      "features": ["p2p-feed", "fan-pass", "qr-checkin", "predictions", "usdt-pool-demo"]
+    },
+    "qvac": {
+      "supported": false,
+      "features": ["local-coach"],
+      "note": "Enable only after QVAC SDK inference runs locally with no cloud AI API."
+    },
+    "wdk": {
+      "supported": "demo",
+      "features": ["usdt-pool-card", "receive-flow-adapter"],
+      "note": "The launch build starts with a deterministic demo ledger. Promote to WDK track claim only when the actual WDK adapter path is passing."
+    }
+  },
+  "publishedAt": "2026-06-29T20:01:36Z",
+  "publishedBy": "Pear CLI"
+}
