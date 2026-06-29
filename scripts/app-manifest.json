@@ -13,7 +13,7 @@
   "links": {
     "pearRuntime": "pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy",
     "pearBrowser": "pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy",
-    "sourceRepo": null
+    "sourceRepo": "https://github.com/iesetorg/matchday-mesh"
   },
   "runtimes": {
     "pear-browser": {
@@ -32,6 +32,6 @@
       "note": "The launch build starts with a deterministic demo ledger. Promote to WDK track claim only when the actual WDK adapter path is passing."
     }
   },
-  "publishedAt": "2026-06-29T20:01:36Z",
+  "publishedAt": "2026-06-29T20:10:08Z",
   "publishedBy": "Pear CLI"
 }

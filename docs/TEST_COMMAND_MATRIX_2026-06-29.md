@@ -15,7 +15,7 @@ Run from:
 | Command | Result | Notes |
 |---|---|---|
 | `npm test` | Pass | 18/18 Node tests pass across domain, operation-log replay, payment adapter behavior, Corestore/Hyperbee persistence, direct Corestore replication, and the Pear renderer runtime API. |
-| `npm run validate:publish` | Pass with 2 expected warnings | Warnings are `links.pearRuntime` and `links.sourceRepo`, both intentionally empty until Pear release and public repo setup. |
+| `npm run validate:publish` | Pass with release metadata present | `links.pearRuntime`, `links.pearBrowser`, and `links.sourceRepo` are all filled in for the public release. |
 | `npm run check` | Pass | Runs `npm test` and `npm run validate:publish`. |
 | `npm ci --ignore-scripts` | Pass | Clean install from `package-lock.json` added 157 packages and found 0 vulnerabilities. Local `node_modules` now matches the lockfile instead of the earlier Pear Home copy. |
 | `npm ci --ignore-scripts` in `/private/tmp/matchday-mesh-ci-proof` | Pass | Fresh fixture with only `package.json` and `package-lock.json` installed successfully from the registry. |
@@ -48,6 +48,7 @@ Run from:
 | `PEAR_LINK=... npm run seed` | Running | Seed announced drive key `fe36eb9038630aeb0a8bc2a21f548d44964c35d9eaff37c654b95d9173233bca`, discovery key `e92e9f4a8df2ced0e5eb1b15354877097a4c1030b843154f8301fe694bdc91f9`, and content key `41328f560d68a5e50e1b45a22ecd3511fa5213c49a42a625170d7175834c6b87`. |
 | `MATCHDAY_MESH_BOOT_PROOF_PATH=... pear run pear://9a5q...` | Pass | Final released-link renderer proof wrote `matchday-release-proof.json` with `ok: true`, `hasMatchdayAPI: true`, backend `pears-store`, a `matchday-mesh-core-invite-v1` invite, and 3 seeded operations after release length `1888`. |
 | `node --test test/pears-sync.test.js` | Pass | Host Corestore replicated the Hyperbee operation log to a read-only peer by core key; a live appended feed card reached the peer. |
+| `gh repo create matchday-mesh --public --source . --remote origin --push` | Pass | Created and pushed the public source repo at `https://github.com/iesetorg/matchday-mesh`. |
 
 ## Current Preview
 
@@ -97,5 +98,4 @@ The automated tests currently prove:
 
 - Pear runtime launch from a fixed Pear PATH terminal without the shim warning.
 - Visual Pear window screenshot showing Corestore/Hyperbee in the status panel.
-- Public GitHub source repo URL in `scripts/app-manifest.json`.
 - PearBrowser store listing screenshot.

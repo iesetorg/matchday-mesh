@@ -39,6 +39,12 @@ Released Pear link:
 pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy
 ```
 
+Public source repository:
+
+```text
+https://github.com/iesetorg/matchday-mesh
+```
+
 For an automated renderer proof:
 
 ```sh
@@ -61,7 +67,7 @@ npm run validate:publish -- --strict-release
 ```
 
 After release, update `scripts/app-manifest.json` with the final `pearRuntime`
-link and public source repo URL.
+link and public source repo URL, then run the strict publish validator.
 
 ## MVP Flow
 
