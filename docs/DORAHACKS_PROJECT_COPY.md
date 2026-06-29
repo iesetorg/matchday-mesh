@@ -66,6 +66,8 @@ npm run preview -- --port 4173
 - Fresh-peer catalog verification found the signed `matchday-mesh` row.
 - Running desktop PearBrowser loaded `Tether Developers Cup Apps` through its
   own Apps/catalog RPC path with 11 peers and 11 HiveRelays.
+- Browser proof shows the P2P invite inspector accepting a released-link invite
+  and summarizing it as a read-only handoff.
 - Visual proof captures are in `docs/proof/`.
 
 ## Prior Work

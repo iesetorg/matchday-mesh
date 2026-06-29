@@ -30,7 +30,8 @@ body {
 
 button,
 input,
-select {
+select,
+textarea {
   font: inherit;
 }
 
@@ -50,7 +51,8 @@ button:disabled {
 }
 
 input,
-select {
+select,
+textarea {
   width: 100%;
   min-height: 40px;
   border: 1px solid var(--line);
@@ -58,6 +60,12 @@ select {
   background: #0d100f;
   color: var(--text);
   padding: 0 12px;
+}
+
+textarea {
+  min-height: 116px;
+  padding: 10px 12px;
+  resize: vertical;
 }
 
 label {
@@ -341,6 +349,55 @@ label {
   color: var(--mint);
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.invite-inspector {
+  display: grid;
+  gap: 8px;
+}
+
+.invite-summary {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 12px;
+  border: 1px solid rgba(57, 197, 107, 0.42);
+  border-radius: 8px;
+  background: #121913;
+}
+
+.invite-summary div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.invite-summary dt {
+  color: var(--muted);
+}
+
+.invite-summary dd {
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  color: var(--mint);
+  text-align: right;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.invite-result {
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #111512;
+  color: var(--muted);
+}
+
+.invite-result.error {
+  border-color: rgba(255, 122, 89, 0.5);
+  color: #ffb19e;
 }
 
 .feed-list {

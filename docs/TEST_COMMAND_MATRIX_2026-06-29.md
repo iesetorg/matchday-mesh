@@ -39,6 +39,7 @@ Run from:
 | In-app browser click flow | Pass | Reset demo, scanned Ada pass, opened USDt pool, contributed 5 USDt. Result showed `Accepted`, `5.00 USDt / 50`, newest feed cards ordered as pool contribution, pool opened, check-in, reaction. |
 | In-app browser payment adapter flow | Pass | Pool displayed `demo-usdt://matchday-mesh/...` receive address, rendered 49 QR cells, status showed `WDK-shaped demo receive path`, and top feed card was `pool-contribution`. |
 | In-app browser P2P invite panel smoke | Pass | Preview mode shows the P2P invite panel with `Mode: Preview`, `Core: Launch in Pear`, disabled export button, and operation count updating from 3 to 6 after the demo flow. |
+| In-app browser invite inspector flow | Pass | Pasted a released-link `matchday-mesh-core-invite-v1` invite, inspected it, and verified the summary showed `read-only`, `ops 3`, the short core key, and the short discovery key; invalid JSON showed `Invite must be valid JSON`. Proof saved at `docs/proof/matchday-mesh-invite-inspector-2026-06-30.jpg`. |
 | In-app browser visual proof capture | Pass | Saved viewport proofs at `docs/proof/matchday-mesh-preview-2026-06-30.jpg` and `docs/proof/matchday-mesh-preview-flow-2026-06-30.jpg`; DOM assertions confirmed `Accepted`, `5.00 USDt / 50`, `Ops 6`, `Launch in Pear`, and `backendOps 6` with zero console errors. |
 | `which pear` | Pass | Pear CLI shim exists at `/opt/homebrew/bin/pear`. |
 | `pear --version` | Not supported | CLI exists but bailed with `UNKNOWN_FLAG: version`; also printed PATH warning. |

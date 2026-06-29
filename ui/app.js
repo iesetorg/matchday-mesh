@@ -16,6 +16,10 @@ import {
   createPoolReceiveRequest,
   paymentModuleStatus
 } from '../app/payments.js'
+import {
+  createMatchdayInvite,
+  summarizeMatchdayInvite
+} from '../app/invite.js'
 
 const OPS_STORAGE_KEY = 'matchday-mesh:ops:v1'
 const root = document.querySelector('#app')
@@ -25,6 +29,8 @@ let operations = await backend.loadOperations()
 let state = replaySafe(operations)
 let selectedHubId = Object.keys(state.hubs)[0] || null
 let selectedPassId = Object.keys(state.passes)[0] || null
+let inviteDraft = ''
+let inviteInspection = null
 
 if (!selectedHubId) await seedDemo()
 render()
@@ -290,7 +296,29 @@ function renderP2PInvite () {
         <strong>${escapeHtml(String(backendStatus.operations))}</strong>
       </div>
       <button data-action="export-invite" ${isPear ? '' : 'disabled'}>Export Invite</button>
+      <form data-form="inspect-invite" class="invite-inspector">
+        <textarea name="invite" rows="5" placeholder="Invite JSON">${escapeHtml(inviteDraft)}</textarea>
+        <button type="submit">Inspect Invite</button>
+      </form>
+      ${renderInviteInspection()}
     </div>
+  `
+}
+
+function renderInviteInspection () {
+  if (!inviteInspection) return ''
+  if (inviteInspection.error) {
+    return `<div class="invite-result error">${escapeHtml(inviteInspection.error)}</div>`
+  }
+  const summary = inviteInspection.summary
+  return `
+    <dl class="invite-summary">
+      <div><dt>type</dt><dd>${escapeHtml(summary.type)}</dd></div>
+      <div><dt>core</dt><dd title="${escapeAttr(summary.key)}">${escapeHtml(summary.shortKey)}</dd></div>
+      <div><dt>discovery</dt><dd title="${escapeAttr(summary.discoveryKey)}">${escapeHtml(summary.shortDiscoveryKey)}</dd></div>
+      <div><dt>ops</dt><dd>${escapeHtml(String(summary.operations))}</dd></div>
+      <div><dt>mode</dt><dd>${summary.writable ? 'writable' : 'read-only'}</dd></div>
+    </dl>
   `
 }
 
@@ -341,6 +369,18 @@ function bindActions () {
       const invite = await backend.invite()
       window.alert(JSON.stringify(invite, null, 2))
     })
+  })
+
+  bindForm('inspect-invite', async (form) => {
+    const data = formData(form)
+    inviteDraft = data.invite || ''
+    try {
+      inviteInspection = {
+        summary: await backend.summarizeInvite(inviteDraft)
+      }
+    } catch (err) {
+      inviteInspection = { error: err.message }
+    }
   })
 
   bindForm('create-hub', async (form) => {
@@ -462,7 +502,11 @@ async function createOperationBackend () {
       async invite () {
         if (typeof runtimeApi.invite === 'function') return runtimeApi.invite()
         const info = await runtimeApi.info()
-        return createBackendInvite(info)
+        return createMatchdayInvite(info)
+      },
+      async summarizeInvite (invite) {
+        if (typeof runtimeApi.summarizeInvite === 'function') return runtimeApi.summarizeInvite(invite)
+        return summarizeMatchdayInvite(invite)
       },
       async status () {
         const info = await runtimeApi.info()
@@ -515,6 +559,9 @@ function createLocalOperationBackend () {
         unavailable: true
       }
     },
+    async summarizeInvite (invite) {
+      return summarizeMatchdayInvite(invite)
+    },
     async status () {
       return {
         source: 'local-storage',
@@ -525,19 +572,6 @@ function createLocalOperationBackend () {
         storagePath: OPS_STORAGE_KEY
       }
     }
-  }
-}
-
-function createBackendInvite (info) {
-  return {
-    type: 'matchday-mesh-core-invite-v1',
-    app: 'matchday-mesh',
-    coreName: info.coreName || 'matchday-mesh-ops',
-    key: info.key,
-    discoveryKey: info.discoveryKey,
-    writable: false,
-    operations: info.operations,
-    createdAt: new Date().toISOString()
   }
 }
 

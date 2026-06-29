@@ -26,6 +26,7 @@ Target length: 3 minutes.
 3. Run or show `npm run validate:publish -- --strict-release`.
 4. Show `docs/proof/matchday-mesh-preview-2026-06-30.jpg`.
 5. Show `docs/proof/matchday-mesh-preview-flow-2026-06-30.jpg`.
-6. Show `docs/proof/pearbrowser-desktop-catalog-rpc-2026-06-30.json`.
-7. End on the public repo URL:
+6. Show `docs/proof/matchday-mesh-invite-inspector-2026-06-30.jpg`.
+7. Show `docs/proof/pearbrowser-desktop-catalog-rpc-2026-06-30.json`.
+8. End on the public repo URL:
    `https://github.com/iesetorg/matchday-mesh`.
