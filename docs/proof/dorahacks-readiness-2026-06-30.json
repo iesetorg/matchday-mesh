@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "capturedAt": "2026-06-29T23:48:26.153Z",
+  "capturedAt": "2026-06-30T00:02:55.529Z",
   "app": {
     "id": "matchday-mesh",
     "name": "Matchday Mesh",
@@ -9,8 +9,8 @@
     "catalog": "hyperbee://0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f",
     "sourceRepo": "https://github.com/iesetorg/matchday-mesh",
     "license": "MIT",
-    "release": 2394,
-    "length": 2394
+    "release": 2407,
+    "length": 2407
   },
   "checks": {
     "openSource": true,
@@ -35,8 +35,8 @@
   "proofHighlights": {
     "release": {
       "ok": true,
-      "release": 2394,
-      "length": 2394,
+      "release": 2407,
+      "length": 2407,
       "backend": "Corestore/Hyperbee",
       "visualMode": "renderer-proof-card"
     },

@@ -191,6 +191,8 @@ label {
 }
 
 .hero-actions {
+  display: grid;
+  gap: 8px;
   min-width: 120px;
 }
 
@@ -416,6 +418,60 @@ label {
   color: #ffb19e;
 }
 
+.tester-output {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+  border-color: rgba(231, 195, 90, 0.42);
+}
+
+.tester-output .panel-heading {
+  margin-bottom: 0;
+}
+
+.output-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(84px, 1fr));
+  gap: 8px;
+}
+
+.tester-output textarea {
+  min-height: 220px;
+  font-family: Menlo, Consolas, monospace;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  white-space: pre;
+}
+
+.output-meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+}
+
+.output-meta div {
+  min-width: 0;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #111512;
+}
+
+.output-meta dt {
+  color: var(--muted);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+}
+
+.output-meta dd {
+  margin: 4px 0 0;
+  overflow: hidden;
+  color: var(--mint);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .feed-list {
   max-height: 360px;
   overflow: auto;
@@ -489,6 +545,10 @@ label {
   .status-strip {
     justify-content: flex-start;
   }
+
+  .output-meta {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 560px) {
@@ -507,5 +567,9 @@ label {
   .pass-preview {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .output-actions {
+    grid-template-columns: 1fr;
   }
 }

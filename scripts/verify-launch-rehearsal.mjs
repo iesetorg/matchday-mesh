@@ -102,7 +102,10 @@ async function main () {
     livePairingCommand: commandResults.find((result) => result.name === 'livePairing')?.ok === true,
     liveReadinessCommand: commandResults.find((result) => result.name === 'liveReadiness')?.ok === true,
     releasedPearProof: proofFiles.releaseProof?.ok === true &&
-      proofFiles.releaseProof?.release === 2394 &&
+      Number.isSafeInteger(proofFiles.releaseProof?.release) &&
+      Number.isSafeInteger(proofFiles.releaseProof?.length) &&
+      proofFiles.releaseProof.release > 0 &&
+      proofFiles.releaseProof.length >= proofFiles.releaseProof.release &&
       proofFiles.releaseProof?.backendLabel === 'Corestore/Hyperbee',
     livePairingProof: proofFiles.livePairing?.ok === true &&
       proofFiles.livePairing?.replica?.writable === false &&

@@ -117,7 +117,7 @@ publish validator.
 - Export the P2P invite from the match hub.
 - Open a USDt pool demo card.
 - Record demo contributions into the feed.
-- Export the proof pack from the app header.
+- Render the proof pack and operation log from the app header.
 - Verify the deterministic demo proof in `docs/proof/`.
 - Verify the repeatable local preview smoke proof.
 - Verify the PearBrowser catalog visual proof card.

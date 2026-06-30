@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "capturedAt": "2026-06-29T23:27:42.165Z",
+  "capturedAt": "2026-06-30T00:02:05.033Z",
   "app": {
     "pearLink": "pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy",
     "catalog": "hyperbee://0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f",
@@ -17,6 +17,7 @@
     "previewBootAsset": true,
     "launchCopy": true,
     "demoActions": true,
+    "testerOutput": true,
     "honestTrackState": true,
     "qrRender": true,
     "indexModules": true,
@@ -42,7 +43,7 @@
       "path": "/ui/app.js",
       "status": 200,
       "contentType": "text/javascript; charset=utf-8",
-      "bytes": 25245,
+      "bytes": 27696,
       "ok": true,
       "missing": [],
       "message": "/ui/app.js served expected launch UI content"
@@ -51,7 +52,7 @@
       "path": "/ui/styles.css",
       "status": 200,
       "contentType": "text/css; charset=utf-8",
-      "bytes": 7850,
+      "bytes": 8894,
       "ok": true,
       "missing": [],
       "message": "/ui/styles.css served expected launch UI content"
@@ -69,6 +70,7 @@
   "source": {
     "launchCopy": true,
     "demoActions": true,
+    "testerOutput": true,
     "honestTrackState": true,
     "qrRender": true,
     "indexModules": true,

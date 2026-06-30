@@ -1,12 +1,12 @@
 {
   "ok": true,
-  "capturedAt": "2026-06-29T23:47:44.671Z",
+  "capturedAt": "2026-06-30T00:02:22.233Z",
   "app": {
     "pearLink": "pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy",
     "catalog": "hyperbee://0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f",
     "sourceRepo": "https://github.com/iesetorg/matchday-mesh",
-    "release": 2394,
-    "length": 2394
+    "release": 2407,
+    "length": 2407
   },
   "checks": {
     "packageIdentity": true,

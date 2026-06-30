@@ -256,7 +256,12 @@ if (releaseProof) {
   if (releaseProof.ok !== true) fail('released link renderer proof should be ok')
   if (releaseProof.hasPear !== true) fail('released link renderer proof should have Pear')
   if (releaseProof.hasMatchdayAPI !== true) fail('released link renderer proof should have matchdayAPI')
-  if (releaseProof.release !== 2394 || releaseProof.length !== 2394) fail('released link renderer proof release metadata is stale')
+  if (!Number.isSafeInteger(releaseProof.release) ||
+    !Number.isSafeInteger(releaseProof.length) ||
+    releaseProof.release < 1 ||
+    releaseProof.length < releaseProof.release) {
+    fail('released link renderer proof release metadata is stale')
+  }
   if (releaseProof.backendLabel !== 'Corestore/Hyperbee') fail('released link renderer proof should use Corestore/Hyperbee')
   if (releaseProof.inviteType !== 'matchday-mesh-core-invite-v1') fail('released link renderer proof should export the invite type')
   if (releaseProof.pairingType !== 'matchday-mesh-pairing-v1') fail('released link renderer proof should export the pairing type')

@@ -81,8 +81,9 @@ Highlights:
   Apps/catalog RPC path.
 - PearBrowser catalog visual proof card:
   `docs/proof/pearbrowser-catalog-visual-proof-2026-06-30.png`;
-- preview smoke proof verifies the local test path: served UI assets, Ada scan,
-  USDt pool open, 5 USDt contribution, and newest feed card.
+- preview smoke proof verifies the local test path: served UI assets, in-app
+  proof/log output panel, Ada scan, USDt pool open, 5 USDt contribution, and
+  newest feed card.
 - real Hyperswarm pairing proof joined a read-only replica and caught a live
   host feed append.
 - launch rehearsal proof ran DoraHacks readiness, the judge gate, released

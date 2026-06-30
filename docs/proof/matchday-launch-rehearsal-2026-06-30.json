@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "capturedAt": "2026-06-29T23:48:20.449Z",
+  "capturedAt": "2026-06-30T00:02:48.824Z",
   "app": {
     "pearLink": "pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy",
     "catalog": "hyperbee://0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f",
@@ -13,7 +13,7 @@
       "ok": true,
       "exitCode": 0,
       "durationMs": 148,
-      "stdoutTail": "\n> matchday-mesh@0.1.0 verify:dorahacks\n> node scripts/verify-dorahacks-readiness.mjs\n\nMatchday Mesh DoraHacks readiness OK\n  pear: pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy\n  catalog: hyperbee://0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f\n  release: 2394, visual: renderer-proof-card\n  catalog visual: docs/proof/pearbrowser-catalog-visual-proof-2026-06-30.png\n  manual actions: 4\n",
+      "stdoutTail": "\n> matchday-mesh@0.1.0 verify:dorahacks\n> node scripts/verify-dorahacks-readiness.mjs\n\nMatchday Mesh DoraHacks readiness OK\n  pear: pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy\n  catalog: hyperbee://0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f\n  release: 2407, visual: renderer-proof-card\n  catalog visual: docs/proof/pearbrowser-catalog-visual-proof-2026-06-30.png\n  manual actions: 4\n",
       "stderrTail": ""
     },
     {
@@ -21,8 +21,8 @@
       "command": "npm run verify:release-window",
       "ok": true,
       "exitCode": 0,
-      "durationMs": 6957,
-      "stdoutTail": "\n> matchday-mesh@0.1.0 verify:release-window\n> node scripts/verify-release-window-proof.mjs\n\nMatchday Mesh released window proof OK\n  pear: pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy\n  release: 2394, length 2394\n  backend: Corestore/Hyperbee\n  visual: /var/folders/rx/zv2nrybs0sg0f0vs6kj9m71w0000gn/T/matchday-release-window-proof-9111-1782776883384.png (126111 bytes)\n  proof: /var/folders/rx/zv2nrybs0sg0f0vs6kj9m71w0000gn/T/matchday-release-window-proof-9111-1782776883384.json\n",
+      "durationMs": 6963,
+      "stdoutTail": "\n> matchday-mesh@0.1.0 verify:release-window\n> node scripts/verify-release-window-proof.mjs\n\nMatchday Mesh released window proof OK\n  pear: pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy\n  release: 2407, length 2407\n  backend: Corestore/Hyperbee\n  visual: /var/folders/rx/zv2nrybs0sg0f0vs6kj9m71w0000gn/T/matchday-release-window-proof-33242-1782777753188.png (126111 bytes)\n  proof: /var/folders/rx/zv2nrybs0sg0f0vs6kj9m71w0000gn/T/matchday-release-window-proof-33242-1782777753188.json\n",
       "stderrTail": ""
     },
     {
@@ -30,8 +30,8 @@
       "command": "npm run check:judge",
       "ok": true,
       "exitCode": 0,
-      "durationMs": 1905,
-      "stdoutTail": "log-visual.mjs\n\nMatchday Mesh PearBrowser catalog visual proof OK\n  catalog: hyperbee://0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f\n  app: pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy\n  visual: docs/proof/pearbrowser-catalog-visual-proof-2026-06-30.png (354369 bytes)\n\n> matchday-mesh@0.1.0 verify:submission\n> node scripts/verify-submission-pack.mjs\n\nMatchday Mesh submission pack OK\n  pear: pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy\n  catalog: hyperbee://0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f\n  repo: https://github.com/iesetorg/matchday-mesh\n\n> matchday-mesh@0.1.0 handoff:judge\n> node scripts/print-judge-handoff.mjs\n\nMatchday Mesh judge handoff OK\n\nRun the released app:\n  pear run pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy\n\nPearBrowser catalog:\n  hyperbee://0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f\n\nSource and local checks:\n  https://github.com/iesetorg/matchday-mesh\n  npm ci\n  npm run check:release\n  npm run verify:preview-smoke\n  npm run verify:catalog-visual\n  npm run verify:launch\n  npm run verify:release-window\n  npm run verify:live-pairing\n  npm run verify:live-readiness\n\nProof highlights:\n  release 2394, length 2394, backend Corestore/Hyperbee\n  preview smoke ops 6, latest feed:pool-contribution, total 5 USDt\n  demo ops 8, feed cards 8, latest feed:pool-contribution\n  live pairing e57d796c...edf495, replica ops 4, writable false\n  catalog peers 11, HiveRelays 11\n  catalog visual docs/proof/pearbrowser-catalog-visual-proof-2026-06-30.png, 354369 bytes\n",
+      "durationMs": 1925,
+      "stdoutTail": "log-visual.mjs\n\nMatchday Mesh PearBrowser catalog visual proof OK\n  catalog: hyperbee://0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f\n  app: pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy\n  visual: docs/proof/pearbrowser-catalog-visual-proof-2026-06-30.png (354369 bytes)\n\n> matchday-mesh@0.1.0 verify:submission\n> node scripts/verify-submission-pack.mjs\n\nMatchday Mesh submission pack OK\n  pear: pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy\n  catalog: hyperbee://0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f\n  repo: https://github.com/iesetorg/matchday-mesh\n\n> matchday-mesh@0.1.0 handoff:judge\n> node scripts/print-judge-handoff.mjs\n\nMatchday Mesh judge handoff OK\n\nRun the released app:\n  pear run pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy\n\nPearBrowser catalog:\n  hyperbee://0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f\n\nSource and local checks:\n  https://github.com/iesetorg/matchday-mesh\n  npm ci\n  npm run check:release\n  npm run verify:preview-smoke\n  npm run verify:catalog-visual\n  npm run verify:launch\n  npm run verify:release-window\n  npm run verify:live-pairing\n  npm run verify:live-readiness\n\nProof highlights:\n  release 2407, length 2407, backend Corestore/Hyperbee\n  preview smoke ops 6, latest feed:pool-contribution, total 5 USDt\n  demo ops 8, feed cards 8, latest feed:pool-contribution\n  live pairing e57d796c...edf495, replica ops 4, writable false\n  catalog peers 11, HiveRelays 11\n  catalog visual docs/proof/pearbrowser-catalog-visual-proof-2026-06-30.png, 354369 bytes\n",
       "stderrTail": ""
     },
     {
@@ -39,8 +39,8 @@
       "command": "npm run verify:live-pairing -- --timeout 60000",
       "ok": true,
       "exitCode": 0,
-      "durationMs": 8108,
-      "stdoutTail": "\n> matchday-mesh@0.1.0 verify:live-pairing\n> node scripts/verify-live-pairing.mjs --timeout 60000\n\nMatchday Mesh live pairing OK\n  topic: df77df1b...4110b2\n  replica ops: 4\n",
+      "durationMs": 6653,
+      "stdoutTail": "\n> matchday-mesh@0.1.0 verify:live-pairing\n> node scripts/verify-live-pairing.mjs --timeout 60000\n\nMatchday Mesh live pairing OK\n  topic: 7e31b087...b54964\n  replica ops: 4\n",
       "stderrTail": ""
     },
     {
@@ -48,7 +48,7 @@
       "command": "npm run verify:live-readiness",
       "ok": true,
       "exitCode": 0,
-      "durationMs": 239,
+      "durationMs": 240,
       "stdoutTail": "\n> matchday-mesh@0.1.0 verify:live-readiness\n> node scripts/verify-live-readiness.mjs\n\nMatchday Mesh live readiness OK\n  pear: pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy\n  catalog: hyperbee://0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f\n  preview: http://127.0.0.1:4173/\n",
       "stderrTail": ""
     }
@@ -56,8 +56,8 @@
   "proofs": {
     "release": {
       "ok": true,
-      "release": 2394,
-      "length": 2394,
+      "release": 2407,
+      "length": 2407,
       "backend": "Corestore/Hyperbee",
       "inviteType": "matchday-mesh-core-invite-v1",
       "pairingType": "matchday-mesh-pairing-v1"
@@ -74,8 +74,8 @@
     },
     "liveReadiness": {
       "ok": true,
-      "release": 2394,
-      "length": 2394,
+      "release": 2407,
+      "length": 2407,
       "preview": "http://127.0.0.1:4173/",
       "checks": {
         "packageIdentity": true,

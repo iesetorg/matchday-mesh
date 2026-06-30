@@ -33,6 +33,7 @@ let inviteDraft = ''
 let inviteInspection = null
 let pairingHostStatus = null
 let replicaJoinStatus = null
+let testerOutput = null
 
 if (!selectedHubId) await seedDemo()
 render()
@@ -126,6 +127,8 @@ function renderHub (hub) {
         <button data-action="proof">Proof</button>
       </div>
     </section>
+
+    ${renderTesterOutput()}
 
     <div class="grid">
       <section class="panel">
@@ -315,6 +318,30 @@ function renderP2PInvite () {
   `
 }
 
+function renderTesterOutput () {
+  if (!testerOutput) return ''
+  return `
+    <section class="panel tester-output" data-testid="tester-output">
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">${escapeHtml(testerOutput.kind)}</p>
+          <h2>${escapeHtml(testerOutput.title)}</h2>
+        </div>
+        <div class="output-actions">
+          <button data-action="copy-output" type="button">Copy</button>
+          <button data-action="clear-output" type="button">Clear</button>
+        </div>
+      </div>
+      <textarea readonly rows="10" data-testid="tester-output-text">${escapeHtml(testerOutput.body)}</textarea>
+      <dl class="output-meta">
+        <div><dt>bytes</dt><dd>${escapeHtml(String(testerOutput.bytes))}</dd></div>
+        <div><dt>updated</dt><dd>${escapeHtml(testerOutput.updatedAt)}</dd></div>
+        ${testerOutput.copyStatus ? `<div><dt>clipboard</dt><dd>${escapeHtml(testerOutput.copyStatus)}</dd></div>` : ''}
+      </dl>
+    </section>
+  `
+}
+
 function renderInviteInspection () {
   if (!inviteInspection) return ''
   if (inviteInspection.error) {
@@ -410,11 +437,30 @@ function bindActions () {
   })
 
   root.querySelector('[data-action="proof"]')?.addEventListener('click', () => {
-    window.alert(JSON.stringify(exportProofPack(state), null, 2))
+    setTesterOutput('Proof Pack', 'proof-pack', JSON.stringify(exportProofPack(state), null, 2))
+    render()
   })
 
   root.querySelector('[data-action="export-log"]')?.addEventListener('click', () => {
-    window.alert(serializeOperations(operations))
+    setTesterOutput('Operation Log', 'operation-log', serializeOperations(operations))
+    render()
+  })
+
+  root.querySelector('[data-action="clear-output"]')?.addEventListener('click', () => {
+    testerOutput = null
+    render()
+  })
+
+  root.querySelector('[data-action="copy-output"]')?.addEventListener('click', async () => {
+    if (!testerOutput) return
+    let copyStatus = 'copied'
+    try {
+      await copyText(testerOutput.body)
+    } catch {
+      copyStatus = 'copy unavailable'
+    }
+    testerOutput = { ...testerOutput, copyStatus }
+    render()
   })
 
   root.querySelector('[data-action="export-invite"]')?.addEventListener('click', () => {
@@ -526,6 +572,39 @@ async function runAction (handler) {
   } catch (err) {
     window.alert(err.message)
   }
+}
+
+function setTesterOutput (title, kind, body) {
+  testerOutput = {
+    title,
+    kind,
+    body,
+    bytes: new TextEncoder().encode(body).length,
+    updatedAt: new Date().toLocaleString(),
+    copyStatus: ''
+  }
+}
+
+async function copyText (text) {
+  let clipboardError = null
+  if (navigator.clipboard?.writeText) {
+    try {
+      await navigator.clipboard.writeText(text)
+      return
+    } catch (err) {
+      clipboardError = err
+    }
+  }
+  const textarea = document.createElement('textarea')
+  textarea.value = text
+  textarea.setAttribute('readonly', '')
+  textarea.style.position = 'fixed'
+  textarea.style.left = '-9999px'
+  document.body.appendChild(textarea)
+  textarea.select()
+  const copied = document.execCommand('copy')
+  textarea.remove()
+  if (!copied) throw clipboardError || new Error('Clipboard copy unavailable')
 }
 
 function formData (form) {

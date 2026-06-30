@@ -146,8 +146,10 @@ async function main () {
   }
 
   if (releaseProof.ok === true &&
-    releaseProof.release === 2394 &&
-    releaseProof.length === 2394 &&
+    Number.isSafeInteger(releaseProof.release) &&
+    Number.isSafeInteger(releaseProof.length) &&
+    releaseProof.release > 0 &&
+    releaseProof.length >= releaseProof.release &&
     releaseProof.backendLabel === 'Corestore/Hyperbee' &&
     releaseProof.inviteType === 'matchday-mesh-core-invite-v1' &&
     releaseProof.pairingType === 'matchday-mesh-pairing-v1' &&

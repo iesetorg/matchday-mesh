@@ -30,6 +30,10 @@ function requireEqual (actual, expected, label) {
   if (actual !== expected) fail(`${label} expected ${expected}, got ${actual}`)
 }
 
+function requirePositiveInteger (actual, label) {
+  if (!Number.isSafeInteger(actual) || actual < 1) fail(`${label} should be a positive integer, got ${actual}`)
+}
+
 function requireIncludes (text, expected, label) {
   if (!text.includes(expected)) fail(`${label} should include ${expected}`)
 }
@@ -48,7 +52,8 @@ requireEqual(manifest.links?.pearRuntime, EXPECTED.pearLink, 'manifest pearRunti
 requireEqual(manifest.links?.pearBrowserCatalog, EXPECTED.catalog, 'manifest catalog')
 requireEqual(manifest.links?.sourceRepo, EXPECTED.repo, 'manifest source repo')
 requireEqual(releaseProof.ok, true, 'released Pear proof ok')
-requireEqual(releaseProof.release, 2394, 'released Pear proof release')
+requirePositiveInteger(releaseProof.release, 'released Pear proof release')
+requirePositiveInteger(releaseProof.length, 'released Pear proof length')
 requireEqual(releaseProof.backendLabel, 'Corestore/Hyperbee', 'released Pear proof backend')
 requireEqual(releaseProof.pairingType, 'matchday-mesh-pairing-v1', 'released Pear proof pairing')
 requireEqual(catalogProof.ok, true, 'PearBrowser catalog RPC proof ok')

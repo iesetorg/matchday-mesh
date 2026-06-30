@@ -58,7 +58,8 @@ npm run handoff:judge
    then click `Join Replica` and confirm the joined replica is read-only. The
    automated `npm run verify:live-pairing` proof exercises the same host/join
    path over real Hyperswarm.
-8. Show the proof files in `docs/proof/`.
+8. Click `Proof` or `Export Log` to render the in-app tester output panel, then
+   show the proof files in `docs/proof/`.
 
 The same local-preview reset, scan, pool-open, and contribution path is covered
 by `npm run verify:preview-smoke`.

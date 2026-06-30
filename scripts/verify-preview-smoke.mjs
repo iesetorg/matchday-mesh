@@ -167,11 +167,11 @@ async function verifyHttpSurface (previewUrl, failures, checks) {
   record(checks, failures, 'previewIndex', assets.index.ok, assets.index.message)
 
   const ui = await fetchAsset(previewUrl, '/ui/app.js', args.timeout)
-  assets.ui = summarizeAsset(ui, ['PearBrowser launch build', 'Scan Pass', 'Open Pool', 'Add', 'P2P Invite'])
+  assets.ui = summarizeAsset(ui, ['PearBrowser launch build', 'Scan Pass', 'Open Pool', 'Add', 'P2P Invite', 'data-testid="tester-output"'])
   record(checks, failures, 'previewUiAsset', assets.ui.ok, assets.ui.message)
 
   const styles = await fetchAsset(previewUrl, '/ui/styles.css', args.timeout)
-  assets.styles = summarizeAsset(styles, ['.feed-card', '.pool-meter', '.invite-panel', '@media'])
+  assets.styles = summarizeAsset(styles, ['.feed-card', '.pool-meter', '.invite-panel', '.tester-output', '@media'])
   record(checks, failures, 'previewStyleAsset', assets.styles.ok, assets.styles.message)
 
   const boot = await fetchAsset(previewUrl, '/app/boot-renderer.js', args.timeout)
@@ -226,6 +226,15 @@ function verifyFrontendContracts (failures, checks) {
   const uiContracts = {
     launchCopy: hasAll(uiApp, ['PearBrowser launch build', 'Match Hubs', 'USDt Pool', 'P2P Invite', 'Module Status']),
     demoActions: hasAll(uiApp, ['data-action="scan-pass"', 'data-form="open-pool"', 'data-form="contribute"', 'data-action="export-invite"', 'data-action="join-replica"']),
+    testerOutput: hasAll(uiApp, [
+      'data-testid="tester-output"',
+      'data-testid="tester-output-text"',
+      'data-action="copy-output"',
+      'data-action="clear-output"',
+      'setTesterOutput',
+      'serializeOperations(operations)',
+      'exportProofPack(state)'
+    ]),
     honestTrackState: hasAll(uiApp, ['Corestore host', 'Preview']) &&
       domain.includes('disabled-until-local-sdk-proof') &&
       payments.includes('WDK-shaped demo receive path'),

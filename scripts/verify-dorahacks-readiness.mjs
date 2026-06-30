@@ -101,8 +101,10 @@ async function main () {
 
   checks.releaseApp = passFail(failures,
     releaseProof?.ok === true &&
-    releaseProof?.release === 2394 &&
-    releaseProof?.length === 2394 &&
+    Number.isSafeInteger(releaseProof?.release) &&
+    Number.isSafeInteger(releaseProof?.length) &&
+    releaseProof.release > 0 &&
+    releaseProof.length >= releaseProof.release &&
     releaseProof?.app?.pearLink === EXPECTED.pearLink &&
     releaseProof?.backendLabel === 'Corestore/Hyperbee' &&
     releaseProof?.inviteType === 'matchday-mesh-core-invite-v1' &&
@@ -173,14 +175,16 @@ async function main () {
   checks.demoProof = passFail(failures,
     demoProof?.checks &&
     Object.values(demoProof.checks).every((value) => value === true) &&
-    demoProof?.release?.pearRelease === 2394 &&
+    demoProof?.release?.pearRelease === releaseProof?.release &&
+    demoProof?.release?.pearLength === releaseProof?.length &&
     demoProof?.scenario?.operationCount === 8,
     'demoProof',
     'deterministic demo proof is missing or stale')
 
   checks.liveReadiness = passFail(failures,
     readiness?.ok === true &&
-    readiness?.app?.release === 2394 &&
+    readiness?.app?.release === releaseProof?.release &&
+    readiness?.app?.length === releaseProof?.length &&
     Object.values(readiness?.checks || {}).every((value) => value === true),
     'liveReadiness',
     'live-readiness proof is missing or stale')

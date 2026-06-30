@@ -1,9 +1,9 @@
 {
   "ok": true,
-  "capturedAt": "2026-06-29T23:04:31.955Z",
-  "release": 2394,
-  "length": 2394,
-  "command": "MATCHDAY_MESH_BOOT_PROOF_PATH=/var/folders/rx/zv2nrybs0sg0f0vs6kj9m71w0000gn/T/matchday-release-window-raw-49636-1782774267287.json MATCHDAY_MESH_VISUAL_PROOF_PATH=/Users/localllm/Projects/pear-ecosystem/02-apps/matchday-mesh/docs/proof/pear-release-window-2026-06-30.png pear run pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy",
+  "capturedAt": "2026-06-30T00:02:07.894Z",
+  "release": 2407,
+  "length": 2407,
+  "command": "MATCHDAY_MESH_BOOT_PROOF_PATH=/var/folders/rx/zv2nrybs0sg0f0vs6kj9m71w0000gn/T/matchday-release-window-raw-30640-1782777723150.json MATCHDAY_MESH_VISUAL_PROOF_PATH=/Users/localllm/Projects/pear-ecosystem/02-apps/matchday-mesh/docs/proof/pear-release-window-2026-06-30.png pear run pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy",
   "warning": "Pear printed the PATH shim warning because /Users/localllm/Library/Application Support/pear/bin does not exist on this host.",
   "stage": "ui-ready",
   "hasPear": true,
@@ -38,7 +38,7 @@
     "sourceName": "Matchday Mesh renderer proof card",
     "fallbackReason": "Timed out capturing visual proof after 2500ms",
     "stage": "ui-ready",
-    "capturedAt": "2026-06-29T23:04:30.890Z"
+    "capturedAt": "2026-06-30T00:02:06.865Z"
   },
   "app": {
     "pearLink": "pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy",
