@@ -30,7 +30,8 @@ Run from:
 | `npm run verify:submission` | Pass | Submission pack preflight verifies the released Pear link, live PearBrowser catalog key, source repo, proof JSON, proof screenshots, catalog visual proof card, honest track language, and prior-work disclosure. |
 | `npm run check` | Pass | Runs `npm test` and `npm run validate:publish`. |
 | `npm run check:release` | Pass | Runs the full release/submission gate: `npm test`, strict publish validation, deterministic demo-proof verification, preview smoke verification, catalog visual proof verification, and submission-pack preflight. |
-| `npm run check:final` | Pass | Runs the one-command final recording/submission gate: launch rehearsal, DoraHacks readiness, and final submission handoff. |
+| `npm run check:launch` | Pass | Runs the live launch-workstation gate: launch rehearsal, DoraHacks readiness, and final submission handoff. Requires preview/catalog/seed processes for the live-readiness leg. |
+| `npm run check:final` | Pass | Runs the portable final recording/submission packet gate: release/submission checks, DoraHacks readiness, and final submission handoff. |
 | `npm ci --ignore-scripts` | Pass | Clean install from `package-lock.json` recreates the app dependency tree and found 0 vulnerabilities. Local `node_modules` now matches the lockfile instead of the earlier Pear Home copy. |
 | `npm ci --ignore-scripts` in `/private/tmp/matchday-mesh-ci-proof` | Pass | Fresh fixture with only `package.json` and `package-lock.json` installed successfully from the registry. |
 | `npm ls --depth=0` | Pass | Top-level tree is clean: `b4a@1.8.0`, `corestore@6.18.4`, `hyperbee@2.27.3`, `hypercore-crypto@3.6.1`, `hyperswarm@4.17.0`, `pear-bridge@1.2.5`, `pear-electron@1.7.28`. |

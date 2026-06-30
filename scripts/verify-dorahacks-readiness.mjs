@@ -98,8 +98,9 @@ async function main () {
 
   checks.setupInstructions = passFail(failures,
     hasAll(readme, ['npm ci', 'npm test', 'npm run verify:submission', 'pear run --dev .']) &&
-    hasAll(quickstart, ['npm ci', 'npm run check:release', 'npm run verify:launch', EXPECTED.pearLink]) &&
-    hasAll(doraCopy, ['Reviewer source checkout', 'Final launch workstation gate', 'npm run check:release', 'npm run check:final']),
+    hasAll(quickstart, ['npm ci', 'npm run check:release', 'npm run verify:launch', 'npm run check:launch', EXPECTED.pearLink]) &&
+    hasAll(doraCopy, ['Reviewer source checkout', 'Final submission packet gate', 'Live launch workstation gate', 'npm run check:release', 'npm run check:final', 'npm run check:launch', 'npm run verify:public-checkout']) &&
+    packageJson?.scripts?.['verify:public-checkout'] === 'node scripts/verify-public-checkout.mjs',
     'setupInstructions',
     'judge setup instructions are incomplete')
 
@@ -243,8 +244,10 @@ async function main () {
 
   checks.finalSubmissionHandoff = passFail(failures,
     packageJson?.scripts?.['handoff:submission'] === 'node scripts/print-submission-handoff.mjs' &&
-    packageJson?.scripts?.['check:final'] === 'npm run verify:launch && npm run verify:dorahacks && npm run handoff:submission' &&
+    packageJson?.scripts?.['check:launch'] === 'npm run verify:launch && npm run verify:dorahacks && npm run handoff:submission' &&
+    packageJson?.scripts?.['check:final'] === 'npm run check:release && npm run verify:dorahacks && npm run handoff:submission' &&
     finalRunbook.includes('npm run check:final') &&
+    finalRunbook.includes('npm run check:launch') &&
     finalRunbook.includes('npm run handoff:submission') &&
     doraCopy.includes('npm run handoff:submission'),
     'finalSubmissionHandoff',

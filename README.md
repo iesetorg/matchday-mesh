@@ -46,6 +46,12 @@ For a release/submission preflight:
 npm run check:release
 ```
 
+For a public-from-zero checkout rehearsal:
+
+```sh
+npm run verify:public-checkout
+```
+
 For a judge/tester handoff summary:
 
 ```sh
@@ -72,6 +78,7 @@ npm run verify:catalog-visual
 npm run verify:release-window
 npm run verify:live-pairing
 npm run verify:live-readiness
+npm run check:launch
 ```
 
 Released Pear link:

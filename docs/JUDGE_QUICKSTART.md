@@ -29,6 +29,15 @@ npm ci
 npm run check:release
 ```
 
+For a from-zero public-repo rehearsal, run the opt-in network check:
+
+```sh
+npm run verify:public-checkout
+```
+
+It clones the public GitHub repo into a temporary directory, runs `npm ci`, and
+then runs `npm run check:release` from that fresh checkout.
+
 For the launch workstation, with the preview server, catalog server, and Pear
 seed already running:
 
@@ -40,7 +49,7 @@ npm run verify:catalog-visual
 npm run verify:release-window
 npm run verify:live-pairing
 npm run verify:live-readiness
-npm run check:final
+npm run check:launch
 npm run handoff:judge
 npm run handoff:submission
 ```

@@ -103,7 +103,8 @@ for (const relativePath of [
   'docs/proof/matchday-mesh-invite-export-panel-2026-06-30.jpg',
   'catalog/matchday-mesh.catalog.json',
   'scripts/app-manifest.json',
-  'scripts/print-submission-handoff.mjs'
+  'scripts/print-submission-handoff.mjs',
+  'scripts/verify-public-checkout.mjs'
 ]) {
   requireFile(relativePath)
 }
@@ -141,9 +142,12 @@ requireIncludes('docs/DORAHACKS_PROJECT_COPY.md', doraCopy, 'not claimed as prim
 requireIncludes('docs/DORAHACKS_PROJECT_COPY.md', doraCopy, EXPECTED.sourceRepo)
 requireIncludes('docs/DORAHACKS_PROJECT_COPY.md', doraCopy, 'docs/FINAL_SUBMISSION_RUNBOOK.md')
 requireIncludes('docs/DORAHACKS_PROJECT_COPY.md', doraCopy, 'Reviewer source checkout')
-requireIncludes('docs/DORAHACKS_PROJECT_COPY.md', doraCopy, 'Final launch workstation gate')
+requireIncludes('docs/DORAHACKS_PROJECT_COPY.md', doraCopy, 'Final submission packet gate')
+requireIncludes('docs/DORAHACKS_PROJECT_COPY.md', doraCopy, 'Live launch workstation gate')
 requireIncludes('docs/DORAHACKS_PROJECT_COPY.md', doraCopy, 'npm run check:release')
 requireIncludes('docs/DORAHACKS_PROJECT_COPY.md', doraCopy, 'npm run check:final')
+requireIncludes('docs/DORAHACKS_PROJECT_COPY.md', doraCopy, 'npm run check:launch')
+requireIncludes('docs/DORAHACKS_PROJECT_COPY.md', doraCopy, 'npm run verify:public-checkout')
 requireIncludes('docs/DEMO_SCRIPT.md', demoScript, 'Target length: 3 minutes')
 requireIncludes('docs/DEMO_SCRIPT.md', demoScript, 'npm run check:final')
 requireIncludes('docs/DEMO_SCRIPT.md', demoScript, 'npm run handoff:submission')
@@ -161,8 +165,11 @@ requireIncludes('docs/FINAL_SUBMISSION_RUNBOOK.md', finalRunbook, 'WDK demo-ledg
 requireIncludes('docs/FINAL_SUBMISSION_RUNBOOK.md', finalRunbook, 'QVAC gated')
 requireIncludes('docs/FINAL_SUBMISSION_RUNBOOK.md', finalRunbook, 'Autobase multiwriter is not claimed')
 requireIncludes('docs/FINAL_SUBMISSION_RUNBOOK.md', finalRunbook, 'npm run check:final')
+requireIncludes('docs/FINAL_SUBMISSION_RUNBOOK.md', finalRunbook, 'npm run check:launch')
 requireIncludes('docs/FINAL_SUBMISSION_RUNBOOK.md', finalRunbook, 'npm run handoff:submission')
 requireIncludes('docs/JUDGE_QUICKSTART.md', judgeQuickstart, 'npm run check:release')
+requireIncludes('docs/JUDGE_QUICKSTART.md', judgeQuickstart, 'npm run check:launch')
+requireIncludes('docs/JUDGE_QUICKSTART.md', judgeQuickstart, 'npm run verify:public-checkout')
 requireIncludes('docs/JUDGE_QUICKSTART.md', judgeQuickstart, 'npm run handoff:judge')
 requireIncludes('docs/JUDGE_QUICKSTART.md', judgeQuickstart, 'matchday-mesh-core-invite-v1')
 requireIncludes('PRIOR_WORK.md', priorWork, 'Pear Tickets')
@@ -207,12 +214,21 @@ if (packageJson) {
   if (packageJson.scripts?.['handoff:submission'] !== 'node scripts/print-submission-handoff.mjs') {
     fail('package.json should expose handoff:submission')
   }
-  if (packageJson.scripts?.['check:final'] !== 'npm run verify:launch && npm run verify:dorahacks && npm run handoff:submission') {
+  if (packageJson.scripts?.['check:launch'] !== 'npm run verify:launch && npm run verify:dorahacks && npm run handoff:submission') {
+    fail('package.json should expose check:launch')
+  }
+  if (packageJson.scripts?.['check:final'] !== 'npm run check:release && npm run verify:dorahacks && npm run handoff:submission') {
     fail('package.json should expose check:final')
+  }
+  if (packageJson.scripts?.['verify:public-checkout'] !== 'node scripts/verify-public-checkout.mjs') {
+    fail('package.json should expose verify:public-checkout')
   }
   const ignored = packageJson.pear?.stage?.ignore || []
   if (!ignored.includes('/scripts/print-submission-handoff.mjs')) {
     fail('Pear stage ignore should exclude scripts/print-submission-handoff.mjs')
+  }
+  if (!ignored.includes('/scripts/verify-public-checkout.mjs')) {
+    fail('Pear stage ignore should exclude scripts/verify-public-checkout.mjs')
   }
 }
 

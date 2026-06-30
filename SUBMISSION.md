@@ -34,11 +34,16 @@ npm run handoff:submission
 pear run --dev .
 ```
 
-Final launch workstation gate, with live release/catalog/seed conditions
-available:
+Final submission packet gate:
 
 ```sh
 npm run check:final
+```
+
+Live launch workstation gate, with release/catalog/seed conditions available:
+
+```sh
+npm run check:launch
 ```
 
 Public source: https://github.com/iesetorg/matchday-mesh

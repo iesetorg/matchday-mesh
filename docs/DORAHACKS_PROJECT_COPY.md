@@ -56,11 +56,22 @@ npm run handoff:submission
 pear run --dev .
 ```
 
-Final launch workstation gate, with live release/catalog/seed conditions
-available:
+Optional from-zero public-repo rehearsal:
+
+```sh
+npm run verify:public-checkout
+```
+
+Final submission packet gate:
 
 ```sh
 npm run check:final
+```
+
+Live launch workstation gate, with release/catalog/seed conditions available:
+
+```sh
+npm run check:launch
 ```
 
 Local browser preview for trying the UI:

@@ -26,9 +26,12 @@ npm ci
 npm run check:final
 ```
 
-`npm run check:final` ends by running `npm run handoff:submission`. Run
+`npm run check:final` is the portable final submission packet gate: it runs the
+release/submission checks, DoraHacks readiness, and the final handoff. Run
 `npm run handoff:submission` by itself whenever you only need the page fields,
-video beats, and proof highlights.
+video beats, and proof highlights. On the launch workstation, with
+preview/catalog/seed processes already running, `npm run check:launch` runs the
+live rehearsal gate.
 
 Expected handoff highlights:
 
@@ -73,7 +76,9 @@ Target length: 2:45 to 3:00.
 7. 2:10 - Click `Proof`, `Export Log`, and `Import Log`; explain that testers
    can round-trip the operation log without a cloud backend.
 8. 2:35 - Close on the public repo, `docs/proof/`,
-   `npm run check:final`, and `npm run handoff:submission`.
+   `npm run check:final`, and `npm run handoff:submission`. If recording on
+   the launch workstation, mention `npm run check:launch` as the live
+   release/catalog/seed rehearsal.
 
 Keep the narration honest:
 
