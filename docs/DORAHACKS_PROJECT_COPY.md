@@ -47,25 +47,23 @@ production-money claim before the real WDK adapter is proven.
 
 ## Setup
 
+Reviewer source checkout:
+
 ```sh
 npm ci
-npm test
-npm run validate:publish -- --strict-release
-npm run verify:demo-proof
-npm run verify:launch
-npm run verify:dorahacks
-npm run verify:preview-smoke
-npm run verify:catalog-visual
-npm run verify:release-window
-npm run verify:live-pairing
-npm run check:final
-npm run handoff:judge
+npm run check:release
 npm run handoff:submission
-npm run verify:submission
 pear run --dev .
 ```
 
-Local browser preview:
+Final launch workstation gate, with live release/catalog/seed conditions
+available:
+
+```sh
+npm run check:final
+```
+
+Local browser preview for trying the UI:
 
 ```sh
 npm run preview -- --port 4173

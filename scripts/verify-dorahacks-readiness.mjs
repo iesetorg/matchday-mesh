@@ -96,7 +96,8 @@ async function main () {
 
   checks.setupInstructions = passFail(failures,
     hasAll(readme, ['npm ci', 'npm test', 'npm run verify:submission', 'pear run --dev .']) &&
-    hasAll(quickstart, ['npm ci', 'npm run check:release', 'npm run verify:launch', EXPECTED.pearLink]),
+    hasAll(quickstart, ['npm ci', 'npm run check:release', 'npm run verify:launch', EXPECTED.pearLink]) &&
+    hasAll(doraCopy, ['Reviewer source checkout', 'Final launch workstation gate', 'npm run check:release', 'npm run check:final']),
     'setupInstructions',
     'judge setup instructions are incomplete')
 

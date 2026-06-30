@@ -100,10 +100,12 @@ MATCHDAY_MESH_BOOT_PROOF_PATH=./matchday-pear-proof.json pear run --dev .
 
 The proof file is ignored by Pear staging and the app `.gitignore`.
 
-## Publish Path
+## Live Listing Status
 
-The under-one-week goal is a live PearBrowser store listing by July 5, 2026,
-with July 6 reserved for DoraHacks registration lock cleanup.
+The under-one-week PearBrowser listing target is already live for the current
+release. Judges can run the released Pear app and load the Hyperbee catalog
+listed above. For any future launch-critical edit, publish a new release and
+refresh the proof pack with:
 
 ```sh
 export PEAR_LINK=pear://...
@@ -111,11 +113,12 @@ npm run stage
 npm run release
 npm run seed
 npm run validate:publish -- --strict-release
+npm run check:final
 ```
 
 After release, update `scripts/app-manifest.json` with the final `pearRuntime`
 link, public source repo URL, and PearBrowser catalog key, then run the strict
-publish validator.
+publish validator and final submission gate.
 
 ## MVP Flow
 

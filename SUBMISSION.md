@@ -25,14 +25,20 @@ Pear POS, and PearBrowser publishing tools, with all reuse disclosed in
 
 ## Setup
 
+Reviewer source checkout:
+
 ```sh
 npm ci
-npm test
-npm run validate:publish
-npm run check:final
-npm run handoff:judge
+npm run check:release
 npm run handoff:submission
 pear run --dev .
+```
+
+Final launch workstation gate, with live release/catalog/seed conditions
+available:
+
+```sh
+npm run check:final
 ```
 
 Public source: https://github.com/iesetorg/matchday-mesh
