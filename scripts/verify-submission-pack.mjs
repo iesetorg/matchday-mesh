@@ -114,6 +114,10 @@ const judgeQuickstart = readText('docs/JUDGE_QUICKSTART.md')
 const priorWork = readText('PRIOR_WORK.md')
 const proofReadme = readText('docs/proof/README.md')
 const matrix = readText('docs/TEST_COMMAND_MATRIX_2026-06-29.md')
+const releaseProof = readJson('docs/proof/pear-release-renderer-proof-2026-06-30.json')
+const releaseLine = Number.isSafeInteger(releaseProof?.release) && Number.isSafeInteger(releaseProof?.length)
+  ? `Pear release: \`${releaseProof.release}\`, length \`${releaseProof.length}\``
+  : null
 
 for (const [relativePath, text] of [
   ['README.md', readme],
@@ -134,7 +138,11 @@ requireIncludes('docs/DORAHACKS_PROJECT_COPY.md', doraCopy, 'not claimed as prim
 requireIncludes('docs/DORAHACKS_PROJECT_COPY.md', doraCopy, EXPECTED.sourceRepo)
 requireIncludes('docs/DORAHACKS_PROJECT_COPY.md', doraCopy, 'docs/FINAL_SUBMISSION_RUNBOOK.md')
 requireIncludes('docs/DEMO_SCRIPT.md', demoScript, 'Target length: 3 minutes')
-requireIncludes('docs/FINAL_SUBMISSION_RUNBOOK.md', finalRunbook, 'Pear release: `2413`, length `2413`')
+if (releaseLine) {
+  requireIncludes('docs/FINAL_SUBMISSION_RUNBOOK.md', finalRunbook, releaseLine)
+} else {
+  fail('docs/FINAL_SUBMISSION_RUNBOOK.md cannot be checked against stale release proof metadata')
+}
 requireIncludes('docs/FINAL_SUBMISSION_RUNBOOK.md', finalRunbook, 'Primary track: Pears Stack')
 requireIncludes('docs/FINAL_SUBMISSION_RUNBOOK.md', finalRunbook, 'Target length: 2:45 to 3:00')
 requireIncludes('docs/FINAL_SUBMISSION_RUNBOOK.md', finalRunbook, 'Proof')
@@ -268,7 +276,6 @@ if (previewSmoke) {
   }
 }
 
-const releaseProof = readJson('docs/proof/pear-release-renderer-proof-2026-06-30.json')
 if (releaseProof) {
   if (releaseProof.ok !== true) fail('released link renderer proof should be ok')
   if (releaseProof.hasPear !== true) fail('released link renderer proof should have Pear')
