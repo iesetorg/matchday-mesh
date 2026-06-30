@@ -100,7 +100,8 @@ for (const relativePath of [
   'docs/proof/matchday-mesh-invite-inspector-2026-06-30.jpg',
   'docs/proof/matchday-mesh-invite-export-panel-2026-06-30.jpg',
   'catalog/matchday-mesh.catalog.json',
-  'scripts/app-manifest.json'
+  'scripts/app-manifest.json',
+  'scripts/print-submission-handoff.mjs'
 ]) {
   requireFile(relativePath)
 }
@@ -189,6 +190,17 @@ if (manifest) {
   if (!manifest.runtimes?.['pear-browser']?.supported) fail('scripts/app-manifest.json should support pear-browser')
   if (manifest.runtimes?.qvac?.supported !== false) fail('scripts/app-manifest.json should keep qvac gated')
   if (manifest.runtimes?.wdk?.supported !== 'demo') fail('scripts/app-manifest.json should mark wdk as demo')
+}
+
+const packageJson = readJson('package.json')
+if (packageJson) {
+  if (packageJson.scripts?.['handoff:submission'] !== 'node scripts/print-submission-handoff.mjs') {
+    fail('package.json should expose handoff:submission')
+  }
+  const ignored = packageJson.pear?.stage?.ignore || []
+  if (!ignored.includes('/scripts/print-submission-handoff.mjs')) {
+    fail('Pear stage ignore should exclude scripts/print-submission-handoff.mjs')
+  }
 }
 
 const catalog = readJson('catalog/matchday-mesh.catalog.json')

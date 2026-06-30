@@ -26,6 +26,7 @@ Run from:
 | `npm run verify:live-pairing` | Pass | Real Hyperswarm proof hosts the deterministic pairing topic, joins a read-only replica, appends a live feed card on the host, and verifies the replica catches up to 4 operations. |
 | `npm run verify:live-readiness` | Pass | Local launch workstation check verifies release/catalog/demo/preview-smoke proof freshness, preview server response, catalog serve process, and active Pear seed for the released app link. |
 | `npm run handoff:judge` | Pass | Prints and verifies the released app link, PearBrowser catalog, public repo, release proof, catalog visual proof, preview smoke proof, deterministic demo proof, live Hyperswarm pairing proof, live-readiness proof, and judge quickstart references. |
+| `npm run handoff:submission` | Pass | Prints and verifies the final DoraHacks page/video handoff: page fields, pre-recording commands, 3-minute demo beats, proof highlights, and manual actions from the readiness proof. |
 | `npm run verify:submission` | Pass | Submission pack preflight verifies the released Pear link, live PearBrowser catalog key, source repo, proof JSON, proof screenshots, catalog visual proof card, honest track language, and prior-work disclosure. |
 | `npm run check` | Pass | Runs `npm test` and `npm run validate:publish`. |
 | `npm run check:release` | Pass | Runs the full release/submission gate: `npm test`, strict publish validation, deterministic demo-proof verification, preview smoke verification, catalog visual proof verification, and submission-pack preflight. |
@@ -169,6 +170,8 @@ The automated tests currently prove:
   tester.
 - judge handoff verifies the exact links and proof files a reviewer needs to
   run the released Pear app and local test suite.
+- final submission handoff verifies and prints the exact DoraHacks page/video
+  packet for the last manual steps.
 - running desktop PearBrowser can load the live Matchday Mesh Hyperbee catalog
   through its own Apps/catalog RPC path.
 - PearBrowser catalog visual proof card preserves that desktop RPC evidence in

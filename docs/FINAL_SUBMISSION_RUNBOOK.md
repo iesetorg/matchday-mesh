@@ -26,7 +26,7 @@ npm ci
 npm run check:release
 npm run verify:launch
 npm run verify:dorahacks
-npm run handoff:judge
+npm run handoff:submission
 ```
 
 Expected handoff highlights:

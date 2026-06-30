@@ -219,10 +219,18 @@ async function main () {
       'QVAC gated',
       'npm run check:release',
       'npm run verify:launch',
-      'npm run verify:dorahacks'
+      'npm run verify:dorahacks',
+      'npm run handoff:submission'
     ]),
     'finalSubmissionRunbook',
     'final submission runbook is missing release links, recording beats, or honest-claims guardrails')
+
+  checks.finalSubmissionHandoff = passFail(failures,
+    packageJson?.scripts?.['handoff:submission'] === 'node scripts/print-submission-handoff.mjs' &&
+    finalRunbook.includes('npm run handoff:submission') &&
+    doraCopy.includes('npm run handoff:submission'),
+    'finalSubmissionHandoff',
+    'final submission handoff command is missing from package scripts or docs')
 
   checks.noPlatformOverclaim = passFail(failures,
     manifest?.runtimes?.qvac?.supported === false &&

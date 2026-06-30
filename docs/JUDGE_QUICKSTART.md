@@ -41,6 +41,7 @@ npm run verify:release-window
 npm run verify:live-pairing
 npm run verify:live-readiness
 npm run handoff:judge
+npm run handoff:submission
 ```
 
 ## Demo Flow

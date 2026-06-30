@@ -59,6 +59,7 @@ npm run verify:catalog-visual
 npm run verify:release-window
 npm run verify:live-pairing
 npm run handoff:judge
+npm run handoff:submission
 npm run verify:submission
 pear run --dev .
 ```

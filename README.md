@@ -54,9 +54,11 @@ npm run handoff:judge
 
 For the final DoraHacks page/video pass:
 
-```text
-docs/FINAL_SUBMISSION_RUNBOOK.md
+```sh
+npm run handoff:submission
 ```
+
+See `docs/FINAL_SUBMISSION_RUNBOOK.md` for the full checklist.
 
 For a local live-readiness check while the preview server, catalog server, and
 Pear seed are running:

@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "capturedAt": "2026-06-30T00:21:13.692Z",
+  "capturedAt": "2026-06-30T00:29:10.217Z",
   "app": {
     "id": "matchday-mesh",
     "name": "Matchday Mesh",
@@ -30,6 +30,7 @@
     "priorWorkDisclosure": true,
     "demoVideoPlan": true,
     "finalSubmissionRunbook": true,
+    "finalSubmissionHandoff": true,
     "noPlatformOverclaim": true,
     "proofIndex": true
   },
