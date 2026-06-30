@@ -198,7 +198,7 @@ async function main () {
 
   checks.demoVideoPlan = passFail(failures,
     demoScript.includes('Target length: 3 minutes') &&
-    hasAll(demoScript, ['PearBrowser catalog', 'P2P invite', 'USDt pool demo', 'Proof pack']) &&
+    hasAll(demoScript, ['PearBrowser catalog', 'P2P invite', 'USDt pool demo', 'Proof pack', 'npm run check:final', 'npm run handoff:submission']) &&
     doraCopy.includes('Demo Video Outline') &&
     doraCopy.includes('docs/FINAL_SUBMISSION_RUNBOOK.md'),
     'demoVideoPlan',

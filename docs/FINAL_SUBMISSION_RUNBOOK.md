@@ -72,8 +72,8 @@ Target length: 2:45 to 3:00.
    join and catch-up.
 7. 2:10 - Click `Proof`, `Export Log`, and `Import Log`; explain that testers
    can round-trip the operation log without a cloud backend.
-8. 2:35 - Close on the public repo, `docs/proof/`, and `npm run check:release`
-   plus `npm run verify:launch`.
+8. 2:35 - Close on the public repo, `docs/proof/`,
+   `npm run check:final`, and `npm run handoff:submission`.
 
 Keep the narration honest:
 

@@ -139,6 +139,8 @@ requireIncludes('docs/DORAHACKS_PROJECT_COPY.md', doraCopy, 'not claimed as prim
 requireIncludes('docs/DORAHACKS_PROJECT_COPY.md', doraCopy, EXPECTED.sourceRepo)
 requireIncludes('docs/DORAHACKS_PROJECT_COPY.md', doraCopy, 'docs/FINAL_SUBMISSION_RUNBOOK.md')
 requireIncludes('docs/DEMO_SCRIPT.md', demoScript, 'Target length: 3 minutes')
+requireIncludes('docs/DEMO_SCRIPT.md', demoScript, 'npm run check:final')
+requireIncludes('docs/DEMO_SCRIPT.md', demoScript, 'npm run handoff:submission')
 if (releaseLine) {
   requireIncludes('docs/FINAL_SUBMISSION_RUNBOOK.md', finalRunbook, releaseLine)
 } else {

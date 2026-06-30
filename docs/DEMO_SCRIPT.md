@@ -15,7 +15,7 @@ Target length: 3 minutes.
 | 1:45 | P2P invite | "In Pear Runtime, the app exports the Corestore/Hyperbee invite, hosts the Hyperswarm topic, and can join a read-only replica from that invite." |
 | 2:05 | USDt pool demo | "The group opens a host-snacks pool, receives a demo USDt URI, and records a contribution into the feed." |
 | 2:30 | Proof pack | "The app renders the proof pack, exports the operation log, and imports a pasted log in a tester panel, with operation counts, runtime backend, Pears Stack status, and payment module status." |
-| 2:45 | Close | "The repo is public, MIT licensed, with setup commands, prior-work disclosure, repeatable preview smoke proof, live Pear release proof, real Hyperswarm pairing proof, fresh-peer catalog proof, desktop PearBrowser catalog RPC proof, and a catalog visual proof card." |
+| 2:45 | Close | "The repo is public, MIT licensed, with prior-work disclosure, `npm run check:final`, the final submission handoff, repeatable preview smoke proof, live Pear release proof, real Hyperswarm pairing proof, fresh-peer catalog proof, desktop PearBrowser catalog RPC proof, and a catalog visual proof card." |
 
 ## Capture Checklist
 
@@ -23,7 +23,7 @@ Target length: 3 minutes.
    `pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy`.
 2. Show the PearBrowser catalog:
    `hyperbee://0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f`.
-3. Run or show `npm run validate:publish -- --strict-release`.
+3. Run or show `npm run check:final` and `npm run handoff:submission`.
 4. Show `docs/proof/matchday-mesh-preview-2026-06-30.jpg`.
 5. Show `docs/proof/matchday-mesh-preview-flow-2026-06-30.jpg`.
 6. Show `docs/proof/matchday-mesh-invite-export-panel-2026-06-30.jpg`.
