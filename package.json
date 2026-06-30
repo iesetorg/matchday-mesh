@@ -45,6 +45,7 @@
     "dev": "pear run --dev .",
     "dev:devtools": "pear run --dev --devtools .",
     "preview": "node scripts/serve.mjs",
+    "try:preview": "node scripts/serve.mjs --port 4173",
     "test": "node --test",
     "generate:demo-proof": "node scripts/generate-demo-proof.mjs",
     "verify:demo-proof": "node scripts/generate-demo-proof.mjs --check",

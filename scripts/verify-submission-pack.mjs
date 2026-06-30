@@ -79,6 +79,7 @@ for (const relativePath of [
   'LICENSE',
   'docs/JUDGE_QUICKSTART.md',
   'docs/DEMO_SCRIPT.md',
+  'docs/LOCAL_TRYOUT.md',
   'docs/DORAHACKS_PROJECT_COPY.md',
   'docs/FINAL_SUBMISSION_RUNBOOK.md',
   'docs/RISK_LEDGER.md',
@@ -113,6 +114,7 @@ const readme = readText('README.md')
 const submission = readText('SUBMISSION.md')
 const doraCopy = readText('docs/DORAHACKS_PROJECT_COPY.md')
 const demoScript = readText('docs/DEMO_SCRIPT.md')
+const localTryout = readText('docs/LOCAL_TRYOUT.md')
 const finalRunbook = readText('docs/FINAL_SUBMISSION_RUNBOOK.md')
 const judgeQuickstart = readText('docs/JUDGE_QUICKSTART.md')
 const priorWork = readText('PRIOR_WORK.md')
@@ -170,8 +172,15 @@ requireIncludes('docs/FINAL_SUBMISSION_RUNBOOK.md', finalRunbook, 'npm run hando
 requireIncludes('docs/JUDGE_QUICKSTART.md', judgeQuickstart, 'npm run check:release')
 requireIncludes('docs/JUDGE_QUICKSTART.md', judgeQuickstart, 'npm run check:launch')
 requireIncludes('docs/JUDGE_QUICKSTART.md', judgeQuickstart, 'npm run verify:public-checkout')
+requireIncludes('docs/JUDGE_QUICKSTART.md', judgeQuickstart, 'npm run try:preview')
+requireIncludes('docs/JUDGE_QUICKSTART.md', judgeQuickstart, 'docs/LOCAL_TRYOUT.md')
 requireIncludes('docs/JUDGE_QUICKSTART.md', judgeQuickstart, 'npm run handoff:judge')
 requireIncludes('docs/JUDGE_QUICKSTART.md', judgeQuickstart, 'matchday-mesh-core-invite-v1')
+requireIncludes('docs/LOCAL_TRYOUT.md', localTryout, 'npm run try:preview')
+requireIncludes('docs/LOCAL_TRYOUT.md', localTryout, 'http://127.0.0.1:4173/')
+requireIncludes('docs/LOCAL_TRYOUT.md', localTryout, 'Import Applied')
+requireIncludes('docs/LOCAL_TRYOUT.md', localTryout, 'imported 6 ops')
+requireIncludes('docs/LOCAL_TRYOUT.md', localTryout, EXPECTED.pearLink)
 requireIncludes('PRIOR_WORK.md', priorWork, 'Pear Tickets')
 requireIncludes('PRIOR_WORK.md', priorWork, 'Pear POS')
 requireIncludes('PRIOR_WORK.md', priorWork, 'PearBrowser')
@@ -222,6 +231,9 @@ if (packageJson) {
   }
   if (packageJson.scripts?.['verify:public-checkout'] !== 'node scripts/verify-public-checkout.mjs') {
     fail('package.json should expose verify:public-checkout')
+  }
+  if (packageJson.scripts?.['try:preview'] !== 'node scripts/serve.mjs --port 4173') {
+    fail('package.json should expose try:preview')
   }
   const ignored = packageJson.pear?.stage?.ignore || []
   if (!ignored.includes('/scripts/print-submission-handoff.mjs')) {

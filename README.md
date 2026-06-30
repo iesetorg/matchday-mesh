@@ -34,6 +34,15 @@ npm run verify:submission
 npm run preview
 ```
 
+For the shortest hands-on local browser path:
+
+```sh
+npm run try:preview
+```
+
+Then open `http://127.0.0.1:4173/` and follow
+`docs/LOCAL_TRYOUT.md`.
+
 With Pear CLI installed:
 
 ```sh

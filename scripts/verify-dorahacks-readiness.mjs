@@ -65,6 +65,7 @@ async function main () {
   const doraCopy = readText('docs/DORAHACKS_PROJECT_COPY.md', failures)
   const quickstart = readText('docs/JUDGE_QUICKSTART.md', failures)
   const demoScript = readText('docs/DEMO_SCRIPT.md', failures)
+  const localTryout = readText('docs/LOCAL_TRYOUT.md', failures)
   const finalRunbook = readText('docs/FINAL_SUBMISSION_RUNBOOK.md', failures)
   const priorWork = readText('PRIOR_WORK.md', failures)
   const license = readText('LICENSE', failures)
@@ -98,8 +99,10 @@ async function main () {
 
   checks.setupInstructions = passFail(failures,
     hasAll(readme, ['npm ci', 'npm test', 'npm run verify:submission', 'pear run --dev .']) &&
-    hasAll(quickstart, ['npm ci', 'npm run check:release', 'npm run verify:launch', 'npm run check:launch', EXPECTED.pearLink]) &&
+    hasAll(quickstart, ['npm ci', 'npm run check:release', 'npm run verify:launch', 'npm run check:launch', 'npm run try:preview', EXPECTED.pearLink]) &&
+    hasAll(localTryout, ['npm run try:preview', 'http://127.0.0.1:4173/', 'Import Applied', 'imported 6 ops']) &&
     hasAll(doraCopy, ['Reviewer source checkout', 'Final submission packet gate', 'Live launch workstation gate', 'npm run check:release', 'npm run check:final', 'npm run check:launch', 'npm run verify:public-checkout']) &&
+    packageJson?.scripts?.['try:preview'] === 'node scripts/serve.mjs --port 4173' &&
     packageJson?.scripts?.['verify:public-checkout'] === 'node scripts/verify-public-checkout.mjs',
     'setupInstructions',
     'judge setup instructions are incomplete')

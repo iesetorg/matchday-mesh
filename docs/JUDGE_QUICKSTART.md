@@ -29,6 +29,14 @@ npm ci
 npm run check:release
 ```
 
+For the quickest local browser tryout:
+
+```sh
+npm run try:preview
+```
+
+Open `http://127.0.0.1:4173/` and follow `docs/LOCAL_TRYOUT.md`.
+
 For a from-zero public-repo rehearsal, run the opt-in network check:
 
 ```sh
