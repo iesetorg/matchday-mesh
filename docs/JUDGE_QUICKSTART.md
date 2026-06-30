@@ -65,6 +65,7 @@ The same local-preview reset, scan, pool-open, contribution, and operation-log
 round-trip path is covered by `npm run verify:preview-smoke`.
 The PearBrowser catalog proof card is covered by `npm run verify:catalog-visual`
 and saved as `docs/proof/pearbrowser-catalog-visual-proof-2026-06-30.png`.
+The final DoraHacks page/video checklist is `docs/FINAL_SUBMISSION_RUNBOOK.md`.
 
 ## Honest Track Scope
 

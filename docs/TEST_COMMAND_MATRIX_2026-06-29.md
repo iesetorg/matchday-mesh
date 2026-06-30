@@ -21,7 +21,7 @@ Run from:
 | `npm run verify:preview-smoke` | Pass | Starts the local HTTP preview, verifies served frontend assets and in-app tester output/import hooks, replays the reset, scan, USDt pool open, and 5 USDt contribution path through the app modules, and checks operation-log round trip. |
 | `npm run verify:catalog-visual` | Pass | Verifies the PearBrowser catalog visual proof card generated from the live desktop PearBrowser catalog RPC proof, including released app link, catalog key, source repo, peers, HiveRelays, PNG, and SVG metadata. |
 | `npm run verify:launch` | Pass | Consolidated launch rehearsal runs DoraHacks readiness, the judge gate including preview smoke, released-window proof, real Hyperswarm pairing, and live-readiness check in one tester-facing command. |
-| `npm run verify:dorahacks` | Pass | Verifies the technical DoraHacks submission checklist: track scope, football theme, public links, MIT license, setup instructions, release/catalog/P2P proofs, prior-work disclosure, demo-video plan, and manual page/video actions. |
+| `npm run verify:dorahacks` | Pass | Verifies the technical DoraHacks submission checklist: track scope, football theme, public links, MIT license, setup instructions, release/catalog/P2P proofs, prior-work disclosure, final submission runbook, demo-video plan, and manual page/video actions. |
 | `npm run verify:release-window` | Pass | Launches the released Pear app and validates boot proof plus `pear-release-window-2026-06-30.png`; the host blocks desktop screenshots, so the image is a renderer-generated proof card from the live Pear renderer. |
 | `npm run verify:live-pairing` | Pass | Real Hyperswarm proof hosts the deterministic pairing topic, joins a read-only replica, appends a live feed card on the host, and verifies the replica catches up to 4 operations. |
 | `npm run verify:live-readiness` | Pass | Local launch workstation check verifies release/catalog/demo/preview-smoke proof freshness, preview server response, catalog serve process, and active Pear seed for the released app link. |
@@ -160,7 +160,8 @@ The automated tests currently prove:
   released-window proof, real-network pairing, and live workstation readiness
   all pass in one command.
 - DoraHacks readiness proof maps the event submission checklist to current repo
-  evidence and calls out the external video/page actions.
+  evidence, verifies the final page/video runbook, and calls out the external
+  video/page actions.
 - deterministic demo proof replays the submission flow and asserts Pears Stack
   ops, read-only invite handoff, door check-in, and demo USDt contribution.
 - live-readiness proof confirms the preview smoke proof, local preview, catalog

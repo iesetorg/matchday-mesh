@@ -95,3 +95,6 @@ Highlights:
 
 See `docs/DORAHACKS_PROJECT_COPY.md` for paste-ready title, short description,
 long description, setup steps, proof links, and demo-video outline.
+
+See `docs/FINAL_SUBMISSION_RUNBOOK.md` for the final page checklist, recording
+beats, evidence list, and honest-claims guardrails.

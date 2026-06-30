@@ -80,6 +80,7 @@ for (const relativePath of [
   'docs/JUDGE_QUICKSTART.md',
   'docs/DEMO_SCRIPT.md',
   'docs/DORAHACKS_PROJECT_COPY.md',
+  'docs/FINAL_SUBMISSION_RUNBOOK.md',
   'docs/RISK_LEDGER.md',
   'docs/TEST_COMMAND_MATRIX_2026-06-29.md',
   'docs/proof/README.md',
@@ -108,6 +109,7 @@ const readme = readText('README.md')
 const submission = readText('SUBMISSION.md')
 const doraCopy = readText('docs/DORAHACKS_PROJECT_COPY.md')
 const demoScript = readText('docs/DEMO_SCRIPT.md')
+const finalRunbook = readText('docs/FINAL_SUBMISSION_RUNBOOK.md')
 const judgeQuickstart = readText('docs/JUDGE_QUICKSTART.md')
 const priorWork = readText('PRIOR_WORK.md')
 const proofReadme = readText('docs/proof/README.md')
@@ -117,6 +119,7 @@ for (const [relativePath, text] of [
   ['README.md', readme],
   ['SUBMISSION.md', submission],
   ['docs/DORAHACKS_PROJECT_COPY.md', doraCopy],
+  ['docs/FINAL_SUBMISSION_RUNBOOK.md', finalRunbook],
   ['docs/DEMO_SCRIPT.md', demoScript],
   ['docs/JUDGE_QUICKSTART.md', judgeQuickstart],
   ['docs/TEST_COMMAND_MATRIX_2026-06-29.md', matrix]
@@ -129,7 +132,20 @@ requireIncludes('SUBMISSION.md', submission, 'Primary track: Pears Stack')
 requireIncludes('docs/DORAHACKS_PROJECT_COPY.md', doraCopy, 'Primary: Pears Stack')
 requireIncludes('docs/DORAHACKS_PROJECT_COPY.md', doraCopy, 'not claimed as primary tracks')
 requireIncludes('docs/DORAHACKS_PROJECT_COPY.md', doraCopy, EXPECTED.sourceRepo)
+requireIncludes('docs/DORAHACKS_PROJECT_COPY.md', doraCopy, 'docs/FINAL_SUBMISSION_RUNBOOK.md')
 requireIncludes('docs/DEMO_SCRIPT.md', demoScript, 'Target length: 3 minutes')
+requireIncludes('docs/FINAL_SUBMISSION_RUNBOOK.md', finalRunbook, 'Pear release: `2413`, length `2413`')
+requireIncludes('docs/FINAL_SUBMISSION_RUNBOOK.md', finalRunbook, 'Primary track: Pears Stack')
+requireIncludes('docs/FINAL_SUBMISSION_RUNBOOK.md', finalRunbook, 'Target length: 2:45 to 3:00')
+requireIncludes('docs/FINAL_SUBMISSION_RUNBOOK.md', finalRunbook, 'Proof')
+requireIncludes('docs/FINAL_SUBMISSION_RUNBOOK.md', finalRunbook, 'Export Log')
+requireIncludes('docs/FINAL_SUBMISSION_RUNBOOK.md', finalRunbook, 'Import Log')
+requireIncludes('docs/FINAL_SUBMISSION_RUNBOOK.md', finalRunbook, 'WDK demo-ledger only')
+requireIncludes('docs/FINAL_SUBMISSION_RUNBOOK.md', finalRunbook, 'QVAC gated')
+requireIncludes('docs/FINAL_SUBMISSION_RUNBOOK.md', finalRunbook, 'Autobase multiwriter is not claimed')
+requireIncludes('docs/FINAL_SUBMISSION_RUNBOOK.md', finalRunbook, 'npm run check:release')
+requireIncludes('docs/FINAL_SUBMISSION_RUNBOOK.md', finalRunbook, 'npm run verify:launch')
+requireIncludes('docs/FINAL_SUBMISSION_RUNBOOK.md', finalRunbook, 'npm run verify:dorahacks')
 requireIncludes('docs/JUDGE_QUICKSTART.md', judgeQuickstart, 'npm run check:release')
 requireIncludes('docs/JUDGE_QUICKSTART.md', judgeQuickstart, 'npm run handoff:judge')
 requireIncludes('docs/JUDGE_QUICKSTART.md', judgeQuickstart, 'matchday-mesh-core-invite-v1')
@@ -146,6 +162,7 @@ requireIncludes('docs/proof/README.md', proofReadme, 'matchday-live-pairing-2026
 requireIncludes('docs/proof/README.md', proofReadme, 'matchday-live-readiness-2026-06-30.json')
 requireIncludes('docs/proof/README.md', proofReadme, 'pearbrowser-catalog-visual-proof-2026-06-30.json')
 requireIncludes('docs/proof/README.md', proofReadme, 'pearbrowser-catalog-visual-proof-2026-06-30.png')
+requireIncludes('docs/proof/README.md', proofReadme, '../FINAL_SUBMISSION_RUNBOOK.md')
 
 requireImage('docs/proof/matchday-mesh-preview-2026-06-30.jpg', 10_000)
 requireImage('docs/proof/matchday-mesh-preview-flow-2026-06-30.jpg', 10_000)

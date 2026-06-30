@@ -52,6 +52,12 @@ For a judge/tester handoff summary:
 npm run handoff:judge
 ```
 
+For the final DoraHacks page/video pass:
+
+```text
+docs/FINAL_SUBMISSION_RUNBOOK.md
+```
+
 For a local live-readiness check while the preview server, catalog server, and
 Pear seed are running:
 

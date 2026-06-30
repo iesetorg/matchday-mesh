@@ -107,6 +107,8 @@ catalog/publish tooling.
 
 ## Demo Video Outline
 
+Use `docs/FINAL_SUBMISSION_RUNBOOK.md` as the recording checklist.
+
 1. Open with the Pear app link and PearBrowser catalog key.
 2. Show the status strip: Pears Stack primary, WDK demo, QVAC gated.
 3. Create a final-night fan zone.

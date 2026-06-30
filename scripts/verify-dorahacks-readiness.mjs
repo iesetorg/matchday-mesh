@@ -63,6 +63,7 @@ async function main () {
   const doraCopy = readText('docs/DORAHACKS_PROJECT_COPY.md', failures)
   const quickstart = readText('docs/JUDGE_QUICKSTART.md', failures)
   const demoScript = readText('docs/DEMO_SCRIPT.md', failures)
+  const finalRunbook = readText('docs/FINAL_SUBMISSION_RUNBOOK.md', failures)
   const priorWork = readText('PRIOR_WORK.md', failures)
   const license = readText('LICENSE', failures)
   const proofIndex = readText('docs/proof/README.md', failures)
@@ -198,9 +199,30 @@ async function main () {
   checks.demoVideoPlan = passFail(failures,
     demoScript.includes('Target length: 3 minutes') &&
     hasAll(demoScript, ['PearBrowser catalog', 'P2P invite', 'USDt pool demo', 'Proof pack']) &&
-    doraCopy.includes('Demo Video Outline'),
+    doraCopy.includes('Demo Video Outline') &&
+    doraCopy.includes('docs/FINAL_SUBMISSION_RUNBOOK.md'),
     'demoVideoPlan',
     '3-minute demo video plan is missing')
+
+  checks.finalSubmissionRunbook = passFail(failures,
+    hasAll(finalRunbook, [
+      EXPECTED.pearLink,
+      EXPECTED.catalogRef,
+      EXPECTED.sourceRepo,
+      String(releaseProof?.release || ''),
+      'Primary track: Pears Stack',
+      'Target length: 2:45 to 3:00',
+      'Proof',
+      'Export Log',
+      'Import Log',
+      'WDK demo-ledger only',
+      'QVAC gated',
+      'npm run check:release',
+      'npm run verify:launch',
+      'npm run verify:dorahacks'
+    ]),
+    'finalSubmissionRunbook',
+    'final submission runbook is missing release links, recording beats, or honest-claims guardrails')
 
   checks.noPlatformOverclaim = passFail(failures,
     manifest?.runtimes?.qvac?.supported === false &&
@@ -224,8 +246,8 @@ async function main () {
     'proof index is missing key launch proof files')
 
   const manualActions = [
-    'Register or update the DoraHacks project page with the paste-ready copy from docs/DORAHACKS_PROJECT_COPY.md.',
-    'Record and upload a 3-minute-or-shorter unlisted YouTube demo video before the final DoraHacks deadline.',
+    'Use docs/FINAL_SUBMISSION_RUNBOOK.md while updating the DoraHacks page with the paste-ready copy from docs/DORAHACKS_PROJECT_COPY.md.',
+    'Record and upload a 3-minute-or-shorter unlisted YouTube demo video using docs/FINAL_SUBMISSION_RUNBOOK.md before the final DoraHacks deadline.',
     'Add the YouTube demo link to the DoraHacks submission page once recorded.',
     'If a second machine is available, capture a two-device Pear Runtime pairing screenshot for extra polish.'
   ]

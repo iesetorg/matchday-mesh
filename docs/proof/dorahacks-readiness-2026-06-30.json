@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "capturedAt": "2026-06-30T00:15:33.682Z",
+  "capturedAt": "2026-06-30T00:21:13.692Z",
   "app": {
     "id": "matchday-mesh",
     "name": "Matchday Mesh",
@@ -29,6 +29,7 @@
     "liveReadiness": true,
     "priorWorkDisclosure": true,
     "demoVideoPlan": true,
+    "finalSubmissionRunbook": true,
     "noPlatformOverclaim": true,
     "proofIndex": true
   },
@@ -74,8 +75,8 @@
     }
   },
   "manualActions": [
-    "Register or update the DoraHacks project page with the paste-ready copy from docs/DORAHACKS_PROJECT_COPY.md.",
-    "Record and upload a 3-minute-or-shorter unlisted YouTube demo video before the final DoraHacks deadline.",
+    "Use docs/FINAL_SUBMISSION_RUNBOOK.md while updating the DoraHacks page with the paste-ready copy from docs/DORAHACKS_PROJECT_COPY.md.",
+    "Record and upload a 3-minute-or-shorter unlisted YouTube demo video using docs/FINAL_SUBMISSION_RUNBOOK.md before the final DoraHacks deadline.",
     "Add the YouTube demo link to the DoraHacks submission page once recorded.",
     "If a second machine is available, capture a two-device Pear Runtime pairing screenshot for extra polish."
   ],
