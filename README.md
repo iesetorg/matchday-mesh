@@ -55,6 +55,7 @@ npm run handoff:judge
 For the final DoraHacks page/video pass:
 
 ```sh
+npm run check:final
 npm run handoff:submission
 ```
 

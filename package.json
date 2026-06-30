@@ -68,6 +68,7 @@
     "check": "npm test && npm run validate:publish",
     "check:judge": "npm run check:release && npm run handoff:judge",
     "check:release": "npm test && npm run validate:publish -- --strict-release && npm run verify:demo-proof && npm run verify:preview-smoke && npm run verify:catalog-visual && npm run verify:submission",
+    "check:final": "npm run verify:launch && npm run verify:dorahacks && npm run handoff:submission",
     "link:new": "pear touch",
     "stage": "pear stage \"$PEAR_LINK\" .",
     "release": "pear release \"$PEAR_LINK\"",

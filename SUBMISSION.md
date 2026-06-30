@@ -29,6 +29,7 @@ Pear POS, and PearBrowser publishing tools, with all reuse disclosed in
 npm ci
 npm test
 npm run validate:publish
+npm run check:final
 npm run handoff:judge
 npm run handoff:submission
 pear run --dev .

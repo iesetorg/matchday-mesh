@@ -23,11 +23,12 @@ Run these from the repo root before recording:
 
 ```sh
 npm ci
-npm run check:release
-npm run verify:launch
-npm run verify:dorahacks
-npm run handoff:submission
+npm run check:final
 ```
+
+`npm run check:final` ends by running `npm run handoff:submission`. Run
+`npm run handoff:submission` by itself whenever you only need the page fields,
+video beats, and proof highlights.
 
 Expected handoff highlights:
 
@@ -99,5 +100,5 @@ Keep the narration honest:
 2. Confirm the GitHub repo is public and still MIT licensed.
 3. Confirm the Pear app link opens with `pear run`.
 4. Confirm the catalog key is included in the submission text.
-5. Run `npm run verify:dorahacks` one final time and keep the manual action
+5. Run `npm run check:final` one final time and keep the manual action
    list visible while checking the page.

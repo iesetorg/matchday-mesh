@@ -152,9 +152,8 @@ requireIncludes('docs/FINAL_SUBMISSION_RUNBOOK.md', finalRunbook, 'Import Log')
 requireIncludes('docs/FINAL_SUBMISSION_RUNBOOK.md', finalRunbook, 'WDK demo-ledger only')
 requireIncludes('docs/FINAL_SUBMISSION_RUNBOOK.md', finalRunbook, 'QVAC gated')
 requireIncludes('docs/FINAL_SUBMISSION_RUNBOOK.md', finalRunbook, 'Autobase multiwriter is not claimed')
-requireIncludes('docs/FINAL_SUBMISSION_RUNBOOK.md', finalRunbook, 'npm run check:release')
-requireIncludes('docs/FINAL_SUBMISSION_RUNBOOK.md', finalRunbook, 'npm run verify:launch')
-requireIncludes('docs/FINAL_SUBMISSION_RUNBOOK.md', finalRunbook, 'npm run verify:dorahacks')
+requireIncludes('docs/FINAL_SUBMISSION_RUNBOOK.md', finalRunbook, 'npm run check:final')
+requireIncludes('docs/FINAL_SUBMISSION_RUNBOOK.md', finalRunbook, 'npm run handoff:submission')
 requireIncludes('docs/JUDGE_QUICKSTART.md', judgeQuickstart, 'npm run check:release')
 requireIncludes('docs/JUDGE_QUICKSTART.md', judgeQuickstart, 'npm run handoff:judge')
 requireIncludes('docs/JUDGE_QUICKSTART.md', judgeQuickstart, 'matchday-mesh-core-invite-v1')
@@ -196,6 +195,9 @@ const packageJson = readJson('package.json')
 if (packageJson) {
   if (packageJson.scripts?.['handoff:submission'] !== 'node scripts/print-submission-handoff.mjs') {
     fail('package.json should expose handoff:submission')
+  }
+  if (packageJson.scripts?.['check:final'] !== 'npm run verify:launch && npm run verify:dorahacks && npm run handoff:submission') {
+    fail('package.json should expose check:final')
   }
   const ignored = packageJson.pear?.stage?.ignore || []
   if (!ignored.includes('/scripts/print-submission-handoff.mjs')) {

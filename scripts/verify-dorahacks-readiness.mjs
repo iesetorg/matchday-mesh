@@ -217,9 +217,7 @@ async function main () {
       'Import Log',
       'WDK demo-ledger only',
       'QVAC gated',
-      'npm run check:release',
-      'npm run verify:launch',
-      'npm run verify:dorahacks',
+      'npm run check:final',
       'npm run handoff:submission'
     ]),
     'finalSubmissionRunbook',
@@ -227,6 +225,8 @@ async function main () {
 
   checks.finalSubmissionHandoff = passFail(failures,
     packageJson?.scripts?.['handoff:submission'] === 'node scripts/print-submission-handoff.mjs' &&
+    packageJson?.scripts?.['check:final'] === 'npm run verify:launch && npm run verify:dorahacks && npm run handoff:submission' &&
+    finalRunbook.includes('npm run check:final') &&
     finalRunbook.includes('npm run handoff:submission') &&
     doraCopy.includes('npm run handoff:submission'),
     'finalSubmissionHandoff',

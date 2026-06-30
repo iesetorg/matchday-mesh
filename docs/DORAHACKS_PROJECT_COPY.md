@@ -58,6 +58,7 @@ npm run verify:preview-smoke
 npm run verify:catalog-visual
 npm run verify:release-window
 npm run verify:live-pairing
+npm run check:final
 npm run handoff:judge
 npm run handoff:submission
 npm run verify:submission
