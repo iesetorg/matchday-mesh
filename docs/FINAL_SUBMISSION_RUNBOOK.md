@@ -88,6 +88,8 @@ Keep the narration honest:
 - `docs/proof/pear-release-renderer-proof-2026-06-30.json`
 - `docs/proof/pear-release-window-2026-06-30.png`
 - `docs/proof/matchday-preview-smoke-2026-06-30.json`
+- `docs/proof/matchday-browser-preview-flow-2026-06-30.json`
+- `docs/proof/matchday-browser-preview-flow-2026-06-30.jpg`
 - `docs/proof/matchday-demo-flow-proof-2026-06-30.json`
 - `docs/proof/matchday-live-pairing-2026-06-30.json`
 - `docs/proof/matchday-live-readiness-2026-06-30.json`

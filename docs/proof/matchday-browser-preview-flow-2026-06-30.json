@@ -1,0 +1,52 @@
+{
+  "ok": true,
+  "capturedAt": "2026-06-30T00:47:00.828Z",
+  "url": "http://127.0.0.1:4273/",
+  "app": {
+    "title": "Matchday Mesh",
+    "pearLink": "pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy",
+    "catalog": "hyperbee://0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f"
+  },
+  "scenario": {
+    "scannedPassAccepted": true,
+    "poolContributionVisible": true,
+    "poolTotalVisible": true,
+    "exportedOperationCount": 6,
+    "importedOperationLog": true,
+    "testerHeading": "Import Applied",
+    "testerKind": "operation-log-import",
+    "moduleStatus": [
+      "backendBrowser preview",
+      "backendOps6",
+      "backendKeypreview",
+      "pearsStackop-log-ready",
+      "wdkdemo-ledger-active",
+      "qvacdisabled-until-local-sdk-proof",
+      "opLog6",
+      "hubs1",
+      "passes1",
+      "feedCards6",
+      "paymentClaimWDK-shaped demo receive path"
+    ],
+    "latestFeedCards": [
+      "pool-contribution\n          Ada\n          Ada contributed 5 USDt.\n          6/30/2026, 4:45:45 AM",
+      "pool-opened\n          Mina\n          Host snacks pool opened in USDt.\n          6/30/2026, 4:45:44 AM",
+      "checkin\n          Ada\n          Ada checked in.\n          6/30/2026, 4:45:43 AM"
+    ]
+  },
+  "checks": {
+    "title": true,
+    "noConsoleErrors": true,
+    "scannedPassAccepted": true,
+    "poolContributionVisible": true,
+    "poolTotalVisible": true,
+    "exportedOperationCount": true,
+    "importRoundTrip": true,
+    "proofPanelRendered": true
+  },
+  "consoleErrors": [],
+  "screenshot": {
+    "path": "docs/proof/matchday-browser-preview-flow-2026-06-30.jpg",
+    "bytes": 253375
+  }
+}

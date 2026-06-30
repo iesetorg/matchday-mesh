@@ -86,6 +86,8 @@ for (const relativePath of [
   'docs/proof/README.md',
   'docs/proof/dorahacks-readiness-2026-06-30.json',
   'docs/proof/matchday-preview-smoke-2026-06-30.json',
+  'docs/proof/matchday-browser-preview-flow-2026-06-30.json',
+  'docs/proof/matchday-browser-preview-flow-2026-06-30.jpg',
   'docs/proof/pearbrowser-desktop-catalog-rpc-2026-06-30.json',
   'docs/proof/pearbrowser-catalog-visual-proof-2026-06-30.json',
   'docs/proof/pearbrowser-catalog-visual-proof-2026-06-30.png',
@@ -171,6 +173,8 @@ requireIncludes('docs/proof/README.md', proofReadme, 'dorahacks-readiness-2026-0
 requireIncludes('docs/proof/README.md', proofReadme, 'pear-release-renderer-proof-2026-06-30.json')
 requireIncludes('docs/proof/README.md', proofReadme, 'pear-release-window-2026-06-30.png')
 requireIncludes('docs/proof/README.md', proofReadme, 'matchday-preview-smoke-2026-06-30.json')
+requireIncludes('docs/proof/README.md', proofReadme, 'matchday-browser-preview-flow-2026-06-30.json')
+requireIncludes('docs/proof/README.md', proofReadme, 'matchday-browser-preview-flow-2026-06-30.jpg')
 requireIncludes('docs/proof/README.md', proofReadme, 'matchday-demo-flow-proof-2026-06-30.json')
 requireIncludes('docs/proof/README.md', proofReadme, 'matchday-live-pairing-2026-06-30.json')
 requireIncludes('docs/proof/README.md', proofReadme, 'matchday-live-readiness-2026-06-30.json')
@@ -180,6 +184,7 @@ requireIncludes('docs/proof/README.md', proofReadme, '../FINAL_SUBMISSION_RUNBOO
 
 requireImage('docs/proof/matchday-mesh-preview-2026-06-30.jpg', 10_000)
 requireImage('docs/proof/matchday-mesh-preview-flow-2026-06-30.jpg', 10_000)
+requireImage('docs/proof/matchday-browser-preview-flow-2026-06-30.jpg', 10_000)
 requireImage('docs/proof/matchday-mesh-invite-inspector-2026-06-30.jpg', 10_000)
 requireImage('docs/proof/matchday-mesh-invite-export-panel-2026-06-30.jpg', 10_000)
 requireImage('docs/proof/pear-release-window-2026-06-30.png', 10_000)
@@ -293,6 +298,25 @@ if (previewSmoke) {
   }
   for (const [key, value] of Object.entries(previewSmoke.checks || {})) {
     if (value !== true) fail(`preview smoke check should pass: ${key}`)
+  }
+}
+
+const browserPreviewFlow = readJson('docs/proof/matchday-browser-preview-flow-2026-06-30.json')
+if (browserPreviewFlow) {
+  if (browserPreviewFlow.ok !== true) fail('browser preview flow proof should be ok')
+  if (browserPreviewFlow.app?.pearLink !== EXPECTED.pearLink) fail('browser preview flow proof pear link is stale')
+  if (browserPreviewFlow.app?.catalog !== EXPECTED.catalogRef) fail('browser preview flow proof catalog ref is stale')
+  if (browserPreviewFlow.scenario?.exportedOperationCount !== 6) {
+    fail('browser preview flow proof should export the 6-op preview path')
+  }
+  if (browserPreviewFlow.scenario?.testerHeading !== 'Import Applied') {
+    fail('browser preview flow proof should end on the import-applied panel')
+  }
+  if ((browserPreviewFlow.screenshot?.bytes || 0) < 10_000) {
+    fail('browser preview flow proof screenshot is unexpectedly small')
+  }
+  for (const [key, value] of Object.entries(browserPreviewFlow.checks || {})) {
+    if (value !== true) fail(`browser preview flow proof check should pass: ${key}`)
   }
 }
 

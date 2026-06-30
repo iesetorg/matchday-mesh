@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "capturedAt": "2026-06-30T00:42:36.856Z",
+  "capturedAt": "2026-06-30T00:51:35.561Z",
   "app": {
     "id": "matchday-mesh",
     "name": "Matchday Mesh",
@@ -23,6 +23,7 @@
     "catalogProof": true,
     "catalogVisualProof": true,
     "previewSmoke": true,
+    "browserPreviewFlow": true,
     "liveP2P": true,
     "launchRehearsal": true,
     "demoProof": true,
@@ -59,6 +60,13 @@
       "operationCount": 6,
       "latestFeedCard": "feed:pool-contribution",
       "poolTotal": 5
+    },
+    "browserPreviewFlow": {
+      "ok": true,
+      "exportedOperationCount": 6,
+      "importedOperationLog": true,
+      "screenshot": "docs/proof/matchday-browser-preview-flow-2026-06-30.jpg",
+      "bytes": 253375
     },
     "livePairing": {
       "ok": true,

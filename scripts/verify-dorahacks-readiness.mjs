@@ -53,6 +53,8 @@ async function main () {
   const catalogVisualImage = imageInfo('docs/proof/pearbrowser-catalog-visual-proof-2026-06-30.png', failures)
   const catalogVisualSvg = existsSync(join(root, 'docs/proof/pearbrowser-catalog-visual-proof-2026-06-30.svg'))
   const previewSmoke = readJson('docs/proof/matchday-preview-smoke-2026-06-30.json', failures)
+  const browserPreviewFlow = readJson('docs/proof/matchday-browser-preview-flow-2026-06-30.json', failures)
+  const browserPreviewFlowImage = imageInfo('docs/proof/matchday-browser-preview-flow-2026-06-30.jpg', failures)
   const demoProof = readJson('docs/proof/matchday-demo-flow-proof-2026-06-30.json', failures)
   const livePairing = readJson('docs/proof/matchday-live-pairing-2026-06-30.json', failures)
   const launchRehearsal = readJson('docs/proof/matchday-launch-rehearsal-2026-06-30.json', failures)
@@ -156,6 +158,21 @@ async function main () {
     'previewSmoke',
     'preview UI smoke proof is missing or stale')
 
+  checks.browserPreviewFlow = passFail(failures,
+    browserPreviewFlow?.ok === true &&
+    browserPreviewFlow?.app?.pearLink === EXPECTED.pearLink &&
+    browserPreviewFlow?.app?.catalog === EXPECTED.catalogRef &&
+    browserPreviewFlow?.scenario?.scannedPassAccepted === true &&
+    browserPreviewFlow?.scenario?.poolContributionVisible === true &&
+    browserPreviewFlow?.scenario?.poolTotalVisible === true &&
+    browserPreviewFlow?.scenario?.exportedOperationCount === 6 &&
+    browserPreviewFlow?.scenario?.importedOperationLog === true &&
+    browserPreviewFlow?.scenario?.testerHeading === 'Import Applied' &&
+    browserPreviewFlowImage.ok &&
+    Object.values(browserPreviewFlow?.checks || {}).every((value) => value === true),
+    'browserPreviewFlow',
+    'browser preview flow proof is missing or stale')
+
   checks.liveP2P = passFail(failures,
     livePairing?.ok === true &&
     livePairing?.replica?.writable === false &&
@@ -248,6 +265,8 @@ async function main () {
       'pearbrowser-catalog-visual-proof-2026-06-30.json',
       'pearbrowser-catalog-visual-proof-2026-06-30.png',
       'matchday-preview-smoke-2026-06-30.json',
+      'matchday-browser-preview-flow-2026-06-30.json',
+      'matchday-browser-preview-flow-2026-06-30.jpg',
       'matchday-live-pairing-2026-06-30.json',
       'matchday-launch-rehearsal-2026-06-30.json'
     ]),
@@ -301,6 +320,13 @@ async function main () {
         operationCount: previewSmoke?.scenario?.operationCount || 0,
         latestFeedCard: previewSmoke?.scenario?.latestFeedCard?.type || null,
         poolTotal: previewSmoke?.scenario?.poolTotal || 0
+      },
+      browserPreviewFlow: {
+        ok: browserPreviewFlow?.ok === true,
+        exportedOperationCount: browserPreviewFlow?.scenario?.exportedOperationCount || 0,
+        importedOperationLog: browserPreviewFlow?.scenario?.importedOperationLog === true,
+        screenshot: browserPreviewFlow?.screenshot?.path || null,
+        bytes: browserPreviewFlowImage.bytes
       },
       livePairing: {
         ok: livePairing?.ok === true,
@@ -382,8 +408,12 @@ function imageInfo (relativePath, failures) {
     bytes[5] === 0x0a &&
     bytes[6] === 0x1a &&
     bytes[7] === 0x0a
+  const jpeg = bytes.length >= 3 &&
+    bytes[0] === 0xff &&
+    bytes[1] === 0xd8 &&
+    bytes[2] === 0xff
   const size = statSync(abs).size
-  return { ok: png && size >= 10_000, bytes: size, png }
+  return { ok: (png || jpeg) && size >= 10_000, bytes: size, png, jpeg }
 }
 
 function hasAll (text, values) {

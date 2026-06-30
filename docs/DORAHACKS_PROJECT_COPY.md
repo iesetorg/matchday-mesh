@@ -86,6 +86,9 @@ npm run preview -- --port 4173
   hosting the pairing topic, and joining a read-only replica handoff.
 - Preview smoke proof starts the local HTTP preview, verifies the served UI
   assets, and replays the reset, scan, USDt pool, and contribution path.
+- Fresh in-app browser preview proof drove the visible UI through scan, USDt
+  contribution, operation-log export, operation-log import, and confirmed
+  `imported 6 ops` with zero console errors.
 - Live Hyperswarm proof shows a hosted topic, read-only replica join, and live
   replicated feed append.
 - Launch rehearsal proof runs DoraHacks readiness, the judge gate, released
