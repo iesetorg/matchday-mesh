@@ -8,6 +8,7 @@ import {
   createDemoOperations,
   createOperation,
   OP_TYPES,
+  parseOperationEnvelope,
   replayOperations,
   serializeOperations
 } from '../app/ops.js'
@@ -124,6 +125,7 @@ function renderHub (hub) {
       </div>
       <div class="hero-actions">
         <button data-action="export-log">Export Log</button>
+        <button data-action="import-log">Import Log</button>
         <button data-action="proof">Proof</button>
       </div>
     </section>
@@ -320,24 +322,30 @@ function renderP2PInvite () {
 
 function renderTesterOutput () {
   if (!testerOutput) return ''
+  const editable = testerOutput.editable === true
   return `
     <section class="panel tester-output" data-testid="tester-output">
-      <div class="panel-heading">
-        <div>
-          <p class="eyebrow">${escapeHtml(testerOutput.kind)}</p>
-          <h2>${escapeHtml(testerOutput.title)}</h2>
+      <form data-form="tester-output" class="tester-output-form">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">${escapeHtml(testerOutput.kind)}</p>
+            <h2>${escapeHtml(testerOutput.title)}</h2>
+          </div>
+          <div class="output-actions">
+            ${editable
+              ? '<button type="submit">Apply Import</button>'
+              : '<button data-action="copy-output" type="button">Copy</button>'}
+            <button data-action="clear-output" type="button">Clear</button>
+          </div>
         </div>
-        <div class="output-actions">
-          <button data-action="copy-output" type="button">Copy</button>
-          <button data-action="clear-output" type="button">Clear</button>
-        </div>
-      </div>
-      <textarea readonly rows="10" data-testid="tester-output-text">${escapeHtml(testerOutput.body)}</textarea>
-      <dl class="output-meta">
-        <div><dt>bytes</dt><dd>${escapeHtml(String(testerOutput.bytes))}</dd></div>
-        <div><dt>updated</dt><dd>${escapeHtml(testerOutput.updatedAt)}</dd></div>
-        ${testerOutput.copyStatus ? `<div><dt>clipboard</dt><dd>${escapeHtml(testerOutput.copyStatus)}</dd></div>` : ''}
-      </dl>
+        <textarea ${editable ? '' : 'readonly'} name="body" rows="10" data-testid="tester-output-text" placeholder="${escapeAttr(testerOutput.placeholder || '')}">${escapeHtml(testerOutput.body)}</textarea>
+        <dl class="output-meta">
+          <div><dt>bytes</dt><dd>${escapeHtml(String(testerOutput.bytes))}</dd></div>
+          <div><dt>updated</dt><dd>${escapeHtml(testerOutput.updatedAt)}</dd></div>
+          ${testerOutput.status ? `<div><dt>status</dt><dd>${escapeHtml(testerOutput.status)}</dd></div>` : ''}
+          ${testerOutput.copyStatus ? `<div><dt>clipboard</dt><dd>${escapeHtml(testerOutput.copyStatus)}</dd></div>` : ''}
+        </dl>
+      </form>
     </section>
   `
 }
@@ -446,6 +454,14 @@ function bindActions () {
     render()
   })
 
+  root.querySelector('[data-action="import-log"]')?.addEventListener('click', () => {
+    setTesterOutput('Import Operation Log', 'operation-log-import', '', {
+      editable: true,
+      placeholder: 'Paste a Matchday Mesh operation log JSON envelope here.'
+    })
+    render()
+  })
+
   root.querySelector('[data-action="clear-output"]')?.addEventListener('click', () => {
     testerOutput = null
     render()
@@ -461,6 +477,15 @@ function bindActions () {
     }
     testerOutput = { ...testerOutput, copyStatus }
     render()
+  })
+
+  bindForm('tester-output', async (form) => {
+    if (!testerOutput?.editable) return
+    const data = formData(form)
+    const imported = await importOperationLog(data.body || '')
+    setTesterOutput('Import Applied', 'operation-log-import', serializeOperations(operations), {
+      status: `imported ${imported.operationCount} ops`
+    })
   })
 
   root.querySelector('[data-action="export-invite"]')?.addEventListener('click', () => {
@@ -574,15 +599,46 @@ async function runAction (handler) {
   }
 }
 
-function setTesterOutput (title, kind, body) {
+function setTesterOutput (title, kind, body, options = {}) {
+  const text = String(body || '')
   testerOutput = {
     title,
     kind,
-    body,
-    bytes: new TextEncoder().encode(body).length,
+    body: text,
+    bytes: new TextEncoder().encode(text).length,
     updatedAt: new Date().toLocaleString(),
-    copyStatus: ''
+    copyStatus: '',
+    status: '',
+    editable: false,
+    placeholder: '',
+    ...options
   }
+}
+
+async function importOperationLog (text) {
+  const importedOperations = parseOperationEnvelope(text)
+  if (importedOperations.length < 1) throw new Error('Operation log is empty')
+  const importedState = replayOperations(importedOperations)
+  await backend.resetOperations(importedOperations)
+  operations = await backend.loadOperations()
+  state = replaySafe(operations)
+  selectedHubId = Object.keys(state.hubs)[0] || null
+  selectedPassId = selectedHubId
+    ? Object.values(state.passes).find((pass) => pass.hubId === selectedHubId)?.id || null
+    : null
+  inviteDraft = ''
+  inviteInspection = null
+  pairingHostStatus = null
+  replicaJoinStatus = null
+  await refreshBackendStatus()
+  const imported = {
+    operationCount: importedOperations.length,
+    hubs: Object.keys(importedState.hubs).length,
+    passes: Object.keys(importedState.passes).length,
+    feedCards: importedState.feed.length
+  }
+  await writeRuntimeProof('operation-log-imported', { imported })
+  return imported
 }
 
 async function copyText (text) {

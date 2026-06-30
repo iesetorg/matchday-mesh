@@ -14,7 +14,7 @@ Target length: 3 minutes.
 | 1:25 | Feed | "Fans post predictions and notes into the watch-party feed. The feed is rebuilt from an operation log." |
 | 1:45 | P2P invite | "In Pear Runtime, the app exports the Corestore/Hyperbee invite, hosts the Hyperswarm topic, and can join a read-only replica from that invite." |
 | 2:05 | USDt pool demo | "The group opens a host-snacks pool, receives a demo USDt URI, and records a contribution into the feed." |
-| 2:30 | Proof pack | "The app renders the proof pack and operation log in a tester panel, with operation counts, runtime backend, Pears Stack status, and payment module status." |
+| 2:30 | Proof pack | "The app renders the proof pack, exports the operation log, and imports a pasted log in a tester panel, with operation counts, runtime backend, Pears Stack status, and payment module status." |
 | 2:45 | Close | "The repo is public, MIT licensed, with setup commands, prior-work disclosure, repeatable preview smoke proof, live Pear release proof, real Hyperswarm pairing proof, fresh-peer catalog proof, desktop PearBrowser catalog RPC proof, and a catalog visual proof card." |
 
 ## Capture Checklist

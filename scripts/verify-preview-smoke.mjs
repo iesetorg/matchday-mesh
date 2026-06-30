@@ -5,7 +5,15 @@ import { dirname, join, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import { listFeed, moduleStatus } from '../app/domain.js'
-import { applyOperation, createDemoOperations, createOperation, OP_TYPES, replayOperations } from '../app/ops.js'
+import {
+  applyOperation,
+  createDemoOperations,
+  createOperation,
+  OP_TYPES,
+  parseOperationEnvelope,
+  replayOperations,
+  serializeOperations
+} from '../app/ops.js'
 import { confirmDemoPoolContribution, createPoolReceiveRequest, paymentModuleStatus } from '../app/payments.js'
 
 const here = dirname(fileURLToPath(import.meta.url))
@@ -167,11 +175,11 @@ async function verifyHttpSurface (previewUrl, failures, checks) {
   record(checks, failures, 'previewIndex', assets.index.ok, assets.index.message)
 
   const ui = await fetchAsset(previewUrl, '/ui/app.js', args.timeout)
-  assets.ui = summarizeAsset(ui, ['PearBrowser launch build', 'Scan Pass', 'Open Pool', 'Add', 'P2P Invite', 'data-testid="tester-output"'])
+  assets.ui = summarizeAsset(ui, ['PearBrowser launch build', 'Scan Pass', 'Open Pool', 'Add', 'P2P Invite', 'data-testid="tester-output"', 'data-action="import-log"'])
   record(checks, failures, 'previewUiAsset', assets.ui.ok, assets.ui.message)
 
   const styles = await fetchAsset(previewUrl, '/ui/styles.css', args.timeout)
-  assets.styles = summarizeAsset(styles, ['.feed-card', '.pool-meter', '.invite-panel', '.tester-output', '@media'])
+  assets.styles = summarizeAsset(styles, ['.feed-card', '.pool-meter', '.invite-panel', '.tester-output', '.tester-output-form', '@media'])
   record(checks, failures, 'previewStyleAsset', assets.styles.ok, assets.styles.message)
 
   const boot = await fetchAsset(previewUrl, '/app/boot-renderer.js', args.timeout)
@@ -231,7 +239,12 @@ function verifyFrontendContracts (failures, checks) {
       'data-testid="tester-output-text"',
       'data-action="copy-output"',
       'data-action="clear-output"',
+      'data-action="import-log"',
+      'data-form="tester-output"',
+      'Apply Import',
       'setTesterOutput',
+      'parseOperationEnvelope',
+      'operation-log-imported',
       'serializeOperations(operations)',
       'exportProofPack(state)'
     ]),
@@ -317,6 +330,10 @@ function verifyDemoScenario (failures, checks) {
     .reduce((sum, payment) => sum + payment.amount, 0)
   const pass = state.passes.pass_ada
   const latestFeedCard = feed[0]
+  const exportedLog = serializeOperations(operations)
+  const importedOperations = parseOperationEnvelope(exportedLog)
+  const importedState = replayOperations(importedOperations)
+  const importedFeed = listFeed(importedState, 'hub_final_night').slice().reverse()
 
   const scenario = {
     operationCount: operations.length,
@@ -332,6 +349,11 @@ function verifyDemoScenario (failures, checks) {
     receiveAddress: pool.receiveAddress,
     status,
     paymentStatus,
+    importLog: {
+      operationCount: importedOperations.length,
+      feedCards: importedFeed.length,
+      latestFeedCard: importedFeed[0]?.type || null
+    },
     visibleExpectations: {
       scanResult: pass?.checkedInAt ? 'Accepted' : 'Ready',
       poolMeter: `${poolTotal.toFixed(2)} ${pool.asset} / ${pool.targetAmount}`,
@@ -350,6 +372,10 @@ function verifyDemoScenario (failures, checks) {
     status.wdk === 'demo-ledger-active' &&
     status.qvac === 'disabled-until-local-sdk-proof' &&
     paymentStatus.claim === 'WDK-shaped demo receive path', 'module status should match launch claims')
+  record(checks, failures, 'previewImportLogRoundTrip',
+    importedOperations.length === operations.length &&
+    importedFeed[0]?.type === 'feed:pool-contribution',
+    'operation log export/import round trip should preserve latest feed card')
 
   return scenario
 }

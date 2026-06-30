@@ -18,7 +18,7 @@ Run from:
 | `npm run validate:publish` | Pass with release metadata present | `links.pearRuntime`, `links.pearBrowser`, and `links.sourceRepo` are all filled in for the public release. |
 | `npm run validate:publish -- --strict-release` | Pass | Strict release validation reports `Matchday Mesh publish surface OK (0 warnings)`. |
 | `npm run verify:demo-proof` | Pass | Deterministic demo proof is current and covers fan pass check-in, invite summary, prediction, reaction, USDt pool open, and 5 USDt contribution. |
-| `npm run verify:preview-smoke` | Pass | Starts the local HTTP preview, verifies served frontend assets and in-app tester output hooks, and replays the reset, scan, USDt pool open, and 5 USDt contribution path through the app modules. |
+| `npm run verify:preview-smoke` | Pass | Starts the local HTTP preview, verifies served frontend assets and in-app tester output/import hooks, replays the reset, scan, USDt pool open, and 5 USDt contribution path through the app modules, and checks operation-log round trip. |
 | `npm run verify:catalog-visual` | Pass | Verifies the PearBrowser catalog visual proof card generated from the live desktop PearBrowser catalog RPC proof, including released app link, catalog key, source repo, peers, HiveRelays, PNG, and SVG metadata. |
 | `npm run verify:launch` | Pass | Consolidated launch rehearsal runs DoraHacks readiness, the judge gate including preview smoke, released-window proof, real Hyperswarm pairing, and live-readiness check in one tester-facing command. |
 | `npm run verify:dorahacks` | Pass | Verifies the technical DoraHacks submission checklist: track scope, football theme, public links, MIT license, setup instructions, release/catalog/P2P proofs, prior-work disclosure, demo-video plan, and manual page/video actions. |
@@ -66,11 +66,11 @@ Run from:
 | `PEAR_LINK=... npm run stage` | Pass | Staged Matchday Mesh and warmed the app. Latest length reported as `2385` after the Hyperswarm Join Replica update and runtime import fix. |
 | `PEAR_LINK=... npm run stage` after release-window proof hook | Pass | Staged the optional Pear renderer visual proof hook and release-window verifier script; latest length reported as `2393` before release. |
 | `pear stage --purge ...` | Pass | Removed accidentally staged ignored `pearbrowser-catalog-data/` publisher storage before release. |
-| `PEAR_LINK=... npm run stage` after in-app tester output panel | Pass | Staged the Proof/Export Log tester output panel and dynamic release validators. Latest length reported as `2406` before release. |
-| `PEAR_LINK=... npm run release` after in-app tester output panel | Pass | Released `pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy`; final latest length reported as `2407`. |
-| `pear info pear://9a5q...` | Pass | Pear reports `name matchday-mesh`, `release 2407`, `length 2407`, project key `fe36eb...3bca`, discovery key `e92e9f...91f9`, and content key `41328f...6b87`. |
+| `PEAR_LINK=... npm run stage` after in-app Import Log panel | Pass | Staged the Proof/Export/Import Log tester output panel, form styling, and dynamic preview-smoke import validators. Latest length reported as `2412` before release. |
+| `PEAR_LINK=... npm run release` after in-app Import Log panel | Pass | Released `pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy`; final latest length reported as `2413`. |
+| `pear info pear://9a5q...` | Pass | Pear reports `name matchday-mesh`, `release 2413`, `length 2413`, project key `fe36eb...3bca`, discovery key `e92e9f...91f9`, and content key `41328f...6b87`. |
 | `PEAR_LINK=... npm run seed` | Running | Seed announced drive key `fe36eb9038630aeb0a8bc2a21f548d44964c35d9eaff37c654b95d9173233bca`, discovery key `e92e9f4a8df2ced0e5eb1b15354877097a4c1030b843154f8301fe694bdc91f9`, and content key `41328f560d68a5e50e1b45a22ecd3511fa5213c49a42a625170d7175834c6b87`. |
-| `MATCHDAY_MESH_BOOT_PROOF_PATH=... pear run pear://9a5q...` | Pass | Final released-link renderer proof wrote `pear-release-renderer-proof-2026-06-30.json` with `ok: true`, release `2407`, `hasMatchdayAPI: true`, backend `pears-store`, a `matchday-mesh-core-invite-v1` invite, a `matchday-mesh-pairing-v1` Hyperswarm topic, and 3 seeded operations. |
+| `MATCHDAY_MESH_BOOT_PROOF_PATH=... pear run pear://9a5q...` | Pass | Final released-link renderer proof wrote `pear-release-renderer-proof-2026-06-30.json` with `ok: true`, release `2413`, `hasMatchdayAPI: true`, backend `pears-store`, a `matchday-mesh-core-invite-v1` invite, a `matchday-mesh-pairing-v1` Hyperswarm topic, and 3 seeded operations. |
 | `PATH=".../pear/bin:$PATH" MATCHDAY_MESH_BOOT_PROOF_PATH=... pear run pear://9a5q...` | Pass with warning | Released-link renderer proof still passed with `hasPear: true`, `hasMatchdayAPI: true`, Corestore/Hyperbee backend, `matchday-mesh-core-invite-v1`, and `matchday-mesh-pairing-v1`. The Pear shim warning persisted because the suggested `/Users/localllm/Library/Application Support/pear/bin` directory does not exist on this host. Proof saved at `docs/proof/pear-release-renderer-proof-2026-06-30.json`. |
 | `node scripts/verify-release-window-proof.mjs --write` | Pass | Released Pear link wrote `pear-release-renderer-proof-2026-06-30.json` and `pear-release-window-2026-06-30.png`; the PNG is a renderer-generated proof card because macOS desktop screenshot capture failed with `could not create image from display`. |
 | `node scripts/verify-dorahacks-readiness.mjs --write` | Pass | Wrote `docs/proof/dorahacks-readiness-2026-06-30.json`, proving all technical submission checklist items and listing 4 manual DoraHacks page/video actions. |
@@ -110,8 +110,8 @@ The automated tests currently prove:
 - pool contribution creates a USDt feed card;
 - proof pack exports app/version/status counts;
 - the app header renders proof-pack and operation-log JSON in an in-app tester
-  panel, with copy/clear controls that do not block the demo if clipboard access
-  is unavailable.
+  panel, with copy/clear/import controls that do not block the demo if
+  clipboard access is unavailable.
 - operation log replays to deterministic state;
 - duplicate operation IDs do not duplicate state;
 - operation envelope export/import works;
@@ -151,8 +151,9 @@ The automated tests currently prove:
   Replica controls fill the on-page host/join panels instead of relying on an
   alert dialog.
 - preview smoke proof starts the local HTTP app, checks the served frontend
-  assets plus tester output hooks, and replays the reset, scan, pool-open, and
-  contribution path as a repeatable tester gate.
+  assets plus tester output/import hooks, and replays the reset, scan,
+  pool-open, contribution, and operation-log round-trip path as a repeatable
+  tester gate.
 - live Hyperswarm proof confirms the production host/join path can discover a
   hosted pairing topic, sync a read-only replica, and catch a live host append.
 - launch rehearsal proof confirms DoraHacks readiness, the main judge gate,

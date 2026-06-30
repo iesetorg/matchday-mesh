@@ -429,6 +429,11 @@ label {
   margin-bottom: 0;
 }
 
+.tester-output-form {
+  display: grid;
+  gap: 12px;
+}
+
 .output-actions {
   display: grid;
   grid-template-columns: repeat(2, minmax(84px, 1fr));
@@ -441,6 +446,10 @@ label {
   font-size: 0.82rem;
   line-height: 1.45;
   white-space: pre;
+}
+
+.tester-output textarea:not([readonly]) {
+  border-color: rgba(231, 195, 90, 0.55);
 }
 
 .output-meta {

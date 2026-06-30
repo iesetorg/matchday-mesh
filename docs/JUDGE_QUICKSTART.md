@@ -58,11 +58,11 @@ npm run handoff:judge
    then click `Join Replica` and confirm the joined replica is read-only. The
    automated `npm run verify:live-pairing` proof exercises the same host/join
    path over real Hyperswarm.
-8. Click `Proof` or `Export Log` to render the in-app tester output panel, then
-   show the proof files in `docs/proof/`.
+8. Click `Proof`, `Export Log`, or `Import Log` to render the in-app tester
+   output panel, then show the proof files in `docs/proof/`.
 
-The same local-preview reset, scan, pool-open, and contribution path is covered
-by `npm run verify:preview-smoke`.
+The same local-preview reset, scan, pool-open, contribution, and operation-log
+round-trip path is covered by `npm run verify:preview-smoke`.
 The PearBrowser catalog proof card is covered by `npm run verify:catalog-visual`
 and saved as `docs/proof/pearbrowser-catalog-visual-proof-2026-06-30.png`.
 

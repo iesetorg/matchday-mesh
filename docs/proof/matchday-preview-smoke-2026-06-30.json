@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "capturedAt": "2026-06-30T00:02:05.033Z",
+  "capturedAt": "2026-06-30T00:11:51.748Z",
   "app": {
     "pearLink": "pear://9a5qzrbaccfqsnwmaktb6irpe1mrapq37m9uxt1wzfq3nh3d8xfy",
     "catalog": "hyperbee://0ba0bb63d4787c42b218c3c22f693f6aae64626dbc72a7cc52739f8c7d72fd0f",
@@ -27,7 +27,8 @@
     "previewScenarioPoolTotal": true,
     "previewScenarioReceiveAddress": true,
     "previewScenarioLatestFeed": true,
-    "previewScenarioStatus": true
+    "previewScenarioStatus": true,
+    "previewImportLogRoundTrip": true
   },
   "http": {
     "index": {
@@ -43,7 +44,7 @@
       "path": "/ui/app.js",
       "status": 200,
       "contentType": "text/javascript; charset=utf-8",
-      "bytes": 27696,
+      "bytes": 29996,
       "ok": true,
       "missing": [],
       "message": "/ui/app.js served expected launch UI content"
@@ -52,7 +53,7 @@
       "path": "/ui/styles.css",
       "status": 200,
       "contentType": "text/css; charset=utf-8",
-      "bytes": 8894,
+      "bytes": 9036,
       "ok": true,
       "missing": [],
       "message": "/ui/styles.css served expected launch UI content"
@@ -103,6 +104,11 @@
       "demoPools": 1,
       "wdkPools": 0,
       "claim": "WDK-shaped demo receive path"
+    },
+    "importLog": {
+      "operationCount": 6,
+      "feedCards": 6,
+      "latestFeedCard": "feed:pool-contribution"
     },
     "visibleExpectations": {
       "scanResult": "Accepted",

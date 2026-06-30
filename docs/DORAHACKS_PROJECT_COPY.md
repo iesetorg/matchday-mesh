@@ -115,4 +115,5 @@ catalog/publish tooling.
 6. Post a prediction and a match note.
 7. Export the P2P invite, host the pairing topic, and join a read-only replica.
 8. Open a USDt pool demo, add a contribution, and show the feed card.
-9. Show the in-app proof/log panel, deterministic demo proof, and public repo.
+9. Show the in-app proof/export/import log panel, deterministic demo proof, and
+   public repo.

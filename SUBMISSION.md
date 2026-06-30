@@ -82,8 +82,8 @@ Highlights:
 - PearBrowser catalog visual proof card:
   `docs/proof/pearbrowser-catalog-visual-proof-2026-06-30.png`;
 - preview smoke proof verifies the local test path: served UI assets, in-app
-  proof/log output panel, Ada scan, USDt pool open, 5 USDt contribution, and
-  newest feed card.
+  proof/export/import log output panel, Ada scan, USDt pool open, 5 USDt
+  contribution, newest feed card, and operation-log round trip.
 - real Hyperswarm pairing proof joined a read-only replica and caught a live
   host feed append.
 - launch rehearsal proof ran DoraHacks readiness, the judge gate, released
